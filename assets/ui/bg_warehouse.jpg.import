@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jbr3af0wv8b2"
-path="res://.godot/imported/itm_00007.jpg-60aa985ae6b246e83de017731b89c9a7.ctex"
+uid="uid://cqhtd8fys1nww"
+path="res://.godot/imported/bg_warehouse.jpg-62b820528a7fcb3317b6aa9b9277593b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/items/itm_00007.jpg"
-dest_files=["res://.godot/imported/itm_00007.jpg-60aa985ae6b246e83de017731b89c9a7.ctex"]
+source_file="res://assets/ui/bg_warehouse.jpg"
+dest_files=["res://.godot/imported/bg_warehouse.jpg-62b820528a7fcb3317b6aa9b9277593b.ctex"]
 
 [params]
 
