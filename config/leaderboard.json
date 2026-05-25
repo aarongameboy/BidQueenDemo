@@ -1,0 +1,109 @@
+{
+  "regions": [
+    { "id": "all", "label": "全部地区" },
+    { "id": "asia_panda", "label": "亚洲·大熊猫" },
+    { "id": "na_eagle", "label": "北美洲·白头海雕" },
+    { "id": "eu_lion", "label": "欧洲·雄狮" },
+    { "id": "af_giraffe", "label": "非洲·长颈鹿" },
+    { "id": "sa_macaw", "label": "南美洲·金刚鹦鹉" },
+    { "id": "oc_kangaroo", "label": "大洋洲·袋鼠" }
+  ],
+  "categories": [
+    { "id": "total_profit", "label": "总竞拍利润", "format": "silver", "higher_is_better": true },
+    { "id": "total_loss", "label": "总竞拍亏损", "format": "silver", "higher_is_better": true },
+    { "id": "red_collect_count", "label": "红色藏品获取数", "format": "count", "higher_is_better": true },
+    { "id": "single_profit", "label": "单次竞拍利润", "format": "silver", "higher_is_better": true },
+    { "id": "single_loss", "label": "单次竞拍亏损", "format": "silver", "higher_is_better": true },
+    { "id": "total_profit_ratio", "label": "总利润比", "format": "percent", "higher_is_better": true },
+    { "id": "bid_spread_ratio", "label": "竞拍差价比", "format": "percent", "higher_is_better": false },
+    { "id": "bid_success_rate", "label": "竞拍成功率", "format": "percent", "higher_is_better": true },
+    { "id": "consign_profit", "label": "送拍利润", "format": "silver", "higher_is_better": true }
+  ],
+  "periods": [
+    { "id": "daily", "label": "日榜" },
+    { "id": "weekly", "label": "周榜" },
+    { "id": "monthly", "label": "月榜" }
+  ],
+  "bot_npcs": [
+    {
+      "id": "npc_dr_fanatic",
+      "display_name": "狂热博士",
+      "title": "狂热博士",
+      "region_id": "asia_panda",
+      "character_id": "old_man",
+      "is_bot": true
+    },
+    {
+      "id": "npc_silent_hunter",
+      "display_name": "静默猎手",
+      "title": "夜行客",
+      "region_id": "na_eagle",
+      "character_id": "lisette_nightraven",
+      "is_bot": true
+    },
+    {
+      "id": "npc_tower_keeper",
+      "display_name": "星塔守簿",
+      "title": "穹庭书记",
+      "region_id": "eu_lion",
+      "character_id": "serena_startower",
+      "is_bot": true
+    },
+    {
+      "id": "npc_rose_duke",
+      "display_name": "黑蔷薇公爵",
+      "title": "王陵典狱",
+      "region_id": "af_giraffe",
+      "character_id": "noctis_blackrose",
+      "is_bot": true
+    },
+    {
+      "id": "npc_bell_sister",
+      "display_name": "圣铃修女",
+      "title": "修会鉴定师",
+      "region_id": "oc_kangaroo",
+      "character_id": "mia_holybell",
+      "is_bot": true
+    },
+    {
+      "id": "npc_weilong_merc",
+      "display_name": "威龙·佣兵",
+      "title": "佣兵团长",
+      "region_id": "asia_panda",
+      "character_id": "weilong",
+      "is_bot": true
+    },
+    {
+      "id": "npc_ethan_scout",
+      "display_name": "伊森·斥候",
+      "title": "仓库探子",
+      "region_id": "sa_macaw",
+      "character_id": "ethan",
+      "is_bot": true
+    },
+    {
+      "id": "npc_aria_rival",
+      "display_name": "狮心宿敌",
+      "title": "近卫统领",
+      "region_id": "eu_lion",
+      "character_id": "aria_lionheart",
+      "is_bot": true
+    },
+    {
+      "id": "npc_auction_queen",
+      "display_name": "拍卖女王",
+      "title": "金槌夫人",
+      "region_id": "na_eagle",
+      "character_id": "",
+      "is_bot": true
+    },
+    {
+      "id": "npc_silver_fox",
+      "display_name": "银狐账房",
+      "title": "账房先生",
+      "region_id": "asia_panda",
+      "character_id": "",
+      "is_bot": true
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bhkat3qirm1so"
+
+[deps]
+
+files=["res://config/spawn_pool_table.pool.translation", "res://config/spawn_pool_table.min.translation", "res://config/spawn_pool_table.max.translation", "res://config/spawn_pool_table.enabled.translation"]
+
+source_file="res://config/spawn_pool_table.csv"
+dest_files=["res://config/spawn_pool_table.pool.translation", "res://config/spawn_pool_table.min.translation", "res://config/spawn_pool_table.max.translation", "res://config/spawn_pool_table.enabled.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

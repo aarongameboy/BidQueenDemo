@@ -1,0 +1,10 @@
+context,quality,multiplier,enabled
+match_default,white,1.0,1
+match_default,green,1.0,1
+match_default,blue,1.0,1
+match_default,purple,1.0,1
+match_default,gold,1.0,1
+match_default,red,1.0,1
+round_late,purple,1.15,1
+round_late,gold,1.2,1
+round_late,red,1.25,1

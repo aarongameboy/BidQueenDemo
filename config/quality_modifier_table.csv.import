@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://y042p4hrh7xh"
+
+[deps]
+
+files=["res://config/quality_modifier_table.quality.translation", "res://config/quality_modifier_table.multiplier.translation", "res://config/quality_modifier_table.enabled.translation"]
+
+source_file="res://config/quality_modifier_table.csv"
+dest_files=["res://config/quality_modifier_table.quality.translation", "res://config/quality_modifier_table.multiplier.translation", "res://config/quality_modifier_table.enabled.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

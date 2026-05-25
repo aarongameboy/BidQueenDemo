@@ -1,0 +1,319 @@
+[gd_scene load_steps=5 format=3 uid="uid://bidking_main_layout"]
+
+[ext_resource type="Script" path="res://scripts/match/match_controller.gd" id="1_controller"]
+[ext_resource type="Script" path="res://scripts/ui/match_ui.gd" id="2_ui"]
+[ext_resource type="Texture2D" path="res://assets/ui/bg_warehouse.png" id="3_bg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_center"]
+bg_color = Color(0.06, 0.07, 0.1, 0.72)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.22, 0.28, 0.38, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.11, 0.1, 0)
+
+[node name="BgTexture" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="BgDim" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.06, 0.1, 0.0)
+
+[node name="MatchController" type="Node" parent="."]
+script = ExtResource("1_controller")
+
+[node name="MatchUI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ui")
+
+[node name="RootMargin" type="MarginContainer" parent="MatchUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="RootVBox" type="VBoxContainer" parent="MatchUI/RootMargin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TopBar" type="HBoxContainer" parent="MatchUI/RootMargin/RootVBox"]
+layout_mode = 2
+
+[node name="TopSpacer" type="Control" parent="MatchUI/RootMargin/RootVBox/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GoldRow" type="HBoxContainer" parent="MatchUI/RootMargin/RootVBox/TopBar"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="GoldIcon" type="ColorRect" parent="MatchUI/RootMargin/RootVBox/TopBar/GoldRow"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+color = Color(0.95, 0.75, 0.2, 1)
+
+[node name="TopGoldLabel" type="Label" parent="MatchUI/RootMargin/RootVBox/TopBar/GoldRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+
+[node name="SilverIcon" type="ColorRect" parent="MatchUI/RootMargin/RootVBox/TopBar/GoldRow"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+color = Color(0.75, 0.78, 0.85, 1)
+
+[node name="TopSilverLabel" type="Label" parent="MatchUI/RootMargin/RootVBox/TopBar/GoldRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "2,000,000"
+
+[node name="RestartButton" type="Button" parent="MatchUI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 550.0
+offset_top = 640.0
+offset_right = 730.0
+offset_bottom = 692.0
+text = "重新游戏"
+
+[node name="MainColumns" type="HBoxContainer" parent="MatchUI/RootMargin/RootVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="LeftPanel" type="PanelContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+size_flags_vertical = 3
+
+[node name="LeftMargin" type="MarginContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns/LeftPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="LeftVBox" type="VBoxContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns/LeftPanel/LeftMargin"]
+layout_mode = 2
+
+[node name="PlayersScroll" type="ScrollContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns/LeftPanel/LeftMargin/LeftVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayersList" type="VBoxContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns/LeftPanel/LeftMargin/LeftVBox/PlayersScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="EmoteButton" type="Button" parent="MatchUI/RootMargin/RootVBox/MainColumns/LeftPanel/LeftMargin/LeftVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 44)
+text = "表情"
+
+[node name="CenterPanel" type="PanelContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns"]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.43
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_center")
+
+[node name="CenterMargin" type="MarginContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="CenterVBox" type="VBoxContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="RoundBannerRow" type="HBoxContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="RoundBannerLabel" type="Label" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox/RoundBannerRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "第1轮"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InstantKillMultLabel" type="Label" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox/RoundBannerRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(1, 0.78, 0.42, 1)
+theme_override_font_sizes/font_size = 16
+text = "秒杀倍率：2倍"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SkillScroll" type="ScrollContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+custom_minimum_size = Vector2(0, 240)
+size_flags_stretch_ratio = 1.1
+
+[node name="SkillEffectsList" type="VBoxContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox/SkillScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="CenterSpacer" type="Control" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BidArea" type="VBoxContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="BidTimerLabel" type="Label" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox/BidArea"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = ""
+horizontal_alignment = 1
+
+[node name="MinBidLabel" type="Label" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox/BidArea"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.55, 1)
+text = "最低出价 —"
+horizontal_alignment = 1
+
+[node name="BidAmountInput" type="LineEdit" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox/BidArea"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+placeholder_text = "输入出价金额"
+alignment = 1
+
+[node name="BidStatusLabel" type="Label" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox/BidArea"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.75, 0.9, 1)
+text = ""
+horizontal_alignment = 1
+
+[node name="BidButtons" type="HBoxContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox/BidArea"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 12
+
+[node name="ItemToolButton" type="Button" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox/BidArea/BidButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+text = "📦"
+
+[node name="RaiseButton" type="Button" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox/BidArea/BidButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "出价"
+
+[node name="PassRoundButton" type="Button" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox/BidArea/BidButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.9, 1)
+tooltip_text = "本轮不出价"
+text = "✕"
+
+[node name="ForfeitButton" type="Button" parent="MatchUI/RootMargin/RootVBox/MainColumns/CenterPanel/CenterMargin/CenterVBox/BidArea"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0.75, 0.75, 1)
+text = "弃权本局"
+
+[node name="RightPanel" type="PanelContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns"]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.50
+size_flags_vertical = 3
+
+[node name="RightMargin" type="MarginContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns/RightPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="LootPanelHost" type="Control" parent="MatchUI/RootMargin/RootVBox/MainColumns/RightPanel/RightMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LogText" type="RichTextLabel" parent="MatchUI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 8.0
+offset_top = 680.0
+offset_right = 400.0
+offset_bottom = 710.0
+bbcode_enabled = true

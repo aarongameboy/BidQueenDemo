@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[node name="root" type="Control" unique_id=230329818]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="BidControlSamples" type="VBoxContainer" parent="." unique_id=946394897]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/separation = 16
+
+[node name="ButtonRow" type="HBoxContainer" parent="BidControlSamples" unique_id=316244050]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="CatalogButton_88x56" type="Button" parent="BidControlSamples/ButtonRow" unique_id=488344660]
+layout_mode = 2
+text = "藏品"
+
+[node name="BidButton_220x64" type="Button" parent="BidControlSamples/ButtonRow" unique_id=1340116385]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "举牌出价"
+
+[node name="PassButton_112x56" type="Button" parent="BidControlSamples/ButtonRow" unique_id=180608800]
+layout_mode = 2
+text = "本轮放弃"
+
+[node name="BidInput_320x48" type="LineEdit" parent="BidControlSamples" unique_id=1496431564]
+layout_mode = 2
+placeholder_text = "输入出价金额"
+alignment = 1
+
+[node name="ForfeitButton_160x42" type="Button" parent="BidControlSamples" unique_id=916858341]
+layout_mode = 2
+text = "弃权本局"

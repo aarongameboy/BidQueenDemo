@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[node name="root" type="Control" unique_id=1890117936]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="LootCellSamples" type="GridContainer" parent="." unique_id=1678789283]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="LootCellHidden_48" type="PanelContainer" parent="LootCellSamples" unique_id=116399607]
+layout_mode = 2
+
+[node name="LootCellRevealed_48" type="PanelContainer" parent="LootCellSamples" unique_id=1414524322]
+layout_mode = 2
+
+[node name="LootCellRare_96" type="PanelContainer" parent="LootCellSamples" unique_id=1323199542]
+layout_mode = 2

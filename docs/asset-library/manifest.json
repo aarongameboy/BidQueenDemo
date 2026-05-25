@@ -1,0 +1,1873 @@
+{
+  "generatedAt": "2026-05-20T08:23:16.552857+00:00",
+  "project": "BidKing Demo",
+  "projectRoot": "D:\\bidKingDemo",
+  "stats": {
+    "assetFiles": 51,
+    "referencedPaths": 37,
+    "missingOnDisk": 11
+  },
+  "tokens": {
+    "brand": [
+      {
+        "name": "深靛蓝（背景）",
+        "hex": "#182033",
+        "usage": "美术方案主背景色"
+      },
+      {
+        "name": "王冠金",
+        "hex": "#D8A84E",
+        "usage": "强调、资产数字"
+      },
+      {
+        "name": "羊皮纸",
+        "hex": "#E7D4A2",
+        "usage": "信息层、说明文案"
+      },
+      {
+        "name": "宝石青",
+        "hex": "#40C2B8",
+        "usage": "练习模式、正向提示"
+      },
+      {
+        "name": "酒红",
+        "hex": "#8B2F45",
+        "usage": "警示、稀有氛围"
+      }
+    ],
+    "quality": [
+      {
+        "key": "white",
+        "hex": "#B2B2B2",
+        "label": "白"
+      },
+      {
+        "key": "green",
+        "hex": "#44612b",
+        "label": "绿"
+      },
+      {
+        "key": "blue",
+        "hex": "#29487d",
+        "label": "蓝"
+      },
+      {
+        "key": "purple",
+        "hex": "#4e297d",
+        "label": "紫"
+      },
+      {
+        "key": "gold",
+        "hex": "#b1a221",
+        "label": "金"
+      },
+      {
+        "key": "red",
+        "hex": "#a4492a",
+        "label": "红"
+      }
+    ],
+    "ui_accents": [
+      {
+        "name": "快速匹配强调",
+        "hex": "#EB5757",
+        "rgb": "0.92,0.34,0.32",
+        "file": "lobby_ui.gd"
+      },
+      {
+        "name": "面板背景",
+        "hex": "#0F101A",
+        "rgb": "0.06,0.07,0.1",
+        "file": "多处 Panel StyleBoxFlat"
+      },
+      {
+        "name": "按钮扁平底",
+        "hex": "#242A38",
+        "rgb": "0.14,0.16,0.22",
+        "file": "ui_button_style.gd"
+      },
+      {
+        "name": "正文浅色",
+        "hex": "#F3F6FA",
+        "rgb": "0.95,0.97,1.0",
+        "file": "按钮/标签默认字色"
+      }
+    ],
+    "fonts": [
+      {
+        "role": "标题",
+        "paths": [
+          "res://assets/fonts/LaoMingChaoD.ttf",
+          "res://assets/fonts/老明朝D.ttf",
+          "res://assets/fonts/LaoMingChaoD.otf"
+        ],
+        "code": "FontUtil.get_title_font() / style_title_label",
+        "fallback": "老明朝体 / Songti SC",
+        "exists": false
+      },
+      {
+        "role": "正文（中文+英文回退）",
+        "paths": [
+          "res://assets/fonts/SourceHanSansSC-Regular.otf",
+          "res://assets/fonts/NotoSansSC-Regular.otf",
+          "res://assets/fonts/Futura.ttf"
+        ],
+        "code": "FontUtil.get_body_font() / apply_cjk_font",
+        "fallback": "思源黑体 + Futura",
+        "exists": false
+      }
+    ],
+    "nav_icons": [
+      {
+        "file": "shop_outlined.svg",
+        "label": "商店",
+        "action": "shop"
+      },
+      {
+        "file": "hdd_outlined.svg",
+        "label": "仓库",
+        "action": "warehouse"
+      },
+      {
+        "file": "eye_outlined.svg",
+        "label": "百科",
+        "action": "encyclopedia"
+      },
+      {
+        "file": "trophy_outlined.svg",
+        "label": "收藏",
+        "action": "collection"
+      },
+      {
+        "file": "user_switch_outlined.svg",
+        "label": "角色",
+        "action": "characters"
+      },
+      {
+        "file": "book_outlined.svg",
+        "label": "排行榜",
+        "action": "leaderboard"
+      }
+    ],
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "categories": [
+    {
+      "id": "ui-shell",
+      "name": "UI · 壳层与控件",
+      "count": 5,
+      "items": [
+        {
+          "id": "assets__ui__bg_warehouse.png",
+          "path": "res://assets/ui/bg_warehouse.png",
+          "previewUrl": "preview/assets/ui/bg_warehouse.png",
+          "webUrl": "/assets/ui/bg_warehouse.png",
+          "relFile": "../../assets/ui/bg_warehouse.png",
+          "fileName": "bg_warehouse.png",
+          "description": "主界面/对局全屏背景，推荐 1280×720，UiTextureCache + main.tscn",
+          "usages": [
+            {
+              "file": "scenes/main.tscn",
+              "line": 5,
+              "snippet": "[ext_resource type=\"Texture2D\" path=\"res://assets/ui/bg_warehouse.png\" id=\"3_bg\"]"
+            },
+            {
+              "file": "scripts/ui/ui_texture_cache.gd",
+              "line": 6,
+              "snippet": "const WAREHOUSE_BG_PATH := \"res://assets/ui/bg_warehouse.png\""
+            }
+          ],
+          "usageCount": 2,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__ui__button.png",
+          "path": "res://assets/ui/button.png",
+          "previewUrl": "preview/assets/ui/button.png",
+          "webUrl": "/assets/ui/button.png",
+          "relFile": "../../assets/ui/button.png",
+          "fileName": "button.png",
+          "description": "通用按钮九宫格底图，UiButtonStyle.make_box（运行期多改为扁平样式）",
+          "usages": [
+            {
+              "file": "scripts/ui/ui_button_style.gd",
+              "line": 5,
+              "snippet": "const BUTTON_PATH: String = \"res://assets/ui/button.png\""
+            }
+          ],
+          "usageCount": 1,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__ui__close.png",
+          "path": "res://assets/ui/close.png",
+          "previewUrl": "preview/assets/ui/close.png",
+          "webUrl": "/assets/ui/close.png",
+          "relFile": "../../assets/ui/close.png",
+          "fileName": "close.png",
+          "description": "关闭/返回图标，UiCloseButton（磁盘上可能为 close_button.png，需对齐）",
+          "usages": [
+            {
+              "file": "scripts/ui/ui_close_button.gd",
+              "line": 3,
+              "snippet": "## 关闭/返回按钮图标（res://assets/ui/close.png）+ 方形暗色底衬"
+            },
+            {
+              "file": "scripts/ui/ui_close_button.gd",
+              "line": 5,
+              "snippet": "const CLOSE_PATH: String = \"res://assets/ui/close.png\""
+            }
+          ],
+          "usageCount": 2,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__ui__close_button.png",
+          "path": "res://assets/ui/close_button.png",
+          "previewUrl": "preview/assets/ui/close_button.png",
+          "webUrl": "/assets/ui/close_button.png",
+          "relFile": "../../assets/ui/close_button.png",
+          "fileName": "close_button.png",
+          "description": "关闭按钮图（若代码仍写 close.png 需同步）",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__ui__money.png",
+          "path": "res://assets/ui/money.png",
+          "previewUrl": "preview/assets/ui/money.png",
+          "webUrl": "/assets/ui/money.png",
+          "relFile": "../../assets/ui/money.png",
+          "fileName": "money.png",
+          "description": "银币/货币图标，UiMoneyIcon、大厅资产行",
+          "usages": [
+            {
+              "file": "scripts/ui/ui_money_icon.gd",
+              "line": 3,
+              "snippet": "## 货币图标（res://assets/ui/money.png）"
+            },
+            {
+              "file": "scripts/ui/ui_money_icon.gd",
+              "line": 5,
+              "snippet": "const MONEY_PATH: String = \"res://assets/ui/money.png\""
+            }
+          ],
+          "usageCount": 2,
+          "exists": true,
+          "ext": ".png"
+        }
+      ]
+    },
+    {
+      "id": "ui-nav",
+      "name": "UI · 导航图标",
+      "count": 10,
+      "items": [
+        {
+          "id": "assets__ui__icons__",
+          "path": "res://assets/ui/icons/",
+          "previewUrl": "",
+          "webUrl": "/assets/ui/icons/",
+          "relFile": "../../assets/ui/icons/",
+          "fileName": "icons",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [
+            {
+              "file": "scripts/ui/lobby_ui.gd",
+              "line": 24,
+              "snippet": "const ICONS_DIR: String = \"res://assets/ui/icons/\""
+            }
+          ],
+          "usageCount": 1,
+          "exists": true,
+          "ext": ""
+        },
+        {
+          "id": "assets__ui__icons__book_outlined.svg",
+          "path": "res://assets/ui/icons/book_outlined.svg",
+          "previewUrl": "preview/assets/ui/icons/book_outlined.svg",
+          "webUrl": "/assets/ui/icons/book_outlined.svg",
+          "relFile": "../../assets/ui/icons/book_outlined.svg",
+          "fileName": "book_outlined.svg",
+          "description": "大厅导航描边图标 · lobby_ui ICONS_DIR",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".svg"
+        },
+        {
+          "id": "assets__ui__icons__eye_outlined.svg",
+          "path": "res://assets/ui/icons/eye_outlined.svg",
+          "previewUrl": "preview/assets/ui/icons/eye_outlined.svg",
+          "webUrl": "/assets/ui/icons/eye_outlined.svg",
+          "relFile": "../../assets/ui/icons/eye_outlined.svg",
+          "fileName": "eye_outlined.svg",
+          "description": "大厅导航描边图标 · lobby_ui ICONS_DIR",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".svg"
+        },
+        {
+          "id": "assets__ui__icons__file_exclamation_outlined.svg",
+          "path": "res://assets/ui/icons/file_exclamation_outlined.svg",
+          "previewUrl": "preview/assets/ui/icons/file_exclamation_outlined.svg",
+          "webUrl": "/assets/ui/icons/file_exclamation_outlined.svg",
+          "relFile": "../../assets/ui/icons/file_exclamation_outlined.svg",
+          "fileName": "file_exclamation_outlined.svg",
+          "description": "大厅导航描边图标 · lobby_ui ICONS_DIR",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".svg"
+        },
+        {
+          "id": "assets__ui__icons__hdd_outlined.svg",
+          "path": "res://assets/ui/icons/hdd_outlined.svg",
+          "previewUrl": "preview/assets/ui/icons/hdd_outlined.svg",
+          "webUrl": "/assets/ui/icons/hdd_outlined.svg",
+          "relFile": "../../assets/ui/icons/hdd_outlined.svg",
+          "fileName": "hdd_outlined.svg",
+          "description": "大厅导航描边图标 · lobby_ui ICONS_DIR",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".svg"
+        },
+        {
+          "id": "assets__ui__icons__rise_outlined.svg",
+          "path": "res://assets/ui/icons/rise_outlined.svg",
+          "previewUrl": "preview/assets/ui/icons/rise_outlined.svg",
+          "webUrl": "/assets/ui/icons/rise_outlined.svg",
+          "relFile": "../../assets/ui/icons/rise_outlined.svg",
+          "fileName": "rise_outlined.svg",
+          "description": "大厅导航描边图标 · lobby_ui ICONS_DIR",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".svg"
+        },
+        {
+          "id": "assets__ui__icons__setting_outlined.svg",
+          "path": "res://assets/ui/icons/setting_outlined.svg",
+          "previewUrl": "preview/assets/ui/icons/setting_outlined.svg",
+          "webUrl": "/assets/ui/icons/setting_outlined.svg",
+          "relFile": "../../assets/ui/icons/setting_outlined.svg",
+          "fileName": "setting_outlined.svg",
+          "description": "大厅导航描边图标 · lobby_ui ICONS_DIR",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".svg"
+        },
+        {
+          "id": "assets__ui__icons__shop_outlined.svg",
+          "path": "res://assets/ui/icons/shop_outlined.svg",
+          "previewUrl": "preview/assets/ui/icons/shop_outlined.svg",
+          "webUrl": "/assets/ui/icons/shop_outlined.svg",
+          "relFile": "../../assets/ui/icons/shop_outlined.svg",
+          "fileName": "shop_outlined.svg",
+          "description": "大厅导航描边图标 · lobby_ui ICONS_DIR",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".svg"
+        },
+        {
+          "id": "assets__ui__icons__trophy_outlined.svg",
+          "path": "res://assets/ui/icons/trophy_outlined.svg",
+          "previewUrl": "preview/assets/ui/icons/trophy_outlined.svg",
+          "webUrl": "/assets/ui/icons/trophy_outlined.svg",
+          "relFile": "../../assets/ui/icons/trophy_outlined.svg",
+          "fileName": "trophy_outlined.svg",
+          "description": "大厅导航描边图标 · lobby_ui ICONS_DIR",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".svg"
+        },
+        {
+          "id": "assets__ui__icons__user_switch_outlined.svg",
+          "path": "res://assets/ui/icons/user_switch_outlined.svg",
+          "previewUrl": "preview/assets/ui/icons/user_switch_outlined.svg",
+          "webUrl": "/assets/ui/icons/user_switch_outlined.svg",
+          "relFile": "../../assets/ui/icons/user_switch_outlined.svg",
+          "fileName": "user_switch_outlined.svg",
+          "description": "大厅导航描边图标 · lobby_ui ICONS_DIR",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".svg"
+        }
+      ]
+    },
+    {
+      "id": "ui-maps",
+      "name": "UI · 地图预览",
+      "count": 4,
+      "items": [
+        {
+          "id": "assets__ui__maps__map_aerospace.png",
+          "path": "res://assets/ui/maps/map_aerospace.png",
+          "previewUrl": "preview/assets/ui/maps/map_aerospace.png",
+          "webUrl": "/assets/ui/maps/map_aerospace.png",
+          "relFile": "../../assets/ui/maps/map_aerospace.png",
+          "fileName": "map_aerospace.png",
+          "description": "选图卡片预览 · 星塔穹庭",
+          "usages": [
+            {
+              "file": "config/map_modes.json",
+              "line": 49,
+              "snippet": "\"preview_image\": \"res://assets/ui/maps/map_aerospace.png\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__ui__maps__map_dam.png",
+          "path": "res://assets/ui/maps/map_dam.png",
+          "previewUrl": "preview/assets/ui/maps/map_dam.png",
+          "webUrl": "/assets/ui/maps/map_dam.png",
+          "relFile": "../../assets/ui/maps/map_dam.png",
+          "fileName": "map_dam.png",
+          "description": "选图卡片预览 · 琥珀商馆",
+          "usages": [
+            {
+              "file": "config/map_modes.json",
+              "line": 6,
+              "snippet": "\"preview_image\": \"res://assets/ui/maps/map_dam.png\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__ui__maps__map_prison.png",
+          "path": "res://assets/ui/maps/map_prison.png",
+          "previewUrl": "preview/assets/ui/maps/map_prison.png",
+          "webUrl": "/assets/ui/maps/map_prison.png",
+          "relFile": "../../assets/ui/maps/map_prison.png",
+          "fileName": "map_prison.png",
+          "description": "选图卡片预览 · 黑蔷薇王陵",
+          "usages": [
+            {
+              "file": "config/map_modes.json",
+              "line": 75,
+              "snippet": "\"preview_image\": \"res://assets/ui/maps/map_prison.png\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__ui__maps__map_valley.png",
+          "path": "res://assets/ui/maps/map_valley.png",
+          "previewUrl": "preview/assets/ui/maps/map_valley.png",
+          "webUrl": "/assets/ui/maps/map_valley.png",
+          "relFile": "../../assets/ui/maps/map_valley.png",
+          "fileName": "map_valley.png",
+          "description": "选图卡片预览 · 银雾修道院",
+          "usages": [
+            {
+              "file": "config/map_modes.json",
+              "line": 32,
+              "snippet": "\"preview_image\": \"res://assets/ui/maps/map_valley.png\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": true,
+          "ext": ".png"
+        }
+      ]
+    },
+    {
+      "id": "ui-characters",
+      "name": "UI · 角色立绘",
+      "count": 5,
+      "items": [
+        {
+          "id": "assets__ui__characters__portrait_assassin_lisette_nightraven.png",
+          "path": "res://assets/ui/characters/portrait_assassin_lisette_nightraven.png",
+          "previewUrl": "preview/assets/ui/characters/portrait_assassin_lisette_nightraven.png",
+          "webUrl": "/assets/ui/characters/portrait_assassin_lisette_nightraven.png",
+          "relFile": "../../assets/ui/characters/portrait_assassin_lisette_nightraven.png",
+          "fileName": "portrait_assassin_lisette_nightraven.png",
+          "description": "莉赛特·夜鸦 · 刺客 · 技能「夜鸦窥价」— 拍卖开始时，显示紫/金/红藏品总件数。",
+          "usages": [
+            {
+              "file": "config/characters.json",
+              "line": 27,
+              "snippet": "\"portrait\": \"res://assets/ui/characters/portrait_assassin_lisette_nightraven.png\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__ui__characters__portrait_black_knight_noctis_blackrose.png",
+          "path": "res://assets/ui/characters/portrait_black_knight_noctis_blackrose.png",
+          "previewUrl": "preview/assets/ui/characters/portrait_black_knight_noctis_blackrose.png",
+          "webUrl": "/assets/ui/characters/portrait_black_knight_noctis_blackrose.png",
+          "relFile": "../../assets/ui/characters/portrait_black_knight_noctis_blackrose.png",
+          "fileName": "portrait_black_knight_noctis_blackrose.png",
+          "description": "诺克缇丝·黑蔷薇 · 黑骑士 · 技能「黑蔷薇威压」— 与他人同价时由你胜出，不进入下一轮。",
+          "usages": [
+            {
+              "file": "config/characters.json",
+              "line": 72,
+              "snippet": "\"portrait\": \"res://assets/ui/characters/portrait_black_knight_noctis_blackrose.png\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__ui__characters__portrait_mage_serena_startower.png",
+          "path": "res://assets/ui/characters/portrait_mage_serena_startower.png",
+          "previewUrl": "preview/assets/ui/characters/portrait_mage_serena_startower.png",
+          "webUrl": "/assets/ui/characters/portrait_mage_serena_startower.png",
+          "relFile": "../../assets/ui/characters/portrait_mage_serena_startower.png",
+          "fileName": "portrait_mage_serena_startower.png",
+          "description": "塞蕾娜·星塔 · 法师 · 技能「星盘估值」— 开局提示战利品总估值区间（偏低/合理/偏高）。",
+          "usages": [
+            {
+              "file": "config/characters.json",
+              "line": 42,
+              "snippet": "\"portrait\": \"res://assets/ui/characters/portrait_mage_serena_startower.png\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__ui__characters__portrait_support_mia_holybell.png",
+          "path": "res://assets/ui/characters/portrait_support_mia_holybell.png",
+          "previewUrl": "preview/assets/ui/characters/portrait_support_mia_holybell.png",
+          "webUrl": "/assets/ui/characters/portrait_support_mia_holybell.png",
+          "relFile": "../../assets/ui/characters/portrait_support_mia_holybell.png",
+          "fileName": "portrait_support_mia_holybell.png",
+          "description": "米娅·圣铃 · 辅助 · 技能「圣铃摇晃」— 开局随机显示 5 件品质；每回合再揭示 2 件未知品质。",
+          "usages": [
+            {
+              "file": "config/characters.json",
+              "line": 57,
+              "snippet": "\"portrait\": \"res://assets/ui/characters/portrait_support_mia_holybell.png\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__ui__characters__portrait_warrior_aria_lionheart.png",
+          "path": "res://assets/ui/characters/portrait_warrior_aria_lionheart.png",
+          "previewUrl": "preview/assets/ui/characters/portrait_warrior_aria_lionheart.png",
+          "webUrl": "/assets/ui/characters/portrait_warrior_aria_lionheart.png",
+          "relFile": "../../assets/ui/characters/portrait_warrior_aria_lionheart.png",
+          "fileName": "portrait_warrior_aria_lionheart.png",
+          "description": "艾莉娅·狮心 · 战士 · 技能「王庭宣价」— 每轮 1 次，随机翻开 2 件藏品的全部信息。",
+          "usages": [
+            {
+              "file": "config/characters.json",
+              "line": 12,
+              "snippet": "\"portrait\": \"res://assets/ui/characters/portrait_warrior_aria_lionheart.png\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": true,
+          "ext": ".png"
+        }
+      ]
+    },
+    {
+      "id": "ui-avatars",
+      "name": "UI · 席位头像",
+      "count": 5,
+      "items": [
+        {
+          "id": "assets__ui__avatars__avatar_%d.png",
+          "path": "res://assets/ui/avatars/avatar_%d.png",
+          "previewUrl": "",
+          "webUrl": "",
+          "relFile": "",
+          "fileName": "avatar_%d.png",
+          "description": "席位占位头像（Bot/默认）",
+          "usages": [
+            {
+              "file": "scripts/ui/player_seat_card.gd",
+              "line": 55,
+              "snippet": "var path: String = \"res://assets/ui/avatars/avatar_%d.png\" % (seat_visual % 4)"
+            },
+            {
+              "file": "scripts/ui/settlement_overlay.gd",
+              "line": 192,
+              "snippet": "return \"res://assets/ui/avatars/avatar_%d.png\" % (maxi(seat, 0) % 4)"
+            }
+          ],
+          "usageCount": 2,
+          "exists": false,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__ui__avatars__avatar_0.png",
+          "path": "res://assets/ui/avatars/avatar_0.png",
+          "previewUrl": "preview/assets/ui/avatars/avatar_0.png",
+          "webUrl": "/assets/ui/avatars/avatar_0.png",
+          "relFile": "../../assets/ui/avatars/avatar_0.png",
+          "fileName": "avatar_0.png",
+          "description": "席位占位头像（Bot/默认）",
+          "usages": [
+            {
+              "file": "scripts/data/roster_config.gd",
+              "line": 93,
+              "snippet": "return \"res://assets/ui/avatars/avatar_0.png\""
+            },
+            {
+              "file": "scripts/data/roster_config.gd",
+              "line": 96,
+              "snippet": "return \"res://assets/ui/avatars/avatar_0.png\""
+            },
+            {
+              "file": "scripts/ui/player_seat_card.gd",
+              "line": 26,
+              "snippet": "var av_path: String = \"res://assets/ui/avatars/avatar_0.png\""
+            }
+          ],
+          "usageCount": 3,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__ui__avatars__avatar_1.png",
+          "path": "res://assets/ui/avatars/avatar_1.png",
+          "previewUrl": "preview/assets/ui/avatars/avatar_1.png",
+          "webUrl": "/assets/ui/avatars/avatar_1.png",
+          "relFile": "../../assets/ui/avatars/avatar_1.png",
+          "fileName": "avatar_1.png",
+          "description": "席位占位头像（Bot/默认）",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__ui__avatars__avatar_2.png",
+          "path": "res://assets/ui/avatars/avatar_2.png",
+          "previewUrl": "preview/assets/ui/avatars/avatar_2.png",
+          "webUrl": "/assets/ui/avatars/avatar_2.png",
+          "relFile": "../../assets/ui/avatars/avatar_2.png",
+          "fileName": "avatar_2.png",
+          "description": "席位占位头像（Bot/默认）",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__ui__avatars__avatar_3.png",
+          "path": "res://assets/ui/avatars/avatar_3.png",
+          "previewUrl": "preview/assets/ui/avatars/avatar_3.png",
+          "webUrl": "/assets/ui/avatars/avatar_3.png",
+          "relFile": "../../assets/ui/avatars/avatar_3.png",
+          "fileName": "avatar_3.png",
+          "description": "席位占位头像（Bot/默认）",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        }
+      ]
+    },
+    {
+      "id": "items-icons",
+      "name": "道具 · 图标",
+      "count": 14,
+      "items": [
+        {
+          "id": "assets__icons__items__itm_00001.png",
+          "path": "res://assets/icons/items/itm_00001.png",
+          "previewUrl": "preview/assets/icons/items/itm_00001.png",
+          "webUrl": "/assets/icons/items/itm_00001.png",
+          "relFile": "../../assets/icons/items/itm_00001.png",
+          "fileName": "itm_00001.png",
+          "description": "道具「浮尘粉」(itm_00001)，items_master.csv；石花；椎骨木；蛇蜕；排水管；矿车轮；道砟；鱼尾板；彩色玻璃；石砖；弹簧；手锯；大理石板；油壶；研钵；木碗；粉盒；锡杯；嚼着花瓣的夜晚；军需官手册；实用药剂学；墓园设计图；空岛探险指南；赤铁矿",
+          "usages": [
+            {
+              "file": "config/items_master.csv",
+              "line": 2,
+              "snippet": "itm_00001,浮尘粉,1,1,922,res://assets/icons/items/itm_00001.png,white,#B2B2B2,magic,rare,50,1,50,30,30,30,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 59,
+              "snippet": "itm_00058,石花,1,1,954,res://assets/icons/items/itm_00001.png,white,#B2B2B2,biological,common,50,1,50,30,30,30,10,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 60,
+              "snippet": "itm_00059,椎骨木,1,1,1120,res://assets/icons/items/itm_00001.png,white,#B2B2B2,biological,common,50,1,50,30,30,30,10,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 61,
+              "snippet": "itm_00060,蛇蜕,1,2,1984,res://assets/icons/items/itm_00001.png,white,#B2B2B2,biological,common,50,1,50,30,30,30,10,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 89,
+              "snippet": "itm_00088,排水管,1,1,1017,res://assets/icons/items/itm_00001.png,white,#B2B2B2,building,common,50,1,50,30,30,30,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 90,
+              "snippet": "itm_00089,矿车轮,1,1,1067,res://assets/icons/items/itm_00001.png,white,#B2B2B2,building,common,50,1,50,30,30,30,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 91,
+              "snippet": "itm_00090,道砟,1,1,1077,res://assets/icons/items/itm_00001.png,white,#B2B2B2,building,uncommon,50,1,50,30,30,30,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 92,
+              "snippet": "itm_00091,鱼尾板,1,1,1031,res://assets/icons/items/itm_00001.png,white,#B2B2B2,building,uncommon,50,1,50,30,30,30,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 93,
+              "snippet": "itm_00092,彩色玻璃,1,1,1216,res://assets/icons/items/itm_00001.png,white,#B2B2B2,building,common,50,1,50,30,30,30,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 94,
+              "snippet": "itm_00093,石砖,1,1,1285,res://assets/icons/items/itm_00001.png,white,#B2B2B2,building,common,50,1,50,30,30,30,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 100,
+              "snippet": "itm_00099,弹簧,1,1,2293,res://assets/icons/items/itm_00001.png,white,#B2B2B2,building,common,50,1,50,30,30,30,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 104,
+              "snippet": "itm_00103,手锯,1,2,2590,res://assets/icons/items/itm_00001.png,white,#B2B2B2,building,common,50,1,50,30,30,30,10,10"
+            }
+          ],
+          "usageCount": 48,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__itm_00002.png",
+          "path": "res://assets/icons/items/itm_00002.png",
+          "previewUrl": "preview/assets/icons/items/itm_00002.png",
+          "webUrl": "/assets/icons/items/itm_00002.png",
+          "relFile": "../../assets/icons/items/itm_00002.png",
+          "fileName": "itm_00002.png",
+          "description": "道具「祈铃」(itm_00002)，items_master.csv；祭鼓；颂火盆；卜骰；基础符笺；基础符环；阵符环；浮藤汁；浮流盘；破碎利爪；矮人胡须环结；三叶草；一把矮人胡须；伴生；小石颅；瓦片；涂料；铁钉；铁锤；凿子；烙铁；注射器；量角器；枕木；撬棍；木骨架；实木板；甲板桅杆；船身木板；露指手套；双面绒布；锈蚀铁砧；交易运输车；餐叉；唇膏；剑油瓶；蜡膏；镫；兽面头盔；磨刀石；攀爬绳；信号棒；旗帜；烤炉；水壶；汤锅；被服套装；古国铜币；蘸水笔；装饰花瓶；乳香；讲道台；艺术挂毯；裹尸布；空艇操作手册；安纳斯寓言；航行地图；字典；杨木；谒石",
+          "usages": [
+            {
+              "file": "config/items_master.csv",
+              "line": 3,
+              "snippet": "itm_00002,祈铃,1,1,2062,res://assets/icons/items/itm_00002.png,green,#44612b,magic,common,50,1,30,20,20,20,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 4,
+              "snippet": "itm_00003,祭鼓,1,1,2390,res://assets/icons/items/itm_00002.png,green,#44612b,magic,common,50,1,30,20,20,20,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 5,
+              "snippet": "itm_00004,颂火盆,1,1,2585,res://assets/icons/items/itm_00002.png,green,#44612b,magic,common,50,1,30,20,20,20,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 6,
+              "snippet": "itm_00005,卜骰,1,1,2399,res://assets/icons/items/itm_00002.png,green,#44612b,magic,common,50,1,30,20,20,20,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 7,
+              "snippet": "itm_00006,基础符笺,1,1,2312,res://assets/icons/items/itm_00002.png,green,#44612b,magic,common,50,1,30,20,20,20,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 8,
+              "snippet": "itm_00007,基础符环,1,1,2346,res://assets/icons/items/itm_00002.png,green,#44612b,magic,common,50,1,30,20,20,20,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 9,
+              "snippet": "itm_00008,阵符环,1,1,2868,res://assets/icons/items/itm_00002.png,green,#44612b,magic,common,50,1,30,20,20,20,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 10,
+              "snippet": "itm_00009,浮藤汁,1,1,3648,res://assets/icons/items/itm_00002.png,green,#44612b,magic,common,50,1,30,20,20,20,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 11,
+              "snippet": "itm_00010,浮流盘,2,2,5991,res://assets/icons/items/itm_00002.png,green,#44612b,magic,uncommon,50,1,30,20,20,20,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 62,
+              "snippet": "itm_00061,破碎利爪,1,1,2048,res://assets/icons/items/itm_00002.png,green,#44612b,biological,common,50,1,30,20,20,20,10,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 63,
+              "snippet": "itm_00062,矮人胡须环结,1,2,2159,res://assets/icons/items/itm_00002.png,green,#44612b,biological,common,50,1,30,20,20,20,10,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 64,
+              "snippet": "itm_00063,三叶草,1,1,2448,res://assets/icons/items/itm_00002.png,green,#44612b,biological,common,50,1,30,20,20,20,10,10"
+            }
+          ],
+          "usageCount": 120,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__itm_00003.png",
+          "path": "res://assets/icons/items/itm_00003.png",
+          "previewUrl": "preview/assets/icons/items/itm_00003.png",
+          "webUrl": "/assets/icons/items/itm_00003.png",
+          "relFile": "../../assets/icons/items/itm_00003.png",
+          "fileName": "itm_00003.png",
+          "description": "道具「茧丝纸」(itm_00011)，items_master.csv；灼蚀剂；红枝；泪蚀；铭板；魂铃；拓纹阵；针偶；烂泥锤头；枪穗；藤壶；暗淡的躯体；荒鸦羽毛；鸦雀蛋；蛇骸；食腐甲虫；锤球；开锁器；熔炉火种；货物除锈剂；船体燃料；实木骨架；浮质撷取装置；符文外壳；符文铁砧；真皮剑套；餐刀；半瓶棕榈油；黢黑的坩埚；抛光的配重球；武器链；云泡石烟斗；香水；工具套装；工兵铲；携行具套装；野营套装；火漆印章；圣烛；随手涂抹的笔记；滤光器；风尚食谱；失落之岛；论异端；永恒历程；方铅矿；黄铜矿；白铅矿；闪锌矿；铝土矿",
+          "usages": [
+            {
+              "file": "config/items_master.csv",
+              "line": 12,
+              "snippet": "itm_00011,茧丝纸,1,1,8368,res://assets/icons/items/itm_00003.png,blue,#29487d,magic,common,50,1,50,30,30,30,40,40"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 13,
+              "snippet": "itm_00012,灼蚀剂,1,1,7654,res://assets/icons/items/itm_00003.png,blue,#29487d,magic,common,50,1,50,30,30,30,40,40"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 14,
+              "snippet": "itm_00013,红枝,1,1,9371,res://assets/icons/items/itm_00003.png,blue,#29487d,magic,uncommon,50,1,50,30,30,30,40,40"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 15,
+              "snippet": "itm_00014,泪蚀,1,1,10391,res://assets/icons/items/itm_00003.png,blue,#29487d,magic,common,50,1,50,30,30,30,40,40"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 16,
+              "snippet": "itm_00015,铭板,1,1,9895,res://assets/icons/items/itm_00003.png,blue,#29487d,magic,common,50,1,50,30,30,30,40,40"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 17,
+              "snippet": "itm_00016,魂铃,1,1,9748,res://assets/icons/items/itm_00003.png,blue,#29487d,magic,common,50,1,50,30,30,30,40,40"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 18,
+              "snippet": "itm_00017,拓纹阵,2,2,16055,res://assets/icons/items/itm_00003.png,blue,#29487d,magic,rare,50,1,50,30,30,30,40,40"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 19,
+              "snippet": "itm_00018,针偶,1,1,13056,res://assets/icons/items/itm_00003.png,blue,#29487d,magic,common,50,1,50,30,30,30,40,40"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 20,
+              "snippet": "itm_00019,烂泥锤头,2,2,23474,res://assets/icons/items/itm_00003.png,blue,#29487d,magic,common,50,1,50,30,30,30,40,40"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 21,
+              "snippet": "itm_00020,枪穗,4,2,24620,res://assets/icons/items/itm_00003.png,blue,#29487d,magic,rare,50,1,50,30,30,30,40,40"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 68,
+              "snippet": "itm_00067,藤壶,1,1,10061,res://assets/icons/items/itm_00003.png,blue,#29487d,biological,common,50,1,50,30,30,30,40,40"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 69,
+              "snippet": "itm_00068,暗淡的躯体,1,1,8874,res://assets/icons/items/itm_00003.png,blue,#29487d,biological,uncommon,50,1,50,30,30,30,40,40"
+            }
+          ],
+          "usageCount": 100,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__itm_00004.png",
+          "path": "res://assets/icons/items/itm_00004.png",
+          "previewUrl": "preview/assets/icons/items/itm_00004.png",
+          "webUrl": "/assets/icons/items/itm_00004.png",
+          "relFile": "../../assets/icons/items/itm_00004.png",
+          "fileName": "itm_00004.png",
+          "description": "道具「龙血凝块」(itm_00021)，items_master.csv；祖人面具；献物；失落的咒文；符石笔；纯净浮质；精炼釜；笼糜；石铠；偶具；浮流计；獠牙盔；蝠眼；缝蝇幼虫；碎鳞蛾蛹；萤火虫；幸运三叶草；木质货架；特制防尘罩；洞石块；精工地板；融塑；高脚杯；银餐盘；斗篷别针；蒸馏器；斗兽棋子；定影剂；灵仪；圣鳞饼；雕花相框；沙漏；乳牙吊坠；万花筒；血灰坛；扩张与征服；云生物种图鉴；松木；石膏；细砂；燧石；浮石",
+          "usages": [
+            {
+              "file": "config/items_master.csv",
+              "line": 22,
+              "snippet": "itm_00021,龙血凝块,1,1,21331,res://assets/icons/items/itm_00004.png,purple,#4e297d,magic,mythic,50,1,3,10,10,10,20,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 23,
+              "snippet": "itm_00022,祖人面具,2,1,24410,res://assets/icons/items/itm_00004.png,purple,#4e297d,magic,common,50,1,3,10,10,10,20,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 24,
+              "snippet": "itm_00023,献物,2,1,25425,res://assets/icons/items/itm_00004.png,purple,#4e297d,magic,uncommon,50,1,3,10,10,10,20,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 25,
+              "snippet": "itm_00024,失落的咒文,1,1,28431,res://assets/icons/items/itm_00004.png,purple,#4e297d,magic,uncommon,50,1,3,10,10,10,20,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 26,
+              "snippet": "itm_00025,符石笔,2,1,27327,res://assets/icons/items/itm_00004.png,purple,#4e297d,magic,common,50,1,3,10,10,10,20,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 27,
+              "snippet": "itm_00026,纯净浮质,1,1,32220,res://assets/icons/items/itm_00004.png,purple,#4e297d,magic,uncommon,50,1,3,10,10,10,20,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 28,
+              "snippet": "itm_00027,精炼釜,2,1,40125,res://assets/icons/items/itm_00004.png,purple,#4e297d,magic,uncommon,50,1,3,10,10,10,20,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 29,
+              "snippet": "itm_00028,笼糜,1,1,34223,res://assets/icons/items/itm_00004.png,purple,#4e297d,magic,common,50,1,3,10,10,10,20,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 30,
+              "snippet": "itm_00029,石铠,2,2,45586,res://assets/icons/items/itm_00004.png,purple,#4e297d,magic,uncommon,50,1,3,10,10,10,20,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 31,
+              "snippet": "itm_00030,偶具,2,1,58212,res://assets/icons/items/itm_00004.png,purple,#4e297d,magic,common,50,1,3,10,10,10,20,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 33,
+              "snippet": "itm_00032,浮流计,1,1,18900,res://assets/icons/items/itm_00004.png,purple,#4e297d,magic,legendary,50,1,3,10,10,10,20,20"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 39,
+              "snippet": "itm_00038,獠牙盔,2,3,69064,res://assets/icons/items/itm_00004.png,purple,#4e297d,magic,mythic,50,1,3,10,10,10,20,20"
+            }
+          ],
+          "usageCount": 84,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__itm_00005.png",
+          "path": "res://assets/icons/items/itm_00005.png",
+          "previewUrl": "preview/assets/icons/items/itm_00005.png",
+          "webUrl": "/assets/icons/items/itm_00005.png",
+          "relFile": "../../assets/icons/items/itm_00005.png",
+          "fileName": "itm_00005.png",
+          "description": "道具「棘环」(itm_00031)，items_master.csv；凝滞石；血阵杵；古云贝；乐面；丧面；三头犬盔；尖石帽；“胎盘”；棱刺；融躯炉；众子之母；长生符；舱底鼠壳；吞生之结；咒鸦的尖爪；精纯矮人胡须；浓稠脊髓液；颅砖；水平仪；沉骨方；矛头；袖珍日晷；号角；狮头印；奉祭碟；拆信刀；缩聚珠；鼻烟壶；小龙玩偶；香薰炉；风暴瓶；八音盒；圣水盆；教钟；永燃灯芯；灵学；辰砂；碎骸",
+          "usages": [
+            {
+              "file": "config/items_master.csv",
+              "line": 32,
+              "snippet": "itm_00031,棘环,1,1,58685,res://assets/icons/items/itm_00005.png,gold,#b1a221,magic,rare,50,1,1,5,5,5,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 34,
+              "snippet": "itm_00033,凝滞石,1,1,61809,res://assets/icons/items/itm_00005.png,gold,#b1a221,magic,common,50,1,1,5,5,5,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 35,
+              "snippet": "itm_00034,血阵杵,1,1,64265,res://assets/icons/items/itm_00005.png,gold,#b1a221,magic,legendary,50,1,1,5,5,5,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 36,
+              "snippet": "itm_00035,古云贝,1,1,133674,res://assets/icons/items/itm_00005.png,gold,#b1a221,magic,mythic,50,1,1,5,5,5,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 37,
+              "snippet": "itm_00036,乐面,1,1,74682,res://assets/icons/items/itm_00005.png,gold,#b1a221,magic,common,50,1,1,5,5,5,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 38,
+              "snippet": "itm_00037,丧面,1,1,75026,res://assets/icons/items/itm_00005.png,gold,#b1a221,magic,common,50,1,1,5,5,5,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 40,
+              "snippet": "itm_00039,三头犬盔,1,2,85088,res://assets/icons/items/itm_00005.png,gold,#b1a221,magic,common,50,1,1,5,5,5,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 41,
+              "snippet": "itm_00040,尖石帽,2,1,92336,res://assets/icons/items/itm_00005.png,gold,#b1a221,magic,common,50,1,1,5,5,5,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 42,
+              "snippet": "itm_00041,“胎盘”,2,2,93733,res://assets/icons/items/itm_00005.png,gold,#b1a221,magic,common,50,1,1,5,5,5,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 43,
+              "snippet": "itm_00042,棱刺,1,1,65659,res://assets/icons/items/itm_00005.png,gold,#b1a221,magic,mythic,50,1,1,5,5,5,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 44,
+              "snippet": "itm_00043,融躯炉,2,2,126425,res://assets/icons/items/itm_00005.png,gold,#b1a221,magic,uncommon,50,1,1,5,5,5,10,10"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 45,
+              "snippet": "itm_00044,众子之母,2,2,227047,res://assets/icons/items/itm_00005.png,gold,#b1a221,magic,common,50,1,1,5,5,5,10,10"
+            }
+          ],
+          "usageCount": 78,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__itm_00006.png",
+          "path": "res://assets/icons/items/itm_00006.png",
+          "previewUrl": "preview/assets/icons/items/itm_00006.png",
+          "webUrl": "/assets/icons/items/itm_00006.png",
+          "relFile": "../../assets/icons/items/itm_00006.png",
+          "fileName": "itm_00006.png",
+          "description": "道具「龙角碎片」(itm_00045)，items_master.csv；凝丝符锥；巨蛇颂；扼首；浮心镜；枯指戒；龙角盅；锐羽；杖首；虚茧仪阵；未竟之心；血樱桃；风梭骨；巨人瞳；巨人舌；巨人脊；巨人心；滴水嘴兽；便携暖炉；闪辉管；镀金油灯；砍骨刀；云丝披肩；神像摆件；提炉；圣龙杯；龙骨念珠；圣音琴；三首钟；半身像；《创生》；工艺雕像；空艇模型；血珀项链；血色馈赠；圣咏集；厄萨的涂鸦本；空域图；龙学大典；石墨；紫水晶；琥珀商馆的宝石；金矿",
+          "usages": [
+            {
+              "file": "config/items_master.csv",
+              "line": 46,
+              "snippet": "itm_00045,龙角碎片,2,1,332424,res://assets/icons/items/itm_00006.png,red,#a4492a,magic,legendary,50,1,1,2,2,2,4,4"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 47,
+              "snippet": "itm_00046,凝丝符锥,2,1,386253,res://assets/icons/items/itm_00006.png,red,#a4492a,magic,common,50,1,1,2,2,2,4,4"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 49,
+              "snippet": "itm_00048,巨蛇颂,2,2,533583,res://assets/icons/items/itm_00006.png,red,#a4492a,magic,uncommon,50,1,1,2,2,2,4,4"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 50,
+              "snippet": "itm_00049,扼首,2,2,614545,res://assets/icons/items/itm_00006.png,red,#a4492a,magic,common,50,1,1,2,2,2,4,4"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 51,
+              "snippet": "itm_00050,浮心镜,2,2,894546,res://assets/icons/items/itm_00006.png,red,#a4492a,magic,common,50,1,1,2,2,2,4,4"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 52,
+              "snippet": "itm_00051,枯指戒,3,2,905046,res://assets/icons/items/itm_00006.png,red,#a4492a,magic,common,50,1,1,2,2,2,4,4"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 53,
+              "snippet": "itm_00052,龙角盅,3,2,1974932,res://assets/icons/items/itm_00006.png,red,#a4492a,magic,common,50,1,1,2,2,2,4,4"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 54,
+              "snippet": "itm_00053,锐羽,3,2,3178130,res://assets/icons/items/itm_00006.png,red,#a4492a,magic,common,50,1,1,2,2,2,4,4"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 55,
+              "snippet": "itm_00054,杖首,3,4,1431828,res://assets/icons/items/itm_00006.png,red,#a4492a,magic,common,50,1,1,2,2,2,4,4"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 56,
+              "snippet": "itm_00055,虚茧仪阵,4,3,3249403,res://assets/icons/items/itm_00006.png,red,#a4492a,magic,legendary,50,1,1,2,2,2,4,4"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 57,
+              "snippet": "itm_00056,未竟之心,3,3,2015276,res://assets/icons/items/itm_00006.png,red,#a4492a,magic,common,50,1,1,2,2,2,4,4"
+            },
+            {
+              "file": "config/items_master.csv",
+              "line": 58,
+              "snippet": "itm_00057,血樱桃,3,3,2102096,res://assets/icons/items/itm_00006.png,red,#a4492a,magic,common,50,1,1,2,2,2,4,4"
+            }
+          ],
+          "usageCount": 86,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__itm_00007.jpg",
+          "path": "res://assets/icons/items/itm_00007.jpg",
+          "previewUrl": "preview/assets/icons/items/itm_00007.jpg",
+          "webUrl": "/assets/icons/items/itm_00007.jpg",
+          "relFile": "../../assets/icons/items/itm_00007.jpg",
+          "fileName": "itm_00007.jpg",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".jpg"
+        },
+        {
+          "id": "assets__icons__items__placeholder_q%d.png",
+          "path": "res://assets/icons/items/placeholder_q%d.png",
+          "previewUrl": "",
+          "webUrl": "",
+          "relFile": "",
+          "fileName": "placeholder_q%d.png",
+          "description": "未揭示道具占位图 · 品质槽 %d",
+          "usages": [
+            {
+              "file": "scripts/ui/item_icon_util.gd",
+              "line": 5,
+              "snippet": "const PLACEHOLDER_TMPL: String = \"res://assets/icons/items/placeholder_q%d.png\""
+            }
+          ],
+          "usageCount": 1,
+          "exists": false,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__placeholder_q0.png",
+          "path": "res://assets/icons/items/placeholder_q0.png",
+          "previewUrl": "preview/assets/icons/items/placeholder_q0.png",
+          "webUrl": "/assets/icons/items/placeholder_q0.png",
+          "relFile": "../../assets/icons/items/placeholder_q0.png",
+          "fileName": "placeholder_q0.png",
+          "description": "未揭示道具占位图 · 品质槽 0",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__placeholder_q1.png",
+          "path": "res://assets/icons/items/placeholder_q1.png",
+          "previewUrl": "preview/assets/icons/items/placeholder_q1.png",
+          "webUrl": "/assets/icons/items/placeholder_q1.png",
+          "relFile": "../../assets/icons/items/placeholder_q1.png",
+          "fileName": "placeholder_q1.png",
+          "description": "未揭示道具占位图 · 品质槽 1",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__placeholder_q2.png",
+          "path": "res://assets/icons/items/placeholder_q2.png",
+          "previewUrl": "preview/assets/icons/items/placeholder_q2.png",
+          "webUrl": "/assets/icons/items/placeholder_q2.png",
+          "relFile": "../../assets/icons/items/placeholder_q2.png",
+          "fileName": "placeholder_q2.png",
+          "description": "未揭示道具占位图 · 品质槽 2",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__placeholder_q3.png",
+          "path": "res://assets/icons/items/placeholder_q3.png",
+          "previewUrl": "preview/assets/icons/items/placeholder_q3.png",
+          "webUrl": "/assets/icons/items/placeholder_q3.png",
+          "relFile": "../../assets/icons/items/placeholder_q3.png",
+          "fileName": "placeholder_q3.png",
+          "description": "未揭示道具占位图 · 品质槽 3",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__placeholder_q4.png",
+          "path": "res://assets/icons/items/placeholder_q4.png",
+          "previewUrl": "preview/assets/icons/items/placeholder_q4.png",
+          "webUrl": "/assets/icons/items/placeholder_q4.png",
+          "relFile": "../../assets/icons/items/placeholder_q4.png",
+          "fileName": "placeholder_q4.png",
+          "description": "未揭示道具占位图 · 品质槽 4",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__placeholder_q5.png",
+          "path": "res://assets/icons/items/placeholder_q5.png",
+          "previewUrl": "preview/assets/icons/items/placeholder_q5.png",
+          "webUrl": "/assets/icons/items/placeholder_q5.png",
+          "relFile": "../../assets/icons/items/placeholder_q5.png",
+          "fileName": "placeholder_q5.png",
+          "description": "未揭示道具占位图 · 品质槽 5",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        }
+      ]
+    },
+    {
+      "id": "items-frames",
+      "name": "道具 · 品质框",
+      "count": 6,
+      "items": [
+        {
+          "id": "assets__icons__items__blue.png",
+          "path": "res://assets/icons/items/blue.png",
+          "previewUrl": "preview/assets/icons/items/blue.png",
+          "webUrl": "/assets/icons/items/blue.png",
+          "relFile": "../../assets/icons/items/blue.png",
+          "fileName": "blue.png",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__gold.png",
+          "path": "res://assets/icons/items/gold.png",
+          "previewUrl": "preview/assets/icons/items/gold.png",
+          "webUrl": "/assets/icons/items/gold.png",
+          "relFile": "../../assets/icons/items/gold.png",
+          "fileName": "gold.png",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__green.png",
+          "path": "res://assets/icons/items/green.png",
+          "previewUrl": "preview/assets/icons/items/green.png",
+          "webUrl": "/assets/icons/items/green.png",
+          "relFile": "../../assets/icons/items/green.png",
+          "fileName": "green.png",
+          "description": "道具格品质边框 · ItemQualityFrame",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__purple.png",
+          "path": "res://assets/icons/items/purple.png",
+          "previewUrl": "preview/assets/icons/items/purple.png",
+          "webUrl": "/assets/icons/items/purple.png",
+          "relFile": "../../assets/icons/items/purple.png",
+          "fileName": "purple.png",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__red.png",
+          "path": "res://assets/icons/items/red.png",
+          "previewUrl": "preview/assets/icons/items/red.png",
+          "webUrl": "/assets/icons/items/red.png",
+          "relFile": "../../assets/icons/items/red.png",
+          "fileName": "red.png",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        },
+        {
+          "id": "assets__icons__items__white.png",
+          "path": "res://assets/icons/items/white.png",
+          "previewUrl": "preview/assets/icons/items/white.png",
+          "webUrl": "/assets/icons/items/white.png",
+          "relFile": "../../assets/icons/items/white.png",
+          "fileName": "white.png",
+          "description": "道具格品质边框 · ItemQualityFrame",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".png"
+        }
+      ]
+    },
+    {
+      "id": "audio",
+      "name": "音频 · BGM",
+      "count": 4,
+      "items": [
+        {
+          "id": "assets__music__AL.mp3",
+          "path": "res://assets/music/AL.mp3",
+          "previewUrl": "preview/assets/music/AL.mp3",
+          "webUrl": "/assets/music/AL.mp3",
+          "relFile": "../../assets/music/AL.mp3",
+          "fileName": "AL.mp3",
+          "description": "BGM · 银雾修道院 valley",
+          "usages": [
+            {
+              "file": "scripts/audio/bgm_player.gd",
+              "line": 6,
+              "snippet": "\"AL\": \"res://assets/music/AL.mp3\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": true,
+          "ext": ".mp3"
+        },
+        {
+          "id": "assets__music__CA.mp3",
+          "path": "res://assets/music/CA.mp3",
+          "previewUrl": "preview/assets/music/CA.mp3",
+          "webUrl": "/assets/music/CA.mp3",
+          "relFile": "../../assets/music/CA.mp3",
+          "fileName": "CA.mp3",
+          "description": "BGM · 航天城 aerospace",
+          "usages": [
+            {
+              "file": "scripts/audio/bgm_player.gd",
+              "line": 7,
+              "snippet": "\"CA\": \"res://assets/music/CA.mp3\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": true,
+          "ext": ".mp3"
+        },
+        {
+          "id": "assets__music__CS.mp3",
+          "path": "res://assets/music/CS.mp3",
+          "previewUrl": "preview/assets/music/CS.mp3",
+          "webUrl": "/assets/music/CS.mp3",
+          "relFile": "../../assets/music/CS.mp3",
+          "fileName": "CS.mp3",
+          "description": "BGM · 黑牢 prison",
+          "usages": [
+            {
+              "file": "scripts/audio/bgm_player.gd",
+              "line": 8,
+              "snippet": "\"CS\": \"res://assets/music/CS.mp3\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": true,
+          "ext": ".mp3"
+        },
+        {
+          "id": "assets__music__JY.mp3",
+          "path": "res://assets/music/JY.mp3",
+          "previewUrl": "preview/assets/music/JY.mp3",
+          "webUrl": "/assets/music/JY.mp3",
+          "relFile": "../../assets/music/JY.mp3",
+          "fileName": "JY.mp3",
+          "description": "BGM · 琥珀商馆 dam",
+          "usages": [
+            {
+              "file": "scripts/audio/bgm_player.gd",
+              "line": 5,
+              "snippet": "\"JY\": \"res://assets/music/JY.mp3\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": true,
+          "ext": ".mp3"
+        }
+      ]
+    },
+    {
+      "id": "fonts",
+      "name": "字体",
+      "count": 9,
+      "items": [
+        {
+          "id": "assets__fonts__Futura-Medium.ttf",
+          "path": "res://assets/fonts/Futura-Medium.ttf",
+          "previewUrl": "",
+          "webUrl": "",
+          "relFile": "",
+          "fileName": "Futura-Medium.ttf",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [
+            {
+              "file": "scripts/ui/font_util.gd",
+              "line": 21,
+              "snippet": "\"res://assets/fonts/Futura-Medium.ttf\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": false,
+          "ext": ".ttf"
+        },
+        {
+          "id": "assets__fonts__Futura.ttf",
+          "path": "res://assets/fonts/Futura.ttf",
+          "previewUrl": "",
+          "webUrl": "",
+          "relFile": "",
+          "fileName": "Futura.ttf",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [
+            {
+              "file": "scripts/ui/font_util.gd",
+              "line": 20,
+              "snippet": "\"res://assets/fonts/Futura.ttf\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": false,
+          "ext": ".ttf"
+        },
+        {
+          "id": "assets__fonts__LaoMingChaoD.otf",
+          "path": "res://assets/fonts/LaoMingChaoD.otf",
+          "previewUrl": "",
+          "webUrl": "",
+          "relFile": "",
+          "fileName": "LaoMingChaoD.otf",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [
+            {
+              "file": "scripts/ui/font_util.gd",
+              "line": 10,
+              "snippet": "\"res://assets/fonts/LaoMingChaoD.otf\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": false,
+          "ext": ".otf"
+        },
+        {
+          "id": "assets__fonts__LaoMingChaoD.ttf",
+          "path": "res://assets/fonts/LaoMingChaoD.ttf",
+          "previewUrl": "",
+          "webUrl": "",
+          "relFile": "",
+          "fileName": "LaoMingChaoD.ttf",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [
+            {
+              "file": "scripts/ui/font_util.gd",
+              "line": 8,
+              "snippet": "\"res://assets/fonts/LaoMingChaoD.ttf\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": false,
+          "ext": ".ttf"
+        },
+        {
+          "id": "assets__fonts__NotoSansSC-Regular.otf",
+          "path": "res://assets/fonts/NotoSansSC-Regular.otf",
+          "previewUrl": "",
+          "webUrl": "",
+          "relFile": "",
+          "fileName": "NotoSansSC-Regular.otf",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [
+            {
+              "file": "scripts/ui/font_util.gd",
+              "line": 15,
+              "snippet": "\"res://assets/fonts/NotoSansSC-Regular.otf\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": false,
+          "ext": ".otf"
+        },
+        {
+          "id": "assets__fonts__SourceHanSansCN-Regular.otf",
+          "path": "res://assets/fonts/SourceHanSansCN-Regular.otf",
+          "previewUrl": "",
+          "webUrl": "",
+          "relFile": "",
+          "fileName": "SourceHanSansCN-Regular.otf",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [
+            {
+              "file": "scripts/ui/font_util.gd",
+              "line": 16,
+              "snippet": "\"res://assets/fonts/SourceHanSansCN-Regular.otf\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": false,
+          "ext": ".otf"
+        },
+        {
+          "id": "assets__fonts__SourceHanSansSC-Regular.otf",
+          "path": "res://assets/fonts/SourceHanSansSC-Regular.otf",
+          "previewUrl": "",
+          "webUrl": "",
+          "relFile": "",
+          "fileName": "SourceHanSansSC-Regular.otf",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [
+            {
+              "file": "scripts/ui/font_util.gd",
+              "line": 14,
+              "snippet": "\"res://assets/fonts/SourceHanSansSC-Regular.otf\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": false,
+          "ext": ".otf"
+        },
+        {
+          "id": "assets__fonts__futura.ttf",
+          "path": "res://assets/fonts/futura.ttf",
+          "previewUrl": "",
+          "webUrl": "",
+          "relFile": "",
+          "fileName": "futura.ttf",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [
+            {
+              "file": "scripts/ui/font_util.gd",
+              "line": 22,
+              "snippet": "\"res://assets/fonts/futura.ttf\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": false,
+          "ext": ".ttf"
+        },
+        {
+          "id": "assets__fonts__老明朝D.ttf",
+          "path": "res://assets/fonts/老明朝D.ttf",
+          "previewUrl": "",
+          "webUrl": "",
+          "relFile": "",
+          "fileName": "老明朝D.ttf",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [
+            {
+              "file": "scripts/ui/font_util.gd",
+              "line": 9,
+              "snippet": "\"res://assets/fonts/老明朝D.ttf\","
+            }
+          ],
+          "usageCount": 1,
+          "exists": false,
+          "ext": ".ttf"
+        }
+      ]
+    },
+    {
+      "id": "concept",
+      "name": "概念稿",
+      "count": 1,
+      "items": [
+        {
+          "id": "assets__ui__art_concept__ui_style_preview_crown_auction.svg",
+          "path": "res://assets/ui/art_concept/ui_style_preview_crown_auction.svg",
+          "previewUrl": "preview/assets/ui/art_concept/ui_style_preview_crown_auction.svg",
+          "webUrl": "/assets/ui/art_concept/ui_style_preview_crown_auction.svg",
+          "relFile": "../../assets/ui/art_concept/ui_style_preview_crown_auction.svg",
+          "fileName": "ui_style_preview_crown_auction.svg",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [],
+          "usageCount": 0,
+          "exists": true,
+          "ext": ".svg"
+        }
+      ]
+    },
+    {
+      "id": "other",
+      "name": "其他",
+      "count": 1,
+      "items": [
+        {
+          "id": "assets__icons__items__",
+          "path": "res://assets/icons/items/",
+          "previewUrl": "",
+          "webUrl": "/assets/icons/items/",
+          "relFile": "../../assets/icons/items/",
+          "fileName": "items",
+          "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+          "usages": [
+            {
+              "file": "docs/03-items-master-schema.md",
+              "line": 16,
+              "snippet": "| icon_path | 是 | `res://assets/icons/items/{item_id}.png` |"
+            },
+            {
+              "file": "scripts/ui/item_quality_frame.gd",
+              "line": 5,
+              "snippet": "const FRAME_DIR: String = \"res://assets/icons/items/\""
+            }
+          ],
+          "usageCount": 2,
+          "exists": true,
+          "ext": ""
+        }
+      ]
+    }
+  ],
+  "missingAssets": [
+    {
+      "id": "assets__ui__avatars__avatar_%d.png",
+      "path": "res://assets/ui/avatars/avatar_%d.png",
+      "previewUrl": "",
+      "webUrl": "",
+      "relFile": "",
+      "fileName": "avatar_%d.png",
+      "description": "席位占位头像（Bot/默认）",
+      "usages": [
+        {
+          "file": "scripts/ui/player_seat_card.gd",
+          "line": 55,
+          "snippet": "var path: String = \"res://assets/ui/avatars/avatar_%d.png\" % (seat_visual % 4)"
+        },
+        {
+          "file": "scripts/ui/settlement_overlay.gd",
+          "line": 192,
+          "snippet": "return \"res://assets/ui/avatars/avatar_%d.png\" % (maxi(seat, 0) % 4)"
+        }
+      ],
+      "usageCount": 2,
+      "exists": false,
+      "ext": ".png"
+    },
+    {
+      "id": "assets__icons__items__placeholder_q%d.png",
+      "path": "res://assets/icons/items/placeholder_q%d.png",
+      "previewUrl": "",
+      "webUrl": "",
+      "relFile": "",
+      "fileName": "placeholder_q%d.png",
+      "description": "未揭示道具占位图 · 品质槽 %d",
+      "usages": [
+        {
+          "file": "scripts/ui/item_icon_util.gd",
+          "line": 5,
+          "snippet": "const PLACEHOLDER_TMPL: String = \"res://assets/icons/items/placeholder_q%d.png\""
+        }
+      ],
+      "usageCount": 1,
+      "exists": false,
+      "ext": ".png"
+    },
+    {
+      "id": "assets__fonts__Futura-Medium.ttf",
+      "path": "res://assets/fonts/Futura-Medium.ttf",
+      "previewUrl": "",
+      "webUrl": "",
+      "relFile": "",
+      "fileName": "Futura-Medium.ttf",
+      "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+      "usages": [
+        {
+          "file": "scripts/ui/font_util.gd",
+          "line": 21,
+          "snippet": "\"res://assets/fonts/Futura-Medium.ttf\","
+        }
+      ],
+      "usageCount": 1,
+      "exists": false,
+      "ext": ".ttf"
+    },
+    {
+      "id": "assets__fonts__Futura.ttf",
+      "path": "res://assets/fonts/Futura.ttf",
+      "previewUrl": "",
+      "webUrl": "",
+      "relFile": "",
+      "fileName": "Futura.ttf",
+      "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+      "usages": [
+        {
+          "file": "scripts/ui/font_util.gd",
+          "line": 20,
+          "snippet": "\"res://assets/fonts/Futura.ttf\","
+        }
+      ],
+      "usageCount": 1,
+      "exists": false,
+      "ext": ".ttf"
+    },
+    {
+      "id": "assets__fonts__LaoMingChaoD.otf",
+      "path": "res://assets/fonts/LaoMingChaoD.otf",
+      "previewUrl": "",
+      "webUrl": "",
+      "relFile": "",
+      "fileName": "LaoMingChaoD.otf",
+      "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+      "usages": [
+        {
+          "file": "scripts/ui/font_util.gd",
+          "line": 10,
+          "snippet": "\"res://assets/fonts/LaoMingChaoD.otf\","
+        }
+      ],
+      "usageCount": 1,
+      "exists": false,
+      "ext": ".otf"
+    },
+    {
+      "id": "assets__fonts__LaoMingChaoD.ttf",
+      "path": "res://assets/fonts/LaoMingChaoD.ttf",
+      "previewUrl": "",
+      "webUrl": "",
+      "relFile": "",
+      "fileName": "LaoMingChaoD.ttf",
+      "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+      "usages": [
+        {
+          "file": "scripts/ui/font_util.gd",
+          "line": 8,
+          "snippet": "\"res://assets/fonts/LaoMingChaoD.ttf\","
+        }
+      ],
+      "usageCount": 1,
+      "exists": false,
+      "ext": ".ttf"
+    },
+    {
+      "id": "assets__fonts__NotoSansSC-Regular.otf",
+      "path": "res://assets/fonts/NotoSansSC-Regular.otf",
+      "previewUrl": "",
+      "webUrl": "",
+      "relFile": "",
+      "fileName": "NotoSansSC-Regular.otf",
+      "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+      "usages": [
+        {
+          "file": "scripts/ui/font_util.gd",
+          "line": 15,
+          "snippet": "\"res://assets/fonts/NotoSansSC-Regular.otf\","
+        }
+      ],
+      "usageCount": 1,
+      "exists": false,
+      "ext": ".otf"
+    },
+    {
+      "id": "assets__fonts__SourceHanSansCN-Regular.otf",
+      "path": "res://assets/fonts/SourceHanSansCN-Regular.otf",
+      "previewUrl": "",
+      "webUrl": "",
+      "relFile": "",
+      "fileName": "SourceHanSansCN-Regular.otf",
+      "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+      "usages": [
+        {
+          "file": "scripts/ui/font_util.gd",
+          "line": 16,
+          "snippet": "\"res://assets/fonts/SourceHanSansCN-Regular.otf\","
+        }
+      ],
+      "usageCount": 1,
+      "exists": false,
+      "ext": ".otf"
+    },
+    {
+      "id": "assets__fonts__SourceHanSansSC-Regular.otf",
+      "path": "res://assets/fonts/SourceHanSansSC-Regular.otf",
+      "previewUrl": "",
+      "webUrl": "",
+      "relFile": "",
+      "fileName": "SourceHanSansSC-Regular.otf",
+      "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+      "usages": [
+        {
+          "file": "scripts/ui/font_util.gd",
+          "line": 14,
+          "snippet": "\"res://assets/fonts/SourceHanSansSC-Regular.otf\","
+        }
+      ],
+      "usageCount": 1,
+      "exists": false,
+      "ext": ".otf"
+    },
+    {
+      "id": "assets__fonts__futura.ttf",
+      "path": "res://assets/fonts/futura.ttf",
+      "previewUrl": "",
+      "webUrl": "",
+      "relFile": "",
+      "fileName": "futura.ttf",
+      "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+      "usages": [
+        {
+          "file": "scripts/ui/font_util.gd",
+          "line": 22,
+          "snippet": "\"res://assets/fonts/futura.ttf\","
+        }
+      ],
+      "usageCount": 1,
+      "exists": false,
+      "ext": ".ttf"
+    },
+    {
+      "id": "assets__fonts__老明朝D.ttf",
+      "path": "res://assets/fonts/老明朝D.ttf",
+      "previewUrl": "",
+      "webUrl": "",
+      "relFile": "",
+      "fileName": "老明朝D.ttf",
+      "description": "（暂无描述，可在 generate_asset_library.py 的 MANUAL_DESC 补充）",
+      "usages": [
+        {
+          "file": "scripts/ui/font_util.gd",
+          "line": 9,
+          "snippet": "\"res://assets/fonts/老明朝D.ttf\","
+        }
+      ],
+      "usageCount": 1,
+      "exists": false,
+      "ext": ".ttf"
+    }
+  ],
+  "previewDir": "preview",
+  "serveHint": "在 docs/asset-library 目录: python -m http.server 8765 · 或在项目根目录: python tools/serve_asset_library.py"
+}

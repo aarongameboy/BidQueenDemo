@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cooqqj1iapl8v"
+
+[deps]
+
+files=["res://_tools/items_master_item_type_patched.item.translation", "res://_tools/items_master_item_type_patched.size.translation", "res://_tools/items_master_item_type_patched.size.translation", "res://_tools/items_master_item_type_patched.base.translation", "res://_tools/items_master_item_type_patched.icon.translation", "res://_tools/items_master_item_type_patched.quality.translation", "res://_tools/items_master_item_type_patched.quality.translation", "res://_tools/items_master_item_type_patched.item.translation", "res://_tools/items_master_item_type_patched.pool.translation", "res://_tools/items_master_item_type_patched.weight.translation", "res://_tools/items_master_item_type_patched.enabled.translation", "res://_tools/items_master_item_type_patched.w.translation", "res://_tools/items_master_item_type_patched.w.translation", "res://_tools/items_master_item_type_patched.w.translation", "res://_tools/items_master_item_type_patched.w.translation", "res://_tools/items_master_item_type_patched.w.translation", "res://_tools/items_master_item_type_patched.w.translation"]
+
+source_file="res://_tools/items_master_item_type_patched.csv"
+dest_files=["res://_tools/items_master_item_type_patched.item.translation", "res://_tools/items_master_item_type_patched.size.translation", "res://_tools/items_master_item_type_patched.size.translation", "res://_tools/items_master_item_type_patched.base.translation", "res://_tools/items_master_item_type_patched.icon.translation", "res://_tools/items_master_item_type_patched.quality.translation", "res://_tools/items_master_item_type_patched.quality.translation", "res://_tools/items_master_item_type_patched.item.translation", "res://_tools/items_master_item_type_patched.pool.translation", "res://_tools/items_master_item_type_patched.weight.translation", "res://_tools/items_master_item_type_patched.enabled.translation", "res://_tools/items_master_item_type_patched.w.translation", "res://_tools/items_master_item_type_patched.w.translation", "res://_tools/items_master_item_type_patched.w.translation", "res://_tools/items_master_item_type_patched.w.translation", "res://_tools/items_master_item_type_patched.w.translation", "res://_tools/items_master_item_type_patched.w.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -1,0 +1,21 @@
+[gd_scene format=3]
+
+[node name="root" type="Control" unique_id=1555366828]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="PanelMaskSamples" type="HBoxContainer" parent="." unique_id=878606281]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/separation = 24
+
+[node name="LeftMask_Alpha064" type="PanelContainer" parent="PanelMaskSamples" unique_id=469460300]
+layout_mode = 2
+
+[node name="CenterMask_Alpha058" type="PanelContainer" parent="PanelMaskSamples" unique_id=589901060]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RightMask_Alpha060" type="PanelContainer" parent="PanelMaskSamples" unique_id=1519906094]
+layout_mode = 2

@@ -1,0 +1,9 @@
+{
+  "files.encoding": "utf8",
+  "[csv]": {
+    "files.encoding": "utf8bom"
+  },
+  "files.associations": {
+    "config/*.csv": "csv"
+  }
+}

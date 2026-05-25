@@ -1,0 +1,97 @@
+{
+  "maps": [
+    {
+      "map_id": "dam",
+      "map_name": "琥珀商馆",
+      "preview_image": "res://assets/ui/maps/map_dam.png",
+      "feature_text": "标准明拍 | 双难度可选 | 适合入门",
+      "modes": [
+        {
+          "mode_id": "normal",
+          "mode_name": "简单",
+          "ticket": 1000,
+          "entry_threshold": 0,
+          "dividend_rate": 1.0,
+          "drop_rate_label": "低",
+          "weight_key": "w_dam_normal",
+          "bot_bid_cap": 2000000
+        },
+        {
+          "mode_id": "confidential",
+          "mode_name": "普通",
+          "ticket": 3000,
+          "entry_threshold": 1500000,
+          "dividend_rate": 0.66,
+          "drop_rate_label": "中",
+          "weight_key": "w_dam_confidential",
+          "bot_bid_cap": 4000000
+        }
+      ]
+    },
+    {
+      "map_id": "valley",
+      "map_name": "银雾修道院",
+      "preview_image": "res://assets/ui/maps/map_valley.png",
+      "feature_text": "含敌对玩家 | 含侵蚀值机制 | 含祸月",
+      "modes": [
+        {
+          "mode_id": "confidential",
+          "mode_name": "普通",
+          "ticket": 3000,
+          "entry_threshold": 1500000,
+          "dividend_rate": 0.66,
+          "drop_rate_label": "中",
+          "weight_key": "w_valley_confidential",
+          "bot_bid_cap": 4000000
+        }
+      ]
+    },
+    {
+      "map_id": "aerospace",
+      "map_name": "星塔穹庭",
+      "preview_image": "res://assets/ui/maps/map_aerospace.png",
+      "feature_text": "双难度 | 星塔核心 | 高价值藏品",
+      "modes": [
+        {
+          "mode_id": "confidential",
+          "mode_name": "普通",
+          "ticket": 3000,
+          "entry_threshold": 1500000,
+          "dividend_rate": 0.66,
+          "drop_rate_label": "中",
+          "weight_key": "w_aerospace_confidential",
+          "bot_bid_cap": 4000000
+        },
+        {
+          "mode_id": "top_secret",
+          "mode_name": "困难",
+          "ticket": 10000,
+          "entry_threshold": 3000000,
+          "dividend_rate": 0.33,
+          "drop_rate_label": "高",
+          "weight_key": "w_aerospace_top_secret",
+          "bot_bid_cap": 8000000
+        }
+      ]
+    },
+    {
+      "map_id": "prison",
+      "map_name": "黑蔷薇王陵",
+      "preview_image": "res://assets/ui/maps/map_prison.png",
+      "feature_text": "极难专属 | 王陵深处 | 最高爆率",
+      "modes": [
+        {
+          "mode_id": "top_secret",
+          "mode_name": "困难",
+          "ticket": 10000,
+          "entry_threshold": 3000000,
+          "dividend_rate": 0.33,
+          "drop_rate_label": "高",
+          "weight_key": "w_prison_top_secret",
+          "bot_bid_cap": 8000000
+        }
+      ]
+    }
+  ],
+  "instant_kill_multipliers": [2.0, 1.8, 1.6, 1.4, 1.2, 1.1]
+}

@@ -1,0 +1,187 @@
+[gd_scene format=3]
+
+[node name="root" type="Control" unique_id=849176100]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Backdrop" type="ColorRect" parent="." unique_id=1475332443]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 1)
+
+[node name="RootMargin" type="MarginContainer" parent="." unique_id=627851455]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="RootVBox" type="VBoxContainer" parent="RootMargin" unique_id=1054632183]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="TopBarPanel" type="PanelContainer" parent="RootMargin/RootVBox" unique_id=1679139286]
+layout_mode = 2
+
+[node name="TopBarMargin" type="MarginContainer" parent="RootMargin/RootVBox/TopBarPanel" unique_id=539864395]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 10
+
+[node name="TopBar" type="HBoxContainer" parent="RootMargin/RootVBox/TopBarPanel/TopBarMargin" unique_id=298285017]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="RootMargin/RootVBox/TopBarPanel/TopBarMargin/TopBar" unique_id=1049325194]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "竞拍之王"
+
+[node name="RoundBadge" type="Label" parent="RootMargin/RootVBox/TopBarPanel/TopBarMargin/TopBar" unique_id=2010242576]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "第 1 轮"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainColumns" type="HBoxContainer" parent="RootMargin/RootVBox" unique_id=287787704]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="PlayerRail" type="PanelContainer" parent="RootMargin/RootVBox/MainColumns" unique_id=796268526]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerRailMargin" type="MarginContainer" parent="RootMargin/RootVBox/MainColumns/PlayerRail" unique_id=354558894]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="PlayerList" type="VBoxContainer" parent="RootMargin/RootVBox/MainColumns/PlayerRail/PlayerRailMargin" unique_id=817526643]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PlayerRailTitle" type="Label" parent="RootMargin/RootVBox/MainColumns/PlayerRail/PlayerRailMargin/PlayerList" unique_id=961109605]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "竞拍席位"
+
+[node name="SeatCardSample" type="PanelContainer" parent="RootMargin/RootVBox/MainColumns/PlayerRail/PlayerRailMargin/PlayerList" unique_id=812058221]
+layout_mode = 2
+
+[node name="AuctionStage" type="PanelContainer" parent="RootMargin/RootVBox/MainColumns" unique_id=1915469499]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StageMargin" type="MarginContainer" parent="RootMargin/RootVBox/MainColumns/AuctionStage" unique_id=2055672403]
+layout_mode = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 20
+
+[node name="StageVBox" type="VBoxContainer" parent="RootMargin/RootVBox/MainColumns/AuctionStage/StageMargin" unique_id=947032402]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TimerLabel" type="Label" parent="RootMargin/RootVBox/MainColumns/AuctionStage/StageMargin/StageVBox" unique_id=1585220491]
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "本轮拍卖倒计时：15"
+horizontal_alignment = 1
+
+[node name="CurrentBidLabel" type="Label" parent="RootMargin/RootVBox/MainColumns/AuctionStage/StageMargin/StageVBox" unique_id=1854823216]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "当前最高价"
+horizontal_alignment = 1
+
+[node name="BidAmountLabel" type="Label" parent="RootMargin/RootVBox/MainColumns/AuctionStage/StageMargin/StageVBox" unique_id=2086844109]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "¥ 1,250,000"
+horizontal_alignment = 1
+
+[node name="LeaderLabel" type="Label" parent="RootMargin/RootVBox/MainColumns/AuctionStage/StageMargin/StageVBox" unique_id=1495890517]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "领先者：玩家 1"
+horizontal_alignment = 1
+
+[node name="StageSpacer" type="Control" parent="RootMargin/RootVBox/MainColumns/AuctionStage/StageMargin/StageVBox" unique_id=1823717636]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BidInput" type="LineEdit" parent="RootMargin/RootVBox/MainColumns/AuctionStage/StageMargin/StageVBox" unique_id=1685591643]
+layout_mode = 2
+placeholder_text = "输入出价金额"
+alignment = 1
+
+[node name="ActionButtons" type="HBoxContainer" parent="RootMargin/RootVBox/MainColumns/AuctionStage/StageMargin/StageVBox" unique_id=1199707726]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="CatalogButton" type="Button" parent="RootMargin/RootVBox/MainColumns/AuctionStage/StageMargin/StageVBox/ActionButtons" unique_id=385795628]
+layout_mode = 2
+text = "藏品"
+
+[node name="RaiseButton" type="Button" parent="RootMargin/RootVBox/MainColumns/AuctionStage/StageMargin/StageVBox/ActionButtons" unique_id=667038258]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "举牌出价"
+
+[node name="PassButton" type="Button" parent="RootMargin/RootVBox/MainColumns/AuctionStage/StageMargin/StageVBox/ActionButtons" unique_id=1522120607]
+layout_mode = 2
+text = "本轮放弃"
+
+[node name="LootPanel" type="PanelContainer" parent="RootMargin/RootVBox/MainColumns" unique_id=66005515]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LootMargin" type="MarginContainer" parent="RootMargin/RootVBox/MainColumns/LootPanel" unique_id=1885737579]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="LootVBox" type="VBoxContainer" parent="RootMargin/RootVBox/MainColumns/LootPanel/LootMargin" unique_id=1302192834]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LootTitle" type="Label" parent="RootMargin/RootVBox/MainColumns/LootPanel/LootMargin/LootVBox" unique_id=764457010]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "本轮战利品"
+
+[node name="LootGridPreview" type="GridContainer" parent="RootMargin/RootVBox/MainColumns/LootPanel/LootMargin/LootVBox" unique_id=271904182]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 4
+
+[node name="EstimateLabel" type="Label" parent="RootMargin/RootVBox/MainColumns/LootPanel/LootMargin/LootVBox" unique_id=1613080144]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "预估底价：¥ 800,000"

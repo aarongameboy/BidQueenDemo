@@ -1,0 +1,35 @@
+{
+  "match_seed": 0,
+  "starting_silver": 2000000,
+  "open_auction": {
+    "raise_tendency": 0.35,
+    "max_chase_ratio": 1.25,
+    "reaction_delay": 1.0
+  },
+  "bots": [
+    {
+      "seat": 1,
+      "character_id": "ethan",
+      "aggression": 0.25,
+      "bluff_rate": 0.05,
+      "valuation_bias": -0.08,
+      "raise_tendency": 0.3
+    },
+    {
+      "seat": 2,
+      "character_id": "old_man",
+      "aggression": 0.35,
+      "bluff_rate": 0.1,
+      "valuation_bias": 0.0,
+      "raise_tendency": 0.35
+    },
+    {
+      "seat": 3,
+      "character_id": "weilong",
+      "aggression": 0.7,
+      "bluff_rate": 0.3,
+      "valuation_bias": 0.12,
+      "raise_tendency": 0.55
+    }
+  ]
+}

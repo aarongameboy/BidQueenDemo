@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[node name="root" type="Control" unique_id=359967151]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="BidderAvatarSamples" type="HBoxContainer" parent="." unique_id=1914144041]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/separation = 16
+
+[node name="BidderAvatar_0_Gold" type="PanelContainer" parent="BidderAvatarSamples" unique_id=1839259332]
+layout_mode = 2
+
+[node name="BidderAvatar_1_Violet" type="PanelContainer" parent="BidderAvatarSamples" unique_id=990453901]
+layout_mode = 2
+
+[node name="BidderAvatar_2_Green" type="PanelContainer" parent="BidderAvatarSamples" unique_id=1655679379]
+layout_mode = 2
+
+[node name="BidderAvatar_3_Copper" type="PanelContainer" parent="BidderAvatarSamples" unique_id=1772687874]
+layout_mode = 2

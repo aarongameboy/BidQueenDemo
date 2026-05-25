@@ -1,0 +1,19 @@
+{
+  "auction_mode": "open",
+  "seat_count": 4,
+  "player_seat": 0,
+  "player_character_id": "aria_lionheart",
+  "max_rounds": 5,
+  "bid_window_seconds": 25.0,
+  "min_raise": 50000,
+  "starting_bid": 10000,
+  "reserve_quick_buy": 0,
+  "bot_tick_seconds": 1.2,
+  "warehouse_grid_w": 10,
+  "warehouse_grid_h": 20,
+  "warehouse_item_min": 15,
+  "warehouse_item_max": 40,
+  "warehouse_item_count_weights": {},
+  "max_place_retries": 24,
+  "unbox_item_delay": 0.55
+}

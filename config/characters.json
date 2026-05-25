@@ -1,0 +1,80 @@
+{
+  "default_character_id": "aria_lionheart",
+  "characters": [
+    {
+      "id": "aria_lionheart",
+      "display_name": "艾莉娅·狮心",
+      "role": "战士",
+      "title": "王庭近卫",
+      "skill_id": "court_announce",
+      "skill_name": "王庭宣价",
+      "skill_desc": "每轮 1 次，随机翻开 2 件藏品的全部信息。",
+      "portrait": "res://assets/ui/characters/portrait_warrior_aria_lionheart.png",
+      "aggression": 0.48,
+      "raise_tendency": 0.52,
+      "valuation_bias": -0.03,
+      "bluff_rate": 0.08,
+      "max_chase_ratio": 1.22
+    },
+    {
+      "id": "lisette_nightraven",
+      "display_name": "莉赛特·夜鸦",
+      "role": "刺客",
+      "title": "夜鸦账簿",
+      "skill_id": "night_raven_peek",
+      "skill_name": "夜鸦窥价",
+      "skill_desc": "拍卖开始时，显示紫/金/红藏品总件数。",
+      "portrait": "res://assets/ui/characters/portrait_assassin_lisette_nightraven.png",
+      "aggression": 0.42,
+      "raise_tendency": 0.48,
+      "valuation_bias": -0.1,
+      "bluff_rate": 0.12,
+      "max_chase_ratio": 1.18
+    },
+    {
+      "id": "serena_startower",
+      "display_name": "塞蕾娜·星塔",
+      "role": "法师",
+      "title": "星塔估价师",
+      "skill_id": "star_chart_valuation",
+      "skill_name": "星盘估值",
+      "skill_desc": "开局提示战利品总估值区间（偏低/合理/偏高）。",
+      "portrait": "res://assets/ui/characters/portrait_mage_serena_startower.png",
+      "aggression": 0.4,
+      "raise_tendency": 0.45,
+      "valuation_bias": 0.0,
+      "bluff_rate": 0.06,
+      "max_chase_ratio": 1.2
+    },
+    {
+      "id": "mia_holybell",
+      "display_name": "米娅·圣铃",
+      "role": "辅助",
+      "title": "圣铃修会",
+      "skill_id": "holy_bell_shake",
+      "skill_name": "圣铃摇晃",
+      "skill_desc": "开局随机显示 5 件品质；每回合再揭示 2 件未知品质。",
+      "portrait": "res://assets/ui/characters/portrait_support_mia_holybell.png",
+      "aggression": 0.38,
+      "raise_tendency": 0.42,
+      "valuation_bias": -0.06,
+      "bluff_rate": 0.07,
+      "max_chase_ratio": 1.15
+    },
+    {
+      "id": "noctis_blackrose",
+      "display_name": "诺克缇丝·黑蔷薇",
+      "role": "黑骑士",
+      "title": "失落王冠",
+      "skill_id": "black_rose_pressure",
+      "skill_name": "黑蔷薇威压",
+      "skill_desc": "①同价胜出：与他人出价相同时由你优先胜出；②秒杀：一旦排名第一即刻结算，无需等待。",
+      "portrait": "res://assets/ui/characters/portrait_black_knight_noctis_blackrose.png",
+      "aggression": 0.72,
+      "raise_tendency": 0.68,
+      "valuation_bias": 0.12,
+      "bluff_rate": 0.14,
+      "max_chase_ratio": 1.35
+    }
+  ]
+}

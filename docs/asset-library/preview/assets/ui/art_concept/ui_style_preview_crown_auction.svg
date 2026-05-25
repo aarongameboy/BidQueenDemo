@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#121827"/>
+      <stop offset="0.55" stop-color="#182033"/>
+      <stop offset="1" stop-color="#241622"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F3D98A"/>
+      <stop offset="0.45" stop-color="#D8A84E"/>
+      <stop offset="1" stop-color="#7A5220"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F2E3B8"/>
+      <stop offset="1" stop-color="#CDAE72"/>
+    </linearGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#293148"/>
+      <stop offset="1" stop-color="#111624"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#40C2B8" flood-opacity="0.75"/>
+    </filter>
+    <style>
+      .title { font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-size: 46px; font-weight: 700; fill: #F2E3B8; }
+      .label { font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-size: 24px; font-weight: 700; fill: #E7D4A2; }
+      .small { font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; font-size: 18px; fill: #B8C7CB; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <path d="M0 0 H1600 V110 H0 Z" fill="#0C111D" opacity="0.78"/>
+  <text x="80" y="70" class="title">王冠竞拍会 UI 风格预览</text>
+  <text x="80" y="102" class="small">中世纪幻想 / 二次元手游 / 深色石板 + 王冠金 + 羊皮纸信息层 + 宝石青交互光</text>
+
+  <g transform="translate(80 160)" filter="url(#shadow)">
+    <rect x="0" y="0" width="560" height="300" rx="8" fill="url(#stone)" stroke="#D8A84E" stroke-width="3"/>
+    <rect x="20" y="20" width="520" height="64" rx="4" fill="#111624" stroke="#8B6B34" stroke-width="2"/>
+    <text x="42" y="61" class="label">拍卖信息面板</text>
+    <rect x="28" y="110" width="235" height="150" rx="6" fill="url(#paper)" stroke="#7A5220" stroke-width="2"/>
+    <rect x="296" y="110" width="216" height="150" rx="6" fill="#171E31" stroke="#40C2B8" stroke-width="2"/>
+    <circle cx="404" cy="185" r="48" fill="#111624" stroke="url(#gold)" stroke-width="7"/>
+    <path d="M375 190 L397 166 L421 194 L435 174 L445 206 H365 Z" fill="url(#gold)"/>
+    <text x="42" y="286" class="small">羊皮纸承载数字，深色区域承载状态和头像</text>
+  </g>
+
+  <g transform="translate(700 160)" filter="url(#shadow)">
+    <rect x="0" y="0" width="360" height="84" rx="8" fill="url(#gold)" stroke="#F3D98A" stroke-width="2"/>
+    <text x="118" y="53" class="label" fill="#21160A">加价</text>
+    <circle cx="74" cy="42" r="24" fill="#3D2612" opacity="0.8"/>
+    <path d="M60 48 L82 26 L90 34 L68 56 Z M75 58 H100 V66 H75 Z" fill="#F2E3B8"/>
+
+    <rect x="0" y="118" width="360" height="84" rx="8" fill="#7A2336" stroke="#D8A84E" stroke-width="2"/>
+    <text x="118" y="171" class="label">放弃</text>
+    <path d="M59 140 L91 172 M91 140 L59 172" stroke="#F2E3B8" stroke-width="8" stroke-linecap="round"/>
+
+    <rect x="0" y="236" width="360" height="84" rx="8" fill="#162538" stroke="#40C2B8" stroke-width="3" filter="url(#glow)"/>
+    <text x="118" y="289" class="label">确认</text>
+    <path d="M58 281 L72 295 L98 260" fill="none" stroke="#E7D4A2" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g transform="translate(1120 160)" filter="url(#shadow)">
+    <rect x="0" y="0" width="380" height="300" rx="8" fill="#101725" stroke="#8B6B34" stroke-width="3"/>
+    <text x="30" y="42" class="label">道具格与稀有度</text>
+    <g transform="translate(34 76)">
+      <rect x="0" y="0" width="88" height="88" rx="6" fill="#202941" stroke="#7A5220" stroke-width="3"/>
+      <path d="M58 0 H88 V30 Z" fill="#8B2F45"/>
+      <circle cx="44" cy="44" r="22" fill="#D8A84E" opacity="0.75"/>
+    </g>
+    <g transform="translate(146 76)">
+      <rect x="0" y="0" width="88" height="88" rx="6" fill="#202941" stroke="#40C2B8" stroke-width="3"/>
+      <path d="M58 0 H88 V30 Z" fill="#40C2B8"/>
+      <path d="M44 20 L64 44 L44 68 L24 44 Z" fill="#E7D4A2" opacity="0.8"/>
+    </g>
+    <g transform="translate(258 76)">
+      <rect x="0" y="0" width="88" height="88" rx="6" fill="#202941" stroke="#D8A84E" stroke-width="3"/>
+      <path d="M58 0 H88 V30 Z" fill="#D8A84E"/>
+      <path d="M22 66 L44 20 L66 66 Z" fill="#8B2F45" opacity="0.85"/>
+    </g>
+    <rect x="34" y="206" width="312" height="42" rx="21" fill="#101725" stroke="#40C2B8" stroke-width="2"/>
+    <rect x="42" y="214" width="198" height="26" rx="13" fill="#40C2B8" opacity="0.85"/>
+    <text x="34" y="278" class="small">石板槽 + 宝石角标 + 魔法进度条</text>
+  </g>
+
+  <g transform="translate(80 530)" filter="url(#shadow)">
+    <rect x="0" y="0" width="1420" height="250" rx="8" fill="#0F1626" stroke="#D8A84E" stroke-width="2"/>
+    <text x="32" y="52" class="label">角色头像框方向</text>
+    <g transform="translate(40 90)">
+      <circle cx="55" cy="55" r="55" fill="#1D2840" stroke="url(#gold)" stroke-width="7"/>
+      <path d="M30 58 L55 28 L82 62 L96 44 L105 78 H20 Z" fill="#D8A84E"/>
+      <text x="0" y="142" class="small">战士</text>
+    </g>
+    <g transform="translate(180 90)">
+      <circle cx="55" cy="55" r="55" fill="#1B1730" stroke="#8B2F45" stroke-width="7"/>
+      <path d="M32 72 C48 30 76 28 94 72 C74 60 52 60 32 72 Z" fill="#D8A84E"/>
+      <text x="0" y="142" class="small">刺客</text>
+    </g>
+    <g transform="translate(320 90)">
+      <circle cx="55" cy="55" r="55" fill="#10233A" stroke="#40C2B8" stroke-width="7"/>
+      <path d="M55 18 L64 45 L92 45 L69 61 L78 88 L55 72 L32 88 L41 61 L18 45 L46 45 Z" fill="#E7D4A2"/>
+      <text x="0" y="142" class="small">法师</text>
+    </g>
+    <g transform="translate(460 90)">
+      <circle cx="55" cy="55" r="55" fill="#203026" stroke="#E7D4A2" stroke-width="7"/>
+      <path d="M35 36 H75 V70 A20 20 0 0 1 35 70 Z M45 80 H65" fill="none" stroke="#D8A84E" stroke-width="8" stroke-linecap="round"/>
+      <text x="0" y="142" class="small">辅助</text>
+    </g>
+    <g transform="translate(600 90)">
+      <circle cx="55" cy="55" r="55" fill="#171017" stroke="#8B2F45" stroke-width="7"/>
+      <path d="M55 18 C90 36 90 76 55 96 C20 76 20 36 55 18 Z" fill="#101010" stroke="#D8A84E" stroke-width="3"/>
+      <circle cx="55" cy="56" r="17" fill="#8B2F45"/>
+      <text x="0" y="142" class="small">黑骑士</text>
+    </g>
+    <rect x="820" y="78" width="540" height="112" rx="6" fill="url(#paper)" stroke="#7A5220" stroke-width="2"/>
+    <text x="850" y="124" class="label" fill="#2B1B0E">界面阅读原则</text>
+    <text x="850" y="160" class="small" fill="#3C2A18">角色华丽，功能控件克制；拍卖信息优先清晰，装饰集中在边缘和状态高光。</text>
+  </g>
+</svg>

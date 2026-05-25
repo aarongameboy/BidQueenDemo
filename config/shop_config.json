@@ -1,0 +1,47 @@
+{
+  "categories": [
+    { "id": "items", "name": "道具商店", "enabled": true },
+    { "id": "mall", "name": "商城", "enabled": false },
+    { "id": "secret", "name": "神秘商店", "enabled": false },
+    { "id": "exchange", "name": "兑换所", "enabled": false },
+    { "id": "daily", "name": "每日商城", "enabled": false }
+  ],
+  "products": [
+    {
+      "product_id": "wh_box_basic",
+      "category": "items",
+      "name": "基础仓库箱",
+      "description": "解锁一页 8×10 扩展仓库。",
+      "price_silver": 1200,
+      "purchase_limit": 1,
+      "effect": { "type": "warehouse_page", "page_name": "扩展箱 I", "grid_w": 8, "grid_h": 10 }
+    },
+    {
+      "product_id": "wh_box_standard",
+      "category": "items",
+      "name": "标准仓库箱",
+      "description": "解锁一页 10×10 扩展仓库。",
+      "price_silver": 2500,
+      "purchase_limit": 1,
+      "effect": { "type": "warehouse_page", "page_name": "扩展箱 II", "grid_w": 10, "grid_h": 10 }
+    },
+    {
+      "product_id": "wh_box_advanced",
+      "category": "items",
+      "name": "高级藏品箱",
+      "description": "解锁一页 10×18 高级藏品箱，整理时红色品质道具优先存入。",
+      "price_silver": 4800,
+      "purchase_limit": 1,
+      "effect": { "type": "warehouse_page", "page_name": "高级藏品箱", "grid_w": 10, "grid_h": 18, "is_collection_box": true }
+    },
+    {
+      "product_id": "wh_box_premium",
+      "category": "items",
+      "name": "典藏仓库箱",
+      "description": "解锁一页 12×12 扩展仓库。",
+      "price_silver": 8800,
+      "purchase_limit": 1,
+      "effect": { "type": "warehouse_page", "page_name": "典藏箱", "grid_w": 12, "grid_h": 12 }
+    }
+  ]
+}

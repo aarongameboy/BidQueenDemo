@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BidKing Demo · 美术资源库</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">BidKing <span>Asset Library</span></div>
+      <nav class="tabs" id="main-tabs">
+        <button type="button" class="view-tab active" data-tab="assets">资源总览</button>
+        <button type="button" class="view-tab" data-tab="colors">颜色规范</button>
+        <button type="button" class="view-tab" data-tab="fonts">字体规范</button>
+        <button type="button" class="view-tab" data-tab="icons">导航图标</button>
+      </nav>
+      <div class="search-wrap">
+        <input type="search" id="search-input" placeholder="搜索路径、文件名、描述、引用文件…" autocomplete="off" />
+      </div>
+      <div class="meta" id="generated-meta"></div>
+    </header>
+    <div id="edit-toolbar" class="edit-toolbar-wrap"></div>
+    <p class="edit-status" id="edit-status" aria-live="polite"></p>
+    <div class="body">
+      <aside class="sidebar" id="sidebar">
+        <nav id="sidebar-nav"></nav>
+      </aside>
+      <main class="main" id="main-content"></main>
+      <aside class="toc" id="page-toc"></aside>
+    </div>
+  </div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

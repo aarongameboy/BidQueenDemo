@@ -1,0 +1,89 @@
+{
+  "project": "bidKingDemo",
+  "style_name": "Crown Auction Medieval Anime",
+  "global_style": {
+    "use_case": "stylized-concept",
+    "style_medium": "premium Japanese anime mobile game concept art, clean line art, polished cel shading with soft painterly highlights",
+    "palette": "deep indigo #182033, crown gold #D8A84E, parchment #E7D4A2, jewel teal #40C2B8, wine red #8B2F45",
+    "constraints": "consistent medieval fantasy auction world, elegant but readable, no modern objects, no sci-fi neon, no text, no watermark, no logo, no explicit or suggestive design"
+  },
+  "characters": [
+    {
+      "id": "warrior_aria_lionheart",
+      "role": "战士",
+      "display_name": "艾莉娅·狮心",
+      "skill": {
+        "name": "王庭宣价",
+        "short_effect": "每局1次，本轮首次有效加价可少1个加价步进入场，但不能低于起拍价。"
+      },
+      "output_filename": "portrait_warrior_aria_lionheart.png",
+      "prompt": "Use case: stylized-concept\nAsset type: square game character portrait, 1024x1024\nPrimary request: medieval fantasy anime beautiful young female warrior for an auction strategy game\nSubject: Aria Lionheart, royal guard warrior girl, honey-gold hair, clear blue eyes, confident warm smile, elegant white-silver light armor, red short cape, lion crest shoulder guard, small crown-shaped brooch\nScene/backdrop: blurred royal auction hall with banners and warm crown-gold light\nComposition/framing: bust portrait, head and shoulders, face clear, centered, safe margins for circular avatar crop\nLighting/mood: heroic, trustworthy, polished warm highlights\nColor palette: silver armor, red cape, crown gold accents, deep indigo shadows\nConstraints: premium Japanese anime mobile game style, clean line art, polished cel shading, no text, no watermark, no logo, no modern items, non-explicit design"
+    },
+    {
+      "id": "assassin_lisette_nightraven",
+      "role": "刺客",
+      "display_name": "莉赛特·夜鸦",
+      "skill": {
+        "name": "夜鸦窥价",
+        "short_effect": "每轮开始前自动翻开2个随机未公开道具的类型或品质提示，每局最多触发3轮。"
+      },
+      "output_filename": "portrait_assassin_lisette_nightraven.png",
+      "prompt": "Use case: stylized-concept\nAsset type: square game character portrait, 1024x1024\nPrimary request: medieval fantasy anime beautiful young female assassin for an auction strategy game\nSubject: Lisette Nightraven, calm and clever assassin girl, long black-purple hair, violet-gold eyes, half hood, refined dark leather armor, raven feather hair ornament, slim dagger held low but not threatening\nScene/backdrop: moonlit auction corridor with stone columns, subtle raven-feather motifs\nComposition/framing: bust portrait, head and shoulders, face clear, centered, safe margins for circular avatar crop\nLighting/mood: mysterious, tactical, elegant, cool moonlight with small gold rim light\nColor palette: black violet, muted gold, moon silver, deep indigo\nConstraints: premium Japanese anime mobile game style, clean line art, polished cel shading, no text, no watermark, no logo, no modern items, non-explicit design"
+    },
+    {
+      "id": "mage_serena_startower",
+      "role": "法师",
+      "display_name": "塞蕾娜·星塔",
+      "skill": {
+        "name": "星盘估值",
+        "short_effect": "每局2次，在竞拍窗口内获得当前仓库总估值区间提示。"
+      },
+      "output_filename": "portrait_mage_serena_startower.png",
+      "prompt": "Use case: stylized-concept\nAsset type: square game character portrait, 1024x1024\nPrimary request: medieval fantasy anime beautiful young female mage appraiser for an auction strategy game\nSubject: Serena Startower, silver-blue long hair, bright cyan eyes, starry gradient mage hat, crystal wand, floating spellbook, refined academy cloak with gold trim\nScene/backdrop: glass-domed auction hall with star chart, soft floating runes, magical appraisal instruments\nComposition/framing: bust portrait, head and shoulders, face clear, centered, safe margins for circular avatar crop\nLighting/mood: intelligent, luminous, magical, soft teal and starlight glow\nColor palette: silver blue, jewel teal, parchment gold, deep night blue\nConstraints: premium Japanese anime mobile game style, clean line art, polished cel shading, no text, no watermark, no logo, no modern items, non-explicit design"
+    },
+    {
+      "id": "support_mia_holybell",
+      "role": "辅助",
+      "display_name": "米娅·圣铃",
+      "skill": {
+        "name": "圣铃缓付",
+        "short_effect": "每局1次，成交时先支付85%，剩余15%从结算收益中抵扣。"
+      },
+      "output_filename": "portrait_support_mia_holybell.png",
+      "prompt": "Use case: stylized-concept\nAsset type: square game character portrait, 1024x1024\nPrimary request: medieval fantasy anime beautiful young female support clerk healer for an auction strategy game\nSubject: Mia Holybell, soft light-brown or pale pink hair, gentle green eyes, healer-clerk outfit blending nun robe and merchant assistant, small bell brooch, ledger book, short healing staff\nScene/backdrop: warm candlelit contract desk with parchment, wax seals, and soft gold particles\nComposition/framing: bust portrait, head and shoulders, face clear, centered, safe margins for circular avatar crop\nLighting/mood: gentle, reliable, warm, supportive, refined\nColor palette: parchment cream, soft green, crown gold, warm rose, deep indigo accents\nConstraints: premium Japanese anime mobile game style, clean line art, polished cel shading, no text, no watermark, no logo, no modern items, non-explicit design"
+    },
+    {
+      "id": "black_knight_noctis_blackrose",
+      "role": "黑骑士",
+      "display_name": "诺克缇丝·黑蔷薇",
+      "skill": {
+        "name": "黑蔷薇威压",
+        "short_effect": "每局1次，本轮所有对手的下一次有效加价额外提高1个min_raise。"
+      },
+      "output_filename": "portrait_black_knight_noctis_blackrose.png",
+      "prompt": "Use case: stylized-concept\nAsset type: square game character portrait, 1024x1024\nPrimary request: medieval fantasy anime beautiful young female black knight for an auction strategy game\nSubject: Noctis Blackrose, elegant intimidating black knight girl, white hair with black-silver gradient, red eyes, black gothic plate armor, black rose crest, torn dark cape, calm cold expression\nScene/backdrop: dark auction throne silhouette, black iron arches, muted crimson moonlight, subtle rose petal motif\nComposition/framing: bust portrait, head and shoulders, face clear, centered, safe margins for circular avatar crop\nLighting/mood: powerful, ominous, noble, restrained red rim light and gold reflections\nColor palette: black steel, deep crimson, silver white, dark indigo, antique gold\nConstraints: premium Japanese anime mobile game style, clean line art, polished cel shading, no text, no watermark, no logo, no modern items, non-explicit design"
+    }
+  ],
+  "ui_assets": [
+    {
+      "id": "bg_main_auction_hall",
+      "output_filename": "bg_main_auction_hall.png",
+      "prompt": "Use case: stylized-concept\nAsset type: 16:9 game UI background, 2048x1152\nPrimary request: medieval fantasy royal auction hall background for an auction strategy game\nScene/backdrop: deep wooden auction table in foreground, arched windows, chandeliers, velvet curtains, stone pillars, golden auction hammer, magical projection of treasure crates in the center\nComposition/framing: wide UI-safe composition, central area darker and less detailed for interface overlays, decorative detail around edges, no characters\nLighting/mood: luxurious, strategic, warm gold light mixed with deep indigo shadows\nColor palette: deep indigo, crown gold, dark wood, parchment highlights, jewel teal magical glow\nConstraints: no text, no watermark, no logo, no modern objects, readable for UI overlay"
+    },
+    {
+      "id": "bg_warehouse_grid",
+      "output_filename": "bg_warehouse_grid.png",
+      "prompt": "Use case: stylized-concept\nAsset type: square or 4:3 game board background for item grid\nPrimary request: medieval fantasy warehouse loot grid background\nScene/backdrop: carved stone slab and parchment auction inventory board, faint 8x8 grid impression, metallic corners, gem rarity markers, subtle magical dust\nComposition/framing: clean center, high readability, edges decorated with brass and wax seal motifs, no actual readable text\nLighting/mood: mysterious treasure appraisal, practical and readable\nColor palette: stone gray, parchment cream, antique gold, jewel teal, wine red accents\nConstraints: no text, no watermark, no logo, no modern objects"
+    },
+    {
+      "id": "bg_settlement_contract",
+      "output_filename": "bg_settlement_contract.png",
+      "prompt": "Use case: stylized-concept\nAsset type: 16:9 settlement screen background\nPrimary request: medieval fantasy auction settlement contract background\nScene/backdrop: parchment contract on dark wood table, wax seal, coin piles, crown emblem, small auction hammer, subtle magical accounting glow\nComposition/framing: central parchment area clean for score panels, decorative items at corners, no characters\nLighting/mood: satisfying, premium, decisive end-of-round result\nColor palette: parchment cream, crown gold, dark wood, wine red wax, deep indigo shadow\nConstraints: no readable text, no watermark, no logo, no modern objects"
+    },
+    {
+      "id": "ui_controls_style_sheet",
+      "output_filename": "ui_controls_style_sheet.png",
+      "prompt": "Use case: ui-mockup\nAsset type: game UI control style sheet concept image\nPrimary request: unified medieval fantasy auction UI controls, showing button, input field, panel, avatar frame, item cell, timer bar, tooltip bubble, rarity corner marker\nStyle/medium: polished 2D game UI concept art, high readability, not a screenshot of a complete app\nComposition/framing: arranged neatly on a neutral deep indigo background, each component visually separate, no labels or text\nLighting/mood: premium fantasy auction, metal bevels, parchment surfaces, jewel teal active glow, crown gold accents\nColor palette: deep indigo, crown gold, parchment, jewel teal, wine red\nConstraints: no text, no watermark, no logo, avoid clutter, practical for Godot UI slicing"
+    }
+  ]
+}

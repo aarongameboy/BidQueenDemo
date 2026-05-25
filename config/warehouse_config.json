@@ -1,0 +1,13 @@
+{
+  "default_page": {
+    "name": "主仓库",
+    "grid_w": 10,
+    "grid_h": 20
+  },
+  "expansion_pages": {
+    "扩展箱 I": { "grid_w": 8, "grid_h": 10 },
+    "扩展箱 II": { "grid_w": 10, "grid_h": 10 },
+    "高级藏品箱": { "grid_w": 10, "grid_h": 18 },
+    "典藏箱": { "grid_w": 12, "grid_h": 12 }
+  }
+}
