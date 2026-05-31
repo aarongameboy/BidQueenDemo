@@ -3,11 +3,13 @@
 importer="csv_translation"
 type="Translation"
 uid="uid://dtvq0i70yct67"
-valid=false
 
 [deps]
 
+files=["res://config/items_master.item.translation", "res://config/items_master.size.translation", "res://config/items_master.size.translation", "res://config/items_master.base.translation", "res://config/items_master.icon.translation", "res://config/items_master.quality.translation", "res://config/items_master.quality.translation", "res://config/items_master.item.translation", "res://config/items_master.flavor.translation", "res://config/items_master.pool.translation", "res://config/items_master.weight.translation", "res://config/items_master.enabled.translation", "res://config/items_master.w.translation", "res://config/items_master.w.translation", "res://config/items_master.w.translation", "res://config/items_master.w.translation", "res://config/items_master.w.translation", "res://config/items_master.w.translation"]
+
 source_file="res://config/items_master.csv"
+dest_files=["res://config/items_master.item.translation", "res://config/items_master.size.translation", "res://config/items_master.size.translation", "res://config/items_master.base.translation", "res://config/items_master.icon.translation", "res://config/items_master.quality.translation", "res://config/items_master.quality.translation", "res://config/items_master.item.translation", "res://config/items_master.flavor.translation", "res://config/items_master.pool.translation", "res://config/items_master.weight.translation", "res://config/items_master.enabled.translation", "res://config/items_master.w.translation", "res://config/items_master.w.translation", "res://config/items_master.w.translation", "res://config/items_master.w.translation", "res://config/items_master.w.translation", "res://config/items_master.w.translation"]
 
 [params]
 
