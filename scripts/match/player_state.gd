@@ -26,6 +26,8 @@ var won_auction: bool = false
 var character_title: String = ""
 ## 每轮最终出价（5 轮），0 表示该轮未出价
 var round_bids: Array[int] = []
+## 每轮使用的战术道具 ID；空字符串表示该轮未使用
+var round_tactical_items: Array[String] = []
 
 
 func _init(seat: int, char_id: String, bot_cfg: Dictionary = {}) -> void:
@@ -41,8 +43,10 @@ func _init(seat: int, char_id: String, bot_cfg: Dictionary = {}) -> void:
 		else:
 			character_title = _title_for_legacy_character(char_id)
 	round_bids.resize(GameConstants.MAX_ROUNDS)
+	round_tactical_items.resize(GameConstants.MAX_ROUNDS)
 	for i in GameConstants.MAX_ROUNDS:
 		round_bids[i] = 0
+		round_tactical_items[i] = ""
 	is_human = bool(bot_cfg.get("is_human", false))
 	if bot_cfg.has("is_bot"):
 		is_bot = bool(bot_cfg["is_bot"])
@@ -75,6 +79,13 @@ func record_round_bid(round_index: int, amount: int) -> void:
 	if idx < 0 or idx >= round_bids.size():
 		return
 	round_bids[idx] = amount
+
+
+func record_round_tactical_item(round_index: int, item_id: String) -> void:
+	var idx: int = round_index - 1
+	if idx < 0 or idx >= round_tactical_items.size():
+		return
+	round_tactical_items[idx] = item_id.strip_edges()
 
 
 static func _title_for_legacy_character(char_id: String) -> String:

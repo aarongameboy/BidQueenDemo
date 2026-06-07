@@ -13,6 +13,7 @@ const ItemIconUtilScript = preload("res://scripts/ui/item_icon_util.gd")
 const PersistentGridUtilScript = preload("res://scripts/util/persistent_grid_util.gd")
 const ItemTipsPopupScript = preload("res://scripts/ui/item_tips_popup.gd")
 const ItemTooltipScript = preload("res://scripts/ui/item_tooltip.gd")
+const TacticalCatalogScript = preload("res://scripts/data/tactical_item_catalog.gd")
 
 const CELL_SIZE: int = 42
 const CELL_GAP: int = 1
@@ -56,6 +57,9 @@ func setup(catalog) -> void:
 	_warehouse_node = get_node_or_null("/root/PlayerWarehouse")
 	if _warehouse_node and not _warehouse_node.warehouse_changed.is_connected(_on_warehouse_changed):
 		_warehouse_node.warehouse_changed.connect(_on_warehouse_changed)
+	var tactical: Node = get_node_or_null("/root/PlayerTacticalItems")
+	if tactical and not tactical.inventory_changed.is_connected(_on_tactical_inventory_changed):
+		tactical.inventory_changed.connect(_on_tactical_inventory_changed)
 
 
 func open() -> void:
@@ -77,6 +81,11 @@ func close() -> void:
 
 
 func _on_warehouse_changed() -> void:
+	if is_visible_in_tree():
+		_refresh_all()
+
+
+func _on_tactical_inventory_changed() -> void:
 	if is_visible_in_tree():
 		_refresh_all()
 
@@ -382,6 +391,7 @@ func _refresh_grid() -> void:
 	for gy in rows:
 		for gx in cols:
 			_cells_layer.add_child(_make_cell(gx, gy))
+	var occupancy: Array = PersistentGridUtilScript.new_occupancy(cols, rows)
 	for entry in page.get("items", []):
 		if typeof(entry) != TYPE_DICTIONARY:
 			continue
@@ -392,8 +402,11 @@ func _refresh_grid() -> void:
 		var sh: int = clampi(int(row.get("size_h", 1)), 1, rows)
 		var gx: int = int(entry.get("x", 0))
 		var gy: int = int(entry.get("y", 0))
+		if PersistentGridUtilScript.can_place(occupancy, gx, gy, sw, sh, cols, rows):
+			PersistentGridUtilScript.occupy(occupancy, gx, gy, sw, sh)
 		_items_layer.add_child(_make_item_block(entry, row, gx, gy, sw, sh))
-	var used: int = _warehouse_node.get_used_cells(_page_index, _catalog)
+	var tactical_cells: int = _add_tactical_items_to_grid(page, cols, rows, occupancy)
+	var used: int = _warehouse_node.get_used_cells(_page_index, _catalog) + tactical_cells
 	var cap: int = _warehouse_node.get_capacity_cells(_page_index)
 	_capacity_label.text = "%s · %d / %d 格" % [str(page.get("name", "")), used, cap]
 
@@ -496,6 +509,121 @@ func _make_item_block(entry: Dictionary, row: Dictionary, gx: int, gy: int, sw: 
 	return panel
 
 
+func _add_tactical_items_to_grid(page: Dictionary, cols: int, rows: int, occupancy: Array) -> int:
+	if _page_index != 0:
+		return 0
+	var tactical: Node = get_node_or_null("/root/PlayerTacticalItems")
+	if tactical == null:
+		return 0
+	var catalog: TacticalItemCatalog = tactical.get_catalog()
+	if catalog == null:
+		return 0
+	var cells_used: int = 0
+	for item in catalog.get_all_items():
+		var item_id: String = str(item.get("id", ""))
+		var count: int = int(tactical.get_count(item_id))
+		if count <= 0:
+			continue
+		var pos: Vector2i = PersistentGridUtilScript.find_first_fit(occupancy, 1, 1, cols, rows)
+		if pos.x < 0:
+			break
+		PersistentGridUtilScript.occupy(occupancy, pos.x, pos.y, 1, 1)
+		_items_layer.add_child(_make_tactical_item_block(item, item_id, count, pos.x, pos.y))
+		cells_used += 1
+	return cells_used
+
+
+func _make_tactical_item_block(item: Dictionary, item_id: String, count: int, gx: int, gy: int) -> PanelContainer:
+	var uid: String = _tactical_uid(item_id)
+	var catalog_row: Dictionary = _catalog.get_item(item_id) if _catalog else {}
+	var span: Vector2 = _cell_span(1, 1)
+	var panel := PanelContainer.new()
+	panel.position = _cell_origin(gx, gy)
+	panel.size = span
+	panel.custom_minimum_size = span
+	panel.mouse_filter = Control.MOUSE_FILTER_STOP
+	var q_enum: int = TacticalCatalogScript.quality_to_enum(str(item.get("quality", "white")))
+	panel.add_theme_stylebox_override("panel", ItemQualityFrameScript.transparent_panel_style())
+	panel.add_child(ItemQualityFrameScript.make_frame_rect(q_enum))
+	var inner := Control.new()
+	inner.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	inner.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	panel.add_child(inner)
+	var selected: bool = _mode == Mode.BULK_SELL and _selected_uids.has(uid)
+	if selected:
+		var sel_bg := ColorRect.new()
+		sel_bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		sel_bg.color = Color(0.15, 0.55, 0.32, 0.42)
+		sel_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		inner.add_child(sel_bg)
+	var icon := TextureRect.new()
+	icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	icon.offset_left = 4
+	icon.offset_top = 14
+	icon.offset_right = -4
+	icon.offset_bottom = -4
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var icon_path: String = str(item.get("icon_path", ""))
+	if ResourceLoader.exists(icon_path):
+		icon.texture = load(icon_path) as Texture2D
+	else:
+		icon.texture = ItemQualityFrameScript.load_texture(q_enum)
+	inner.add_child(icon)
+	var name_lbl := Label.new()
+	name_lbl.text = str(item.get("name", ""))
+	name_lbl.position = Vector2(4, 2)
+	name_lbl.size = Vector2(span.x - 8.0, 14.0)
+	name_lbl.clip_text = true
+	name_lbl.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	name_lbl.add_theme_font_size_override("font_size", 10)
+	name_lbl.add_theme_color_override("font_color", Color(0.92, 0.94, 1.0))
+	name_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	inner.add_child(name_lbl)
+	if count > 1:
+		var qty := Label.new()
+		qty.text = "x%d" % count
+		qty.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+		qty.offset_right = -3
+		qty.offset_bottom = -1
+		qty.add_theme_font_size_override("font_size", 11)
+		qty.add_theme_color_override("font_color", Color(0.45, 0.88, 0.55))
+		qty.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		inner.add_child(qty)
+	ItemTooltipScript.bind_hover(
+		panel,
+		_item_tooltip,
+		func() -> Dictionary:
+			return ItemTooltipScript.build_payload_from_catalog(catalog_row),
+	)
+	if _mode == Mode.VIEW:
+		panel.gui_input.connect(func(ev: InputEvent) -> void:
+			if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
+				_open_item_tips(uid, catalog_row)
+		)
+	elif _mode == Mode.BULK_SELL:
+		var price_lbl := Label.new()
+		price_lbl.text = _format_price(int(catalog_row.get("base_price", 0)) * count)
+		price_lbl.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+		price_lbl.offset_right = -4
+		price_lbl.offset_bottom = -2
+		price_lbl.add_theme_font_size_override("font_size", 10)
+		price_lbl.add_theme_color_override("font_color", Color(0.42, 0.92, 0.55))
+		price_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		inner.add_child(price_lbl)
+		panel.gui_input.connect(func(ev: InputEvent) -> void:
+			if ev is InputEventMouseButton and ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT:
+				if _selected_uids.has(uid):
+					_selected_uids.erase(uid)
+				else:
+					_selected_uids[uid] = true
+				_refresh_grid()
+				_update_sell_bar()
+		)
+	return panel
+
+
 func _open_item_tips(uid: String, catalog_row: Dictionary) -> void:
 	if _item_tips == null:
 		return
@@ -507,7 +635,22 @@ func _on_item_tips_closed() -> void:
 
 
 func _on_item_tips_sell(uid: String) -> void:
-	if _warehouse_node == null or uid.is_empty() or _catalog == null:
+	if uid.is_empty() or _catalog == null:
+		return
+	if _is_tactical_uid(uid):
+		var tactical: Node = get_node_or_null("/root/PlayerTacticalItems")
+		var tactical_id: String = _tactical_id_from_uid(uid)
+		var row: Dictionary = _catalog.get_item(tactical_id)
+		var price: int = int(row.get("base_price", 0))
+		if not tactical or not tactical.sell_items(tactical_id, 1):
+			return
+		var portfolio: Node = get_node_or_null("/root/PlayerPortfolio")
+		if portfolio and price > 0 and portfolio.has_method("add_silver"):
+			portfolio.add_silver(price)
+		_item_tips.hide_popup()
+		_refresh_all()
+		return
+	if _warehouse_node == null:
 		return
 	var entry := _find_item_by_uid(uid)
 	if entry.is_empty():
@@ -548,11 +691,16 @@ func _update_sell_bar() -> void:
 	if _catalog:
 		for uid in _selected_uids.keys():
 			var entry := _find_item_by_uid(str(uid))
-			if entry.is_empty():
-				continue
-			var row: Dictionary = _catalog.get_item(str(entry.get("item_id", "")))
-			total += int(row.get("base_price", 0))
-			count += 1
+			if _is_tactical_uid(str(uid)):
+				var tactical: Node = get_node_or_null("/root/PlayerTacticalItems")
+				var tactical_id: String = _tactical_id_from_uid(str(uid))
+				var tactical_count: int = int(tactical.get_count(tactical_id)) if tactical else 0
+				total += int(_catalog.get_item(tactical_id).get("base_price", 0)) * tactical_count
+				count += tactical_count
+			elif not entry.is_empty():
+				var row: Dictionary = _catalog.get_item(str(entry.get("item_id", "")))
+				total += int(row.get("base_price", 0))
+				count += 1
 	_sell_total_label.text = "已选 %d 件 · %s" % [count, _format_price(total)]
 	_update_quality_btn_states()
 
@@ -597,6 +745,13 @@ func _get_page_uids_of_quality(quality: int) -> Array[String]:
 		var row: Dictionary = _catalog.get_item(str(entry.get("item_id", "")))
 		if int(row.get("quality_enum", 0)) == quality:
 			result.append(str(entry.get("uid", "")))
+	if _page_index == 0:
+		var tactical: Node = get_node_or_null("/root/PlayerTacticalItems")
+		if tactical:
+			for item in tactical.get_catalog().get_all_items():
+				var item_id: String = str(item.get("id", ""))
+				if tactical.get_count(item_id) > 0 and TacticalCatalogScript.quality_to_enum(str(item.get("quality", "white"))) == quality:
+					result.append(_tactical_uid(item_id))
 	return result
 
 
@@ -607,12 +762,24 @@ func _confirm_bulk_sell() -> void:
 	for uid in _selected_uids.keys():
 		uids.append(str(uid))
 	var total: int = 0
+	var tactical: Node = get_node_or_null("/root/PlayerTacticalItems")
 	if _catalog:
 		for uid in uids:
-			var entry := _find_item_by_uid(uid)
-			var row: Dictionary = _catalog.get_item(str(entry.get("item_id", "")))
-			total += int(row.get("base_price", 0))
-	_warehouse_node.remove_items_by_uid(uids)
+			if _is_tactical_uid(uid):
+				var tactical_id: String = _tactical_id_from_uid(uid)
+				var tactical_count: int = int(tactical.get_count(tactical_id)) if tactical else 0
+				total += int(_catalog.get_item(tactical_id).get("base_price", 0)) * tactical_count
+				if tactical and tactical_count > 0:
+					tactical.sell_items(tactical_id, tactical_count)
+			else:
+				var entry := _find_item_by_uid(uid)
+				var row: Dictionary = _catalog.get_item(str(entry.get("item_id", "")))
+				total += int(row.get("base_price", 0))
+	var warehouse_uids: Array[String] = []
+	for uid in uids:
+		if not _is_tactical_uid(uid):
+			warehouse_uids.append(uid)
+	_warehouse_node.remove_items_by_uid(warehouse_uids)
 	var portfolio: Node = get_node_or_null("/root/PlayerPortfolio")
 	if portfolio and total > 0 and portfolio.has_method("add_silver"):
 		portfolio.add_silver(total)
@@ -637,6 +804,18 @@ func _find_item_by_uid(uid: String) -> Dictionary:
 		if typeof(entry) == TYPE_DICTIONARY and str(entry.get("uid", "")) == uid:
 			return entry
 	return {}
+
+
+func _tactical_uid(item_id: String) -> String:
+	return "tactical:" + item_id
+
+
+func _is_tactical_uid(uid: String) -> bool:
+	return uid.begins_with("tactical:")
+
+
+func _tactical_id_from_uid(uid: String) -> String:
+	return uid.trim_prefix("tactical:")
 
 
 func _grid_pixel_size(cols: int, rows: int) -> Vector2:

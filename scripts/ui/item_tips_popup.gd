@@ -19,6 +19,7 @@ var _panel: PanelContainer
 var _title_label: Label
 var _price_value_label: Label
 var _type_value_label: Label
+var _description_label: Label
 var _icon_host: Control
 var _size_grid_host: VBoxContainer
 var _sell_btn: Button
@@ -54,6 +55,8 @@ func show_item(
 	_title_label.text = name
 	_price_value_label.text = _format_price(_sell_price)
 	_type_value_label.text = type_label
+	_description_label.text = str(item_row.get("flavor_text", "")).strip_edges()
+	_description_label.visible = not _description_label.text.is_empty()
 	_rebuild_icon(item_row, q_enum)
 	_rebuild_size_grid(sw, sh)
 	_footer.visible = _show_sell
@@ -98,6 +101,11 @@ func _build_ui() -> void:
 	_panel.add_child(root)
 	root.add_child(_build_header_row())
 	root.add_child(_build_price_row())
+	_description_label = Label.new()
+	_description_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_description_label.add_theme_font_size_override("font_size", 12)
+	_description_label.add_theme_color_override("font_color", Color(0.75, 0.78, 0.84))
+	root.add_child(_description_label)
 	var body := HBoxContainer.new()
 	body.add_theme_constant_override("separation", 12)
 	body.custom_minimum_size = Vector2(0, 200)

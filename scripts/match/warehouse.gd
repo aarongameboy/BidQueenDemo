@@ -19,8 +19,8 @@ class WarehouseItem:
 
 
 var seed: int = 0
-var grid_w: int = 10
-var grid_h: int = 20
+var grid_w: int = 9
+var grid_h: int = 14
 var items: Array = []
 var true_total_value: int = 0
 var revealed_count: int = 0
@@ -40,15 +40,15 @@ func generate_from_catalog(
 	cfg: Dictionary,
 ) -> void:
 	seed = p_seed
-	grid_w = int(cfg.get("warehouse_grid_w", 10))
-	grid_h = int(cfg.get("warehouse_grid_h", 20))
+	grid_w = int(cfg.get("warehouse_grid_w", 9))
+	grid_h = int(cfg.get("warehouse_grid_h", 14))
 	items.clear()
 	true_total_value = 0
 	revealed_count = 0
 	_init_grid()
 	var target_count: int = WarehouseSpawnScript.pick_item_count(cfg, rng)
 	var retries_per_item: int = int(cfg.get("max_place_retries", 24))
-	var catalog_items: Array = catalog.get_all_items()
+	var catalog_items: Array = catalog.get_spawnable_items()
 	if catalog_items.is_empty():
 		push_warning("Warehouse: item catalog empty")
 		return

@@ -3,8 +3,12 @@ extends Control
 
 signal match_confirmed(map_id: String, mode_id: String)
 signal selection_cancelled
+signal open_tactical_shop_requested
+signal tactical_toast_requested(text: String)
 
 const MapModeConfigScript = preload("res://scripts/data/map_mode_config.gd")
+const TacticalCatalogScript = preload("res://scripts/data/tactical_item_catalog.gd")
+const TacticalConfigureUIScript = preload("res://scripts/ui/tactical_configure_ui.gd")
 const FontUtilScript = preload("res://scripts/ui/font_util.gd")
 const MenuBackgroundScript = preload("res://scripts/ui/menu_background.gd")
 const MatchControllerScript = preload("res://scripts/match/match_controller.gd")
@@ -42,6 +46,10 @@ var _threshold_hint_label: Label
 var _confirm_btn: Button
 var _mode_group: ButtonGroup
 var _lobby_back_btn: Button
+var _pocket_label: Label
+var _pocket_slots: HBoxContainer
+var _configure_tactical_btn: Button
+var _tactical_configure: TacticalConfigureUI = null
 
 
 func _ready() -> void:
@@ -105,6 +113,140 @@ func _build_ui() -> void:
 	vbox.add_child(body)
 	body.add_child(_build_map_scroll_area())
 	body.add_child(_build_detail_panel())
+
+
+func refresh_tactical_pocket() -> void:
+	if _pocket_label == null or _pocket_slots == null:
+		return
+	var tactical: Node = get_node_or_null("/root/PlayerTacticalItems")
+	var catalog: TacticalItemCatalog = null
+	if tactical != null:
+		catalog = tactical.get_catalog()
+	var max_slots: int = catalog.get_max_loadout_slots() if catalog else 5
+	var equipped: int = int(tactical.get_equipped_count()) if tactical else 0
+	_pocket_label.text = "口袋: %d/%d" % [equipped, max_slots]
+	for i in _pocket_slots.get_child_count():
+		var slot_btn: Button = _pocket_slots.get_child(i) as Button
+		if slot_btn == null:
+			continue
+		_apply_pocket_slot_style(slot_btn, i, tactical, catalog)
+
+
+func _build_tactical_pocket_bar() -> Control:
+	var panel := PanelContainer.new()
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(0.05, 0.07, 0.1, 0.82)
+	sb.border_color = Color(0.28, 0.32, 0.4, 0.55)
+	sb.set_border_width_all(1)
+	sb.set_corner_radius_all(6)
+	sb.content_margin_left = 14
+	sb.content_margin_right = 14
+	sb.content_margin_top = 8
+	sb.content_margin_bottom = 8
+	panel.add_theme_stylebox_override("panel", sb)
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 6)
+	panel.add_child(col)
+	var header_row := HBoxContainer.new()
+	header_row.add_theme_constant_override("separation", 8)
+	col.add_child(header_row)
+	_pocket_label = Label.new()
+	_pocket_label.text = "口袋: 0/5"
+	FontUtilScript.style_title_label(_pocket_label, 16)
+	header_row.add_child(_pocket_label)
+	header_row.add_child(_build_spacer())
+	_configure_tactical_btn = Button.new()
+	_configure_tactical_btn.text = "装配"
+	_configure_tactical_btn.focus_mode = Control.FOCUS_NONE
+	_configure_tactical_btn.custom_minimum_size = Vector2(60, 22)
+	UiButtonStyleScript.apply(_configure_tactical_btn, Color(0.95, 0.82, 0.38), 12)
+	_configure_tactical_btn.pressed.connect(_on_configure_tactical_pressed)
+	header_row.add_child(_configure_tactical_btn)
+	_pocket_slots = HBoxContainer.new()
+	_pocket_slots.add_theme_constant_override("separation", 6)
+	for i in 5:
+		var slot_btn := Button.new()
+		slot_btn.custom_minimum_size = Vector2(48, 48)
+		slot_btn.focus_mode = Control.FOCUS_NONE
+		slot_btn.set_meta("slot_index", i)
+		slot_btn.pressed.connect(_on_pocket_slot_pressed.bind(i))
+		_pocket_slots.add_child(slot_btn)
+	col.add_child(_pocket_slots)
+	_tactical_configure = TacticalConfigureUIScript.new()
+	_tactical_configure.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(_tactical_configure)
+	_tactical_configure.hide()
+	_tactical_configure.closed.connect(refresh_tactical_pocket)
+	_tactical_configure.toast_requested.connect(func(msg: String) -> void: tactical_toast_requested.emit(msg))
+	_tactical_configure.inventory_changed.connect(func() -> void:
+		var portfolio: Node = get_node_or_null("/root/PlayerPortfolio")
+		if portfolio:
+			set_human_silver(int(portfolio.total_assets))
+		refresh_tactical_pocket()
+	)
+	_tactical_configure.open_shop_requested.connect(func() -> void:
+		_tactical_configure.hide()
+		open_tactical_shop_requested.emit()
+	)
+	call_deferred("refresh_tactical_pocket")
+	return panel
+
+
+func _build_spacer() -> Control:
+	var spacer := Control.new()
+	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	return spacer
+
+
+func _apply_pocket_slot_style(
+	slot_btn: Button,
+	slot_index: int,
+	tactical: Node,
+	catalog: TacticalItemCatalog,
+) -> void:
+	var item_id: String = ""
+	if tactical != null and slot_index < tactical.loadout.size():
+		item_id = str(tactical.loadout[slot_index]).strip_edges()
+	var sb := StyleBoxFlat.new()
+	sb.set_corner_radius_all(4)
+	sb.set_border_width_all(2)
+	if item_id.is_empty():
+		slot_btn.text = ""
+		slot_btn.icon = null
+		sb.bg_color = Color(0.1, 0.12, 0.16, 0.95)
+		sb.border_color = Color(0.32, 0.36, 0.42, 0.75)
+	else:
+		slot_btn.text = ""
+		var item: Dictionary = catalog.get_item(item_id) if catalog else {}
+		var item_name: String = str(item.get("name", item_id))
+		slot_btn.tooltip_text = item_name
+		slot_btn.expand_icon = true
+		var icon_path: String = str(item.get("icon_path", ""))
+		if not icon_path.is_empty() and ResourceLoader.exists(icon_path):
+			slot_btn.icon = load(icon_path) as Texture2D
+		sb.border_color = TacticalCatalogScript.quality_color(str(item.get("quality", "white")))
+		sb.bg_color = Color(0.08, 0.1, 0.14, 0.95)
+	slot_btn.add_theme_stylebox_override("normal", sb)
+	slot_btn.add_theme_stylebox_override("hover", sb.duplicate())
+	slot_btn.add_theme_stylebox_override("pressed", sb.duplicate())
+
+
+func _on_pocket_slot_pressed(slot_index: int) -> void:
+	var tactical: Node = get_node_or_null("/root/PlayerTacticalItems")
+	if tactical == null:
+		return
+	if slot_index < 0 or slot_index >= tactical.loadout.size():
+		return
+	if str(tactical.loadout[slot_index]).strip_edges().is_empty():
+		_on_configure_tactical_pressed()
+		return
+	tactical.clear_loadout_slot(slot_index)
+	refresh_tactical_pocket()
+
+
+func _on_configure_tactical_pressed() -> void:
+	if _tactical_configure:
+		_tactical_configure.open_panel()
 
 
 func _build_header() -> Control:
@@ -181,6 +323,7 @@ func _build_detail_panel() -> Control:
 	var spacer := Control.new()
 	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	col.add_child(spacer)
+	col.add_child(_build_tactical_pocket_bar())
 	_confirm_btn = Button.new()
 	_confirm_btn.text = "确认选择"
 	_confirm_btn.focus_mode = Control.FOCUS_NONE
@@ -316,6 +459,7 @@ func _update_card_highlights() -> void:
 
 
 func _refresh_detail_panel() -> void:
+	refresh_tactical_pocket()
 	_refresh_mode_list()
 	var entry: Dictionary = MapModeConfigScript.get_map(_selected_map_id)
 	var feat: String = str(entry.get("feature_text", ""))

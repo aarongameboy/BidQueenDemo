@@ -5,6 +5,7 @@ extends RefCounted
 const ITEMS_PATH := "res://config/items_master.csv"
 const POOLS_PATH := "res://config/spawn_pool_table.csv"
 const MODS_PATH := "res://config/quality_modifier_table.csv"
+const GameConstants = preload("res://scripts/autoload/game_constants.gd")
 
 const QUALITY_TO_ENUM: Dictionary = {
     "white": GameConstants.Quality.WHITE,
@@ -23,10 +24,11 @@ const TYPE_DAILY: String = "daily"
 const TYPE_ART: String = "art"
 const TYPE_DOCUMENT: String = "document"
 const TYPE_RAW_MATERIAL: String = "raw_material"
+const TYPE_TACTICAL: String = "tactical"
 
 const TYPE_ORDER: PackedStringArray = [
     TYPE_MAGIC, TYPE_BIOLOGICAL, TYPE_BUILDING, TYPE_DAILY,
-    TYPE_ART, TYPE_DOCUMENT, TYPE_RAW_MATERIAL,
+    TYPE_ART, TYPE_DOCUMENT, TYPE_RAW_MATERIAL, TYPE_TACTICAL,
 ]
 
 const TYPE_LABELS: Dictionary = {
@@ -37,6 +39,7 @@ const TYPE_LABELS: Dictionary = {
     TYPE_ART: "艺术藏品",
     TYPE_DOCUMENT: "文献书籍",
     TYPE_RAW_MATERIAL: "原石木料",
+    TYPE_TACTICAL: "战术道具",
 }
 
 var _items_by_id: Dictionary = {}
@@ -76,6 +79,8 @@ func get_item(item_id: String) -> Dictionary:
 func get_items_by_quality_name(quality_name: String) -> Array:
     var out: Array = []
     for item in _items_by_id.values():
+        if not _is_spawnable(item):
+            continue
         if str(item.get("quality", "")) != quality_name:
             continue
         out.append(item)
@@ -95,6 +100,14 @@ func get_items_in_pool(pool_tag: String) -> Array:
             return _items_by_pool.get("legendary", [])
         _:
             return []
+
+
+func get_spawnable_items() -> Array:
+    var out: Array = []
+    for item in _items_by_id.values():
+        if _is_spawnable(item):
+            out.append(item)
+    return out
 
 
 func get_pools() -> Array[Dictionary]:
@@ -131,7 +144,7 @@ func _load_items() -> bool:
             "quality_color": GameConstants.get_quality_color_hex(
                 line[idx["quality"]].strip_edges(),
             ),
-            "item_type": resolve_item_type(line[idx["item_id"]].strip_edges()),
+            "item_type": _parse_optional_cell(line, idx, "item_type"),
             "flavor_text": _parse_optional_cell(line, idx, "flavor_text"),
             "pool_tag": line[idx["pool_tag"]].strip_edges(),
             "weight": _parse_float_cell(line, idx, "weight", 0.0),
@@ -139,11 +152,14 @@ func _load_items() -> bool:
         for key in idx.keys():
             if key.begins_with("w_"):
                 item[key] = _parse_float_cell(line, idx, key, float(item["weight"]))
+        if str(item["item_type"]).is_empty():
+            item["item_type"] = resolve_item_type(str(item["item_id"]))
         _items_by_id[item["item_id"]] = item
-        var pool: String = item["pool_tag"]
-        if not _items_by_pool.has(pool):
-            _items_by_pool[pool] = []
-        _items_by_pool[pool].append(item)
+        if _is_spawnable(item):
+            var pool: String = item["pool_tag"]
+            if not _items_by_pool.has(pool):
+                _items_by_pool[pool] = []
+            _items_by_pool[pool].append(item)
     return _items_by_id.size() > 0
 
 
@@ -218,6 +234,8 @@ func _build_min_price_index() -> void:
     _min_price_by_quality_size.clear()
     _min_price_by_quality_cells.clear()
     for item in _items_by_id.values():
+        if not _is_spawnable(item):
+            continue
         var q: int = int(item["quality_enum"])
         var sw: int = int(item["size_w"])
         var sh: int = int(item["size_h"])
@@ -239,6 +257,14 @@ static func _quality_cells_key(quality_enum: int, cell_count: int) -> String:
     return "%d_c%d" % [quality_enum, maxi(cell_count, 1)]
 
 
+static func _is_spawnable(item: Dictionary) -> bool:
+    return (
+        str(item.get("item_type", "")) != TYPE_TACTICAL
+        and not str(item.get("pool_tag", "")).is_empty()
+        and float(item.get("weight", 0.0)) > 0.0
+    )
+
+
 func get_all_items() -> Array:
     var list: Array = []
     for id in _items_by_id.keys():
@@ -250,6 +276,8 @@ func get_unique_sizes() -> Array:
     var seen: Dictionary = {}
     var out: Array = []
     for item in _items_by_id.values():
+        if not _is_spawnable(item):
+            continue
         var key: String = "%d_%d" % [item["size_w"], item["size_h"]]
         if seen.has(key):
             continue

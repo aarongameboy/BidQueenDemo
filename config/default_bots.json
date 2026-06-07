@@ -9,7 +9,7 @@
   "bots": [
     {
       "seat": 1,
-      "character_id": "ethan",
+      "character_id": "karin_otland",
       "aggression": 0.25,
       "bluff_rate": 0.05,
       "valuation_bias": -0.08,
@@ -17,7 +17,7 @@
     },
     {
       "seat": 2,
-      "character_id": "old_man",
+      "character_id": "lisette_nightraven",
       "aggression": 0.35,
       "bluff_rate": 0.1,
       "valuation_bias": 0.0,
@@ -25,7 +25,7 @@
     },
     {
       "seat": 3,
-      "character_id": "weilong",
+      "character_id": "noctis_blackrose",
       "aggression": 0.7,
       "bluff_rate": 0.3,
       "valuation_bias": 0.12,

@@ -23,11 +23,14 @@ const CharacterSelectionUIScript = preload("res://scripts/ui/character_selection
 const LeaderboardUIScript = preload("res://scripts/ui/leaderboard_ui.gd")
 const WarehouseUIScript = preload("res://scripts/ui/warehouse_ui.gd")
 const ShopUIScript = preload("res://scripts/ui/shop_ui.gd")
+const TacticalPickerUIScript = preload("res://scripts/ui/tactical_picker_ui.gd")
+const ItemTipsPopupScript = preload("res://scripts/ui/item_tips_popup.gd")
 const RoomBattleUIScript = preload("res://scripts/ui/room_battle_ui.gd")
 const ItemCatalogScript = preload("res://scripts/data/item_catalog.gd")
 const UiButtonStyleScript = preload("res://scripts/ui/ui_button_style.gd")
 const UiCloseButtonScript = preload("res://scripts/ui/ui_close_button.gd")
 const UiMoneyIconScript = preload("res://scripts/ui/ui_money_icon.gd")
+const ItemQualityFrameScript = preload("res://scripts/ui/item_quality_frame.gd")
 
 const BID_TIMER_PREFIX: String = "本轮拍卖倒计时："
 const BID_TIMER_BASE_FONT_SIZE: int = 32
@@ -97,8 +100,12 @@ var _character_ui: Control = null
 var _leaderboard_ui: Control = null
 var _warehouse_ui: WarehouseUI = null
 var _shop_ui: ShopUI = null
+var _tactical_picker: TacticalPickerUI = null
+var _tactical_info_popup: ItemTipsPopup = null
+var _return_to_map_after_shop: bool = false
 var _last_settlement_result = null
 var _settlement_claimed: bool = false
+var _settlement_recycle_unlocked: bool = false
 var _pending_map_id: String = ""
 var _pending_mode_id: String = ""
 var _room_flow_active: bool = false
@@ -169,6 +176,7 @@ func _finish_ready_deferred() -> void:
     _setup_leaderboard()
     _setup_warehouse()
     _setup_shop()
+    _setup_tactical_picker()
     _setup_restart_button_anchor()
     _show_lobby()
     _hide_currency_display()
@@ -225,6 +233,8 @@ func _setup_map_selection() -> void:
     move_child(_map_selection, -1)
     _map_selection.match_confirmed.connect(_on_map_match_confirmed)
     _map_selection.selection_cancelled.connect(_on_map_selection_cancelled)
+    _map_selection.open_tactical_shop_requested.connect(_on_open_tactical_shop_from_map)
+    _map_selection.tactical_toast_requested.connect(_show_toast)
     _map_selection.hide()
 
 
@@ -383,6 +393,8 @@ func _on_coming_soon(feature_name: String) -> void:
 func _show_map_selection(practice: bool = false, practice_subtitle: String = "") -> void:
     const MenuBackgroundScript = preload("res://scripts/ui/menu_background.gd")
     MenuBackgroundScript.set_viewport_dim(0.36)
+    if _controller:
+        _controller.finalize_tactical_loadout_after_match()
     _hide_lobby()
     if _room_battle_ui:
         _room_battle_ui.hide()
@@ -396,6 +408,8 @@ func _show_map_selection(practice: bool = false, practice_subtitle: String = "")
             _map_selection.set_human_silver(GameConstants.PRACTICE_MATCH_SILVER)
         else:
             _map_selection.set_human_silver(_get_persisted_silver())
+    if _map_selection:
+        _map_selection.refresh_tactical_pocket()
     if _map_selection:
         _map_selection.show()
     _hide_match_layout()
@@ -428,6 +442,54 @@ func _hide_match_layout() -> void:
     _apply_restart_button_placement(RestartBtnPlacement.HIDDEN)
 
 
+func _setup_tactical_picker() -> void:
+    _tactical_picker = TacticalPickerUIScript.new()
+    _tactical_picker.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+    add_child(_tactical_picker)
+    move_child(_tactical_picker, -1)
+    _tactical_picker.item_selected.connect(_on_tactical_item_selected)
+    _tactical_picker.closed.connect(_on_tactical_picker_closed)
+    _tactical_picker.hide()
+
+
+func _validate_tactical_loadout() -> bool:
+    var tactical: Node = get_node_or_null("/root/PlayerTacticalItems")
+    if tactical == null:
+        return true
+    var removed: Array = tactical.sanitize_loadout_for_match()
+    if not removed.is_empty():
+        _show_toast("口袋中已移除库存不足的道具")
+        if _map_selection:
+            _map_selection.refresh_tactical_pocket()
+    var check: Dictionary = tactical.validate_loadout_for_match()
+    if not check.get("ok", false):
+        _show_toast(str(check.get("reason", "战术道具配置无效")))
+        return false
+    return true
+
+
+func _prepare_tactical_for_match() -> bool:
+    if _controller == null:
+        return true
+    var tactical: Node = get_node_or_null("/root/PlayerTacticalItems")
+    if tactical != null:
+        var removed: Array = tactical.sanitize_loadout_for_match()
+        if not removed.is_empty():
+            _show_toast("口袋中已移除库存不足的道具，将不带该道具进入对局")
+            if _map_selection and _map_selection.visible:
+                _map_selection.refresh_tactical_pocket()
+    var result: Dictionary = _controller.prepare_tactical_loadout()
+    if not result.get("ok", false):
+        _show_toast(str(result.get("reason", "战术道具配置无效")))
+        return false
+    return true
+
+
+func _on_open_tactical_shop_from_map() -> void:
+    _return_to_map_after_shop = true
+    _on_open_shop("tactical")
+
+
 func _on_map_match_confirmed(map_id: String, mode_id: String) -> void:
     if _controller == null:
         return
@@ -443,6 +505,11 @@ func _on_map_match_confirmed(map_id: String, mode_id: String) -> void:
         return
     if not _controller.set_match_selection(map_id, mode_id, 0):
         _show_toast("无法进入该模式")
+        return
+    if not _validate_tactical_loadout():
+        if _map_selection:
+            _map_selection.show()
+            _map_selection.refresh_tactical_pocket()
         return
     _controller.set_practice_mode(false)
     _pending_map_id = map_id
@@ -466,6 +533,11 @@ func _on_ai_practice_map_confirmed(map_id: String, mode_id: String) -> void:
     if not _controller.set_match_selection(map_id, mode_id, 1):
         _show_toast("无法进入该模式")
         return
+    if not _prepare_tactical_for_match():
+        if _map_selection:
+            _map_selection.show()
+            _map_selection.refresh_tactical_pocket()
+        return
     _pending_map_id = map_id
     _pending_mode_id = mode_id
     _hide_map_selection()
@@ -480,6 +552,11 @@ func _on_room_map_confirmed(map_id: String, mode_id: String) -> void:
         return
     if not _controller.set_match_selection(map_id, mode_id, 1):
         _show_toast("无法进入该模式")
+        return
+    if not _validate_tactical_loadout():
+        if _map_selection:
+            _map_selection.show()
+            _map_selection.refresh_tactical_pocket()
         return
     _controller.set_practice_mode(true)
     _pending_map_id = map_id
@@ -521,6 +598,11 @@ func _on_room_match_start_requested(payload: Dictionary) -> void:
     _controller.configure_room_network(assignments, true)
     _pending_map_id = map_id
     _pending_mode_id = mode_id
+    if not _prepare_tactical_for_match():
+        _practice_match_active = false
+        if _room_battle_ui:
+            _room_battle_ui.open_hub(map_id, mode_id)
+        return
     _hide_lobby()
     _hide_map_selection()
     _controller.start_match(seed)
@@ -529,6 +611,14 @@ func _on_room_match_start_requested(payload: Dictionary) -> void:
 
 func _on_matchmaking_finished() -> void:
     if _controller == null:
+        return
+    if not _prepare_tactical_for_match():
+        _hide_lobby()
+        if _map_selection:
+            _map_selection.set_human_silver(_get_persisted_silver())
+            _map_selection.show()
+            _map_selection.refresh_tactical_pocket()
+            move_child(_map_selection, -1)
         return
     _controller.start_match()
 
@@ -625,6 +715,8 @@ func _setup_settlement_recycle_bar() -> void:
 
 
 func _should_show_settlement_recycle() -> bool:
+    if not _settlement_recycle_unlocked:
+        return false
     if _practice_match_active or (_controller != null and _controller.is_practice_mode()):
         return false
     var net: Node = get_node_or_null("/root/RoomNetwork")
@@ -657,6 +749,8 @@ func _on_settlement_recycle_filter_changed(_qualities: Array[int]) -> void:
 
 
 func _on_settlement_recycle_pressed(qualities: Array[int]) -> void:
+    if not _settlement_recycle_unlocked:
+        return
     if _controller == null:
         return
     var result: Dictionary = _controller.recycle_items_by_qualities(qualities)
@@ -689,7 +783,7 @@ func _configure_skill_scroll() -> void:
         return
     var scroll: ScrollContainer = _skill_list.get_parent() as ScrollContainer
     if scroll:
-        scroll.custom_minimum_size = Vector2(0, 240)
+        scroll.custom_minimum_size = Vector2(0, 360)
         scroll.size_flags_stretch_ratio = 1.1
 
 
@@ -711,6 +805,7 @@ func _setup_bid_action_row() -> void:
     if _bid_buttons_row == null or _bid_area == null:
         return
     _item_btn.visible = false
+    _item_btn.text = "道具"
     _pass_btn.visible = false
     _raise_btn.visible = true
     _raise_btn.text = "出价"
@@ -1114,7 +1209,7 @@ func _on_warehouse_closed() -> void:
         _show_lobby()
 
 
-func _on_open_shop() -> void:
+func _on_open_shop(category_id: String = "") -> void:
     if _shop_ui == null:
         _show_toast("商店未初始化")
         return
@@ -1130,11 +1225,20 @@ func _on_open_shop() -> void:
         _matchmaking.hide()
     if _warehouse_ui and _warehouse_ui.visible:
         _warehouse_ui.hide()
-    _shop_ui.open()
+    _shop_ui.open(category_id)
     _shop_ui.move_to_front()
 
 
 func _on_shop_closed() -> void:
+    if _return_to_map_after_shop:
+        _return_to_map_after_shop = false
+        _hide_lobby()
+        if _map_selection:
+            _map_selection.set_human_silver(_get_persisted_silver())
+            _map_selection.show()
+            _map_selection.refresh_tactical_pocket()
+            move_child(_map_selection, -1)
+        return
     _show_lobby()
 
 
@@ -1249,6 +1353,8 @@ func _bind_controller(controller) -> void:
     controller.quality_size_revealed.connect(_on_quality_size_revealed)
     controller.bid_window_finished.connect(_on_bid_window_finished)
     controller.cinematic_requested.connect(_on_cinematic_requested)
+    controller.tactical_state_changed.connect(_on_tactical_state_changed)
+    controller.tactical_item_used.connect(_on_tactical_item_used)
 
 
 func _on_cinematic_requested(payload: Dictionary) -> void:
@@ -1295,6 +1401,7 @@ func _on_match_started() -> void:
     _forfeited = false
     _human_locked_this_round = false
     _settlement_claimed = false
+    _settlement_recycle_unlocked = false
     _apply_restart_button_placement(RestartBtnPlacement.HIDDEN)
     _exit_settlement_ui()
     if _settlement_overlay:
@@ -1354,6 +1461,7 @@ func _on_board_updated(board) -> void:
         _controller.get_round_index() if _controller else 1,
         _hide_current_round_bids(),
     )
+    _update_bid_controls_state()
 
 
 func _hide_current_round_bids() -> bool:
@@ -1374,6 +1482,7 @@ func _on_bid_tick(seconds_left: float) -> void:
         _bid_popup_timer.text = "倒计时：%d" % secs
         var color: Color = BID_TIMER_URGENT_COLOR if urgent else BID_TIMER_NORMAL_COLOR
         _bid_popup_timer.add_theme_color_override("font_color", color)
+    _update_bid_controls_state()
 
 
 func _apply_bid_timer_style(urgent: bool) -> void:
@@ -1556,6 +1665,21 @@ func _make_effect_row(effect: Dictionary) -> PanelContainer:
             var portrait: String = RosterConfigScript.get_portrait_path(cid)
             if ResourceLoader.exists(portrait):
                 icon.texture = load(portrait)
+    elif icon_kind == "tactical":
+        const TacticalCatalogScript = preload("res://scripts/data/tactical_item_catalog.gd")
+        var tactical_id: String = str(effect.get("tactical_id", ""))
+        if tactical_id.is_empty():
+            tactical_id = str(effect.get("id", ""))
+        if not tactical_id.is_empty():
+            var tac_cat := TacticalCatalogScript.new()
+            tac_cat.load_all()
+            var tac_item: Dictionary = tac_cat.get_item(tactical_id)
+            var icon_path: String = str(tac_item.get("icon_path", ""))
+            if ResourceLoader.exists(icon_path):
+                icon.texture = load(icon_path) as Texture2D
+            else:
+                var q_enum: int = TacticalCatalogScript.quality_to_enum(str(tac_item.get("quality", "white")))
+                icon.texture = ItemQualityFrameScript.load_texture(q_enum)
     if icon.texture == null:
         var ph := ColorRect.new()
         ph.color = Color(0.55, 0.4, 0.7)
@@ -1635,7 +1759,11 @@ func _on_settlement_tick(tick: Dictionary) -> void:
     var phase: String = str(tick.get("phase", ""))
     var winner: Dictionary = _winner_info_from_tick(tick)
     if phase == "start":
-        _refresh_settlement_recycle_bar()
+        _settlement_recycle_unlocked = false
+        if _settlement_recycle_bar:
+            _settlement_recycle_bar.hide_bar()
+        if _loot_panel:
+            _loot_panel.offset_bottom = 0.0
         _settlement_overlay.begin_settlement(
             int(tick.get("winning_bid", 0)),
             str(winner.get("name", "")),
@@ -1645,10 +1773,11 @@ func _on_settlement_tick(tick: Dictionary) -> void:
         )
     elif phase == "item" or phase == "done":
         _settlement_overlay.apply_tick(tick)
-        _refresh_settlement_recycle_bar()
 
 
 func _on_settlement_ready(result) -> void:
+    _settlement_recycle_unlocked = true
+    _refresh_settlement_recycle_bar()
     _last_settlement_result = result
     _settlement_claimed = false
     var human_won: bool = _human_can_claim_settlement(result)
@@ -1753,6 +1882,7 @@ func _winner_info_from_seat(seat: int) -> Dictionary:
 
 
 func _exit_settlement_ui() -> void:
+    _settlement_recycle_unlocked = false
     if _settlement_recycle_bar:
         _settlement_recycle_bar.hide_bar()
     if _loot_panel:
@@ -1866,6 +1996,8 @@ func _on_player_bid_result(ok: bool, reason: String) -> void:
     if ok and reason.contains("等待"):
         _human_locked_this_round = true
         _update_bid_controls_state()
+        if _tactical_picker and _tactical_picker.visible:
+            _tactical_picker.close_picker()
     if not ok and not reason.is_empty():
         if _is_insufficient_funds_reason(reason):
             _show_toast("金币不足，无法出价")
@@ -1949,6 +2081,7 @@ func _rebuild_player_cards() -> void:
             true,
         )
         _players_list.add_child(card)
+        card.tactical_item_pressed.connect(_on_player_tactical_item_pressed)
         _seat_cards.append(card)
 
 
@@ -1995,9 +2128,7 @@ func _set_bid_controls_enabled(enabled: bool) -> void:
 
 
 func _update_bid_controls_state() -> void:
-    var in_window: bool = false
-    if _controller:
-        in_window = _controller.get_phase() == GameConstants.MatchPhase.BID_WINDOW
+    var in_window: bool = _is_bid_window_active()
     var can_act: bool = in_window and not _forfeited and not _human_locked_this_round
     _raise_btn.disabled = not can_act
     _pass_btn.disabled = not can_act
@@ -2009,6 +2140,7 @@ func _update_bid_controls_state() -> void:
     else:
         _forfeit_btn.visible = _bid_area != null and _bid_area.visible
         _forfeit_btn.disabled = not in_window
+    _refresh_tactical_item_button(in_window)
 
 
 func _on_bid_input_submitted(_text: String) -> void:
@@ -2053,7 +2185,77 @@ func _on_forfeit_pressed() -> void:
 
 
 func _on_item_tool_pressed() -> void:
-    _on_open_encyclopedia()
+    if _controller == null or _tactical_picker == null:
+        return
+    if _tactical_picker.visible:
+        _tactical_picker.close_picker()
+        return
+    if _controller.is_human_bid_locked():
+        _show_toast("本轮已出价，无法再使用战术道具")
+        return
+    if not _controller.can_use_tactical_item():
+        _show_toast("本轮已使用过战术道具，或没有可用道具")
+        return
+    _tactical_picker.open_picker(_controller.get_tactical_slots())
+
+
+func _on_tactical_picker_closed() -> void:
+    _update_bid_controls_state()
+
+
+func _on_tactical_item_selected(slot_index: int) -> void:
+    if _controller:
+        _controller.request_use_tactical_item(slot_index)
+
+
+func _on_tactical_state_changed(_slots: Array) -> void:
+    _sync_player_sidebar()
+    _update_bid_controls_state()
+
+
+func _on_tactical_item_used(_slot_index: int, ok: bool, reason: String) -> void:
+    if not ok and not reason.is_empty():
+        _show_toast(reason)
+    if ok:
+        _sync_player_sidebar()
+    _update_bid_controls_state()
+
+
+func _on_player_tactical_item_pressed(item_id: String, _anchor_global: Vector2) -> void:
+    var catalog = _resolve_item_catalog()
+    if catalog == null:
+        return
+    var item_row: Dictionary = catalog.get_item(item_id)
+    if item_row.is_empty():
+        return
+    if _tactical_info_popup == null:
+        _tactical_info_popup = ItemTipsPopupScript.new()
+        add_child(_tactical_info_popup)
+    _tactical_info_popup.show_item(item_row)
+
+
+func _is_bid_window_active() -> bool:
+    if _controller == null:
+        return false
+    var board = _controller.get_board()
+    if board == null:
+        return false
+    return _controller.get_phase() == GameConstants.MatchPhase.BID_WINDOW and board.window_active
+
+
+func _refresh_tactical_item_button(in_window: bool) -> void:
+    if _item_btn == null:
+        return
+    var has_tactical: bool = false
+    var can_use_item: bool = false
+    if _controller:
+        for slot in _controller.get_tactical_slots():
+            if not str(slot.get("item_id", "")).is_empty():
+                has_tactical = true
+                break
+        can_use_item = _controller.can_use_tactical_item()
+    _item_btn.visible = has_tactical and _bid_area != null and _bid_area.visible
+    _item_btn.disabled = not (in_window and not _forfeited and has_tactical and can_use_item)
 
 
 func _on_restart_pressed() -> void:

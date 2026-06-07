@@ -1,10 +1,35 @@
 {
   "categories": [
-    { "id": "items", "name": "道具商店", "enabled": true },
-    { "id": "mall", "name": "商城", "enabled": false },
-    { "id": "secret", "name": "神秘商店", "enabled": false },
-    { "id": "exchange", "name": "兑换所", "enabled": false },
-    { "id": "daily", "name": "每日商城", "enabled": false }
+    {
+      "id": "items",
+      "name": "道具商店",
+      "enabled": true
+    },
+    {
+      "id": "mall",
+      "name": "商城",
+      "enabled": false
+    },
+    {
+      "id": "secret",
+      "name": "神秘商店",
+      "enabled": false
+    },
+    {
+      "id": "exchange",
+      "name": "兑换所",
+      "enabled": false
+    },
+    {
+      "id": "daily",
+      "name": "每日商城",
+      "enabled": false
+    },
+    {
+      "id": "tactical",
+      "name": "战术道具",
+      "enabled": true
+    }
   ],
   "products": [
     {
@@ -14,7 +39,12 @@
       "description": "解锁一页 8×10 扩展仓库。",
       "price_silver": 1200,
       "purchase_limit": 1,
-      "effect": { "type": "warehouse_page", "page_name": "扩展箱 I", "grid_w": 8, "grid_h": 10 }
+      "effect": {
+        "type": "warehouse_page",
+        "page_name": "扩展箱 I",
+        "grid_w": 8,
+        "grid_h": 10
+      }
     },
     {
       "product_id": "wh_box_standard",
@@ -23,7 +53,12 @@
       "description": "解锁一页 10×10 扩展仓库。",
       "price_silver": 2500,
       "purchase_limit": 1,
-      "effect": { "type": "warehouse_page", "page_name": "扩展箱 II", "grid_w": 10, "grid_h": 10 }
+      "effect": {
+        "type": "warehouse_page",
+        "page_name": "扩展箱 II",
+        "grid_w": 10,
+        "grid_h": 10
+      }
     },
     {
       "product_id": "wh_box_advanced",
@@ -32,7 +67,13 @@
       "description": "解锁一页 10×18 高级藏品箱，整理时红色品质道具优先存入。",
       "price_silver": 4800,
       "purchase_limit": 1,
-      "effect": { "type": "warehouse_page", "page_name": "高级藏品箱", "grid_w": 10, "grid_h": 18, "is_collection_box": true }
+      "effect": {
+        "type": "warehouse_page",
+        "page_name": "高级藏品箱",
+        "grid_w": 10,
+        "grid_h": 18,
+        "is_collection_box": true
+      }
     },
     {
       "product_id": "wh_box_premium",
@@ -41,7 +82,493 @@
       "description": "解锁一页 12×12 扩展仓库。",
       "price_silver": 8800,
       "purchase_limit": 1,
-      "effect": { "type": "warehouse_page", "page_name": "典藏箱", "grid_w": 12, "grid_h": 12 }
+      "effect": {
+        "type": "warehouse_page",
+        "page_name": "典藏箱",
+        "grid_w": 12,
+        "grid_h": 12
+      }
+    },
+    {
+      "product_id": "shop_tact_random_reveal_white",
+      "category": "tactical",
+      "name": "白品随机显示",
+      "description": "随机显示 1 件藏品全部信息。",
+      "price_silver": 5000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_random_reveal_white",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_random_reveal_green",
+      "category": "tactical",
+      "name": "良品随机显示",
+      "description": "随机显示 2 件藏品全部信息。",
+      "price_silver": 12000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_random_reveal_green",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_random_reveal_blue",
+      "category": "tactical",
+      "name": "蓝品随机显示",
+      "description": "随机显示 3 件藏品全部信息。",
+      "price_silver": 30000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_random_reveal_blue",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_random_reveal_purple",
+      "category": "tactical",
+      "name": "优品随机显示",
+      "description": "随机显示 4 件藏品全部信息。",
+      "price_silver": 75000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_random_reveal_purple",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_random_reveal_gold",
+      "category": "tactical",
+      "name": "珍品随机显示",
+      "description": "随机显示 5 件藏品全部信息。",
+      "price_silver": 180000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_random_reveal_gold",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_random_reveal_red",
+      "category": "tactical",
+      "name": "极品随机显示",
+      "description": "随机显示 6 件藏品全部信息。",
+      "price_silver": 450000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_random_reveal_red",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_scan_white",
+      "category": "tactical",
+      "name": "白品扫描",
+      "description": "显示所有白色品质藏品的总格数。",
+      "price_silver": 5000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_scan_white",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_scan_green",
+      "category": "tactical",
+      "name": "良品扫描",
+      "description": "显示所有绿色品质藏品的总格数。",
+      "price_silver": 12000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_scan_green",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_scan_blue",
+      "category": "tactical",
+      "name": "蓝品扫描",
+      "description": "显示所有蓝色品质藏品的总格数。",
+      "price_silver": 30000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_scan_blue",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_scan_purple",
+      "category": "tactical",
+      "name": "优品扫描",
+      "description": "显示所有紫色品质藏品的总格数。",
+      "price_silver": 75000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_scan_purple",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_scan_gold",
+      "category": "tactical",
+      "name": "珍品扫描",
+      "description": "显示所有金色品质藏品的总格数。",
+      "price_silver": 180000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_scan_gold",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_scan_red",
+      "category": "tactical",
+      "name": "极品扫描",
+      "description": "显示所有红色品质藏品的总格数。",
+      "price_silver": 450000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_scan_red",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_stock_white",
+      "category": "tactical",
+      "name": "白品存量",
+      "description": "显示所有白色品质藏品的总数量。",
+      "price_silver": 5000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_stock_white",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_stock_green",
+      "category": "tactical",
+      "name": "良品存量",
+      "description": "显示所有绿色品质藏品的总数量。",
+      "price_silver": 12000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_stock_green",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_stock_blue",
+      "category": "tactical",
+      "name": "蓝品存量",
+      "description": "显示所有蓝色品质藏品的总数量。",
+      "price_silver": 30000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_stock_blue",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_stock_purple",
+      "category": "tactical",
+      "name": "优品存量",
+      "description": "显示所有紫色品质藏品的总数量。",
+      "price_silver": 75000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_stock_purple",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_stock_gold",
+      "category": "tactical",
+      "name": "珍品存量",
+      "description": "显示所有金色品质藏品的总数量。",
+      "price_silver": 180000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_stock_gold",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_stock_red",
+      "category": "tactical",
+      "name": "极品存量",
+      "description": "显示所有红色品质藏品的总数量。",
+      "price_silver": 450000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_stock_red",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_valuation_white",
+      "category": "tactical",
+      "name": "白品估价",
+      "description": "显示所有白色品质藏品的总价值。",
+      "price_silver": 5000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_valuation_white",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_valuation_green",
+      "category": "tactical",
+      "name": "良品估价",
+      "description": "显示所有绿色品质藏品的总价值。",
+      "price_silver": 12000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_valuation_green",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_valuation_blue",
+      "category": "tactical",
+      "name": "蓝品估价",
+      "description": "显示所有蓝色品质藏品的总价值。",
+      "price_silver": 30000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_valuation_blue",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_valuation_purple",
+      "category": "tactical",
+      "name": "优品估价",
+      "description": "显示所有紫色品质藏品的总价值。",
+      "price_silver": 75000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_valuation_purple",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_valuation_gold",
+      "category": "tactical",
+      "name": "珍品估价",
+      "description": "显示所有金色品质藏品的总价值。",
+      "price_silver": 180000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_valuation_gold",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_valuation_red",
+      "category": "tactical",
+      "name": "极品估价",
+      "description": "显示所有红色品质藏品的总价值。",
+      "price_silver": 450000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_valuation_red",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_random_quality_id_white",
+      "category": "tactical",
+      "name": "白品随机品质鉴定",
+      "description": "随机鉴定 2 件未知藏品的品质与占格。",
+      "price_silver": 5000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_random_quality_id_white",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_random_quality_id_green",
+      "category": "tactical",
+      "name": "良品随机品质鉴定",
+      "description": "随机鉴定 4 件未知藏品的品质与占格。",
+      "price_silver": 12000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_random_quality_id_green",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_random_quality_id_blue",
+      "category": "tactical",
+      "name": "蓝品随机品质鉴定",
+      "description": "随机鉴定 6 件未知藏品的品质与占格。",
+      "price_silver": 30000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_random_quality_id_blue",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_random_quality_id_purple",
+      "category": "tactical",
+      "name": "优品随机品质鉴定",
+      "description": "随机鉴定 8 件未知藏品的品质与占格。",
+      "price_silver": 75000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_random_quality_id_purple",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_random_quality_id_gold",
+      "category": "tactical",
+      "name": "珍品随机品质鉴定",
+      "description": "随机鉴定 10 件未知藏品的品质与占格。",
+      "price_silver": 180000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_random_quality_id_gold",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_random_quality_id_red",
+      "category": "tactical",
+      "name": "极品随机品质鉴定",
+      "description": "随机鉴定 12 件未知藏品的品质与占格。",
+      "price_silver": 450000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_random_quality_id_red",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_avg_cells_white",
+      "category": "tactical",
+      "name": "白品均格",
+      "description": "显示所有白色品质藏品的平均格数。",
+      "price_silver": 5000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_avg_cells_white",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_avg_cells_green",
+      "category": "tactical",
+      "name": "良品均格",
+      "description": "显示所有绿色品质藏品的平均格数。",
+      "price_silver": 12000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_avg_cells_green",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_avg_cells_blue",
+      "category": "tactical",
+      "name": "蓝品均格",
+      "description": "显示所有蓝色品质藏品的平均格数。",
+      "price_silver": 30000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_avg_cells_blue",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_avg_cells_purple",
+      "category": "tactical",
+      "name": "优品均格",
+      "description": "显示所有紫色品质藏品的平均格数。",
+      "price_silver": 75000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_avg_cells_purple",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_avg_cells_gold",
+      "category": "tactical",
+      "name": "珍品均格",
+      "description": "显示所有金色品质藏品的平均格数。",
+      "price_silver": 180000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_avg_cells_gold",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_avg_cells_red",
+      "category": "tactical",
+      "name": "极品均格",
+      "description": "显示所有红色品质藏品的平均格数。",
+      "price_silver": 450000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_avg_cells_red",
+        "grant_count": 1
+      }
+    },
+    {
+      "product_id": "shop_tact_omniscient",
+      "category": "tactical",
+      "name": "全知全能",
+      "description": "显示所有藏品的全部信息。",
+      "price_silver": 2000000,
+      "purchase_limit": 0,
+      "effect": {
+        "type": "tactical_item",
+        "tactical_id": "tact_omniscient",
+        "grant_count": 1
+      }
     }
   ]
 }

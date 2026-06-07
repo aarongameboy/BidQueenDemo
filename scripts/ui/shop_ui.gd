@@ -38,7 +38,9 @@ func setup(item_catalog, toast_callback: Callable = Callable()) -> void:
 	_toast_callback = toast_callback
 
 
-func open() -> void:
+func open(category_id: String = "") -> void:
+	if not category_id.is_empty():
+		_category_id = category_id
 	_refresh_silver()
 	_select_category(_category_id)
 	show()
@@ -276,9 +278,18 @@ func _make_product_card(product: Dictionary, shop_data: Node) -> PanelContainer:
 	vbox.add_child(price_lbl)
 	var product_id: String = str(product.get("product_id", ""))
 	var limit: int = int(product.get("purchase_limit", 0))
-	var bought: bool = shop_data != null and not shop_data.can_purchase(product)
+	var effect: Dictionary = product.get("effect", {})
+	var is_tactical: bool = str(effect.get("type", "")) == "tactical_item"
+	var tactical: Node = get_node_or_null("/root/PlayerTacticalItems")
+	var owned: int = 0
+	if is_tactical and tactical != null:
+		owned = int(tactical.get_count(str(effect.get("tactical_id", ""))))
+	var bought: bool = not is_tactical and shop_data != null and not shop_data.can_purchase(product)
 	var status := Label.new()
-	if bought:
+	if is_tactical:
+		status.text = "持有：%d" % owned
+		status.add_theme_color_override("font_color", Color(0.75, 0.78, 0.85))
+	elif bought:
 		status.text = "已购买"
 		status.add_theme_color_override("font_color", Color(0.65, 0.68, 0.75))
 	elif limit > 0:
@@ -287,7 +298,7 @@ func _make_product_card(product: Dictionary, shop_data: Node) -> PanelContainer:
 	vbox.add_child(status)
 	var buy_btn := Button.new()
 	buy_btn.text = "已拥有" if bought else "购买"
-	buy_btn.disabled = bought
+	buy_btn.disabled = bought and not is_tactical
 	UiButtonStyleScript.apply(buy_btn, COLOR_ACCENT if not bought else Color(0.5, 0.52, 0.58), 13)
 	buy_btn.pressed.connect(func() -> void: _try_purchase(product))
 	vbox.add_child(buy_btn)
@@ -298,25 +309,43 @@ func _try_purchase(product: Dictionary) -> void:
 	var shop_data: Node = get_node_or_null("/root/PlayerShop")
 	var portfolio: Node = get_node_or_null("/root/PlayerPortfolio")
 	var warehouse: Node = get_node_or_null("/root/PlayerWarehouse")
-	if shop_data == null or portfolio == null or warehouse == null:
+	var tactical: Node = get_node_or_null("/root/PlayerTacticalItems")
+	if shop_data == null or portfolio == null:
 		_show_toast("系统未就绪")
 		return
-	if not shop_data.can_purchase(product):
+	var effect: Dictionary = product.get("effect", {})
+	var effect_type: String = str(effect.get("type", ""))
+	if effect_type != "tactical_item" and warehouse == null:
+		_show_toast("系统未就绪")
+		return
+	if effect_type != "tactical_item" and not shop_data.can_purchase(product):
 		_show_toast("已达购买上限")
 		return
 	var price: int = int(product.get("price_silver", 0))
 	if not portfolio.spend_silver(price):
 		_show_toast("银币不足")
 		return
-	var effect: Dictionary = product.get("effect", {})
-	if str(effect.get("type", "")) == "warehouse_page":
+	if effect_type == "warehouse_page":
+		if warehouse == null:
+			_show_toast("仓库系统未就绪")
+			return
 		warehouse.unlock_expansion_page(
 			str(effect.get("page_name", "扩展仓库")),
 			int(effect.get("grid_w", 8)),
 			int(effect.get("grid_h", 8)),
 			bool(effect.get("is_collection_box", false)),
 		)
-	shop_data.record_purchase(str(product.get("product_id", "")))
+		shop_data.record_purchase(str(product.get("product_id", "")))
+	elif effect_type == "tactical_item":
+		if tactical == null:
+			_show_toast("战术道具系统未就绪")
+			return
+		var tactical_id: String = str(effect.get("tactical_id", ""))
+		var grant: int = maxi(1, int(effect.get("grant_count", 1)))
+		tactical.add_items(tactical_id, grant)
+	else:
+		_show_toast("未知商品效果")
+		return
 	_show_toast("购买成功：%s" % str(product.get("name", "")))
 	_refresh_silver()
 	_rebuild_products()

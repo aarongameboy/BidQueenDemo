@@ -19,12 +19,22 @@ class RoundCloseResult:
 	var reason: String = ""
 
 
+static func compute_min_next_bid(
+	current_highest_bid: int,
+	starting_bid: int,
+	min_raise: int,
+) -> int:
+	if current_highest_bid <= 0:
+		return starting_bid
+	return maxi(starting_bid, current_highest_bid + min_raise)
+
+
 static func create_board(round_index: int, starting_bid: int, min_raise: int) -> OpenAuctionBoard:
 	var board := OpenAuctionBoard.new()
 	board.round_index = round_index
 	board.current_highest_bid = 0
 	board.current_leader_seat = -1
-	board.min_next_bid = 0
+	board.min_next_bid = compute_min_next_bid(0, starting_bid, min_raise)
 	board.raises_this_round = 0
 	board.window_active = false
 	board.any_raise_this_window = false
@@ -45,6 +55,8 @@ static func can_raise(
 		return {"ok": false, "reason": "已放弃本轮"}
 	if bid <= 0:
 		return {"ok": false, "reason": "请输入有效出价"}
+	if bid < board.min_next_bid:
+		return {"ok": false, "reason": "出价低于最低有效价 %d" % board.min_next_bid}
 	if bid > silver:
 		return {"ok": false, "reason": "金币不足，无法出价"}
 	return {"ok": true, "reason": ""}
@@ -55,10 +67,11 @@ static func apply_raise(
 	seat: int,
 	bid: int,
 	min_raise: int,
+	starting_bid: int = GameConstants.DEFAULT_STARTING_BID,
 ) -> void:
 	board.current_highest_bid = bid
 	board.current_leader_seat = seat
-	board.min_next_bid = 0
+	board.min_next_bid = compute_min_next_bid(bid, starting_bid, min_raise)
 	board.raises_this_round += 1
 	board.any_raise_this_window = true
 

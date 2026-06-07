@@ -1,6 +1,6 @@
 class_name WarehouseGridPanel
 extends Control
-## 战利品格（默认 10×15）：底图 + 格子对齐，道具按 size_w×size_h 占格
+## 战利品格（默认 9×14）：底图 + 格子对齐，道具按 size_w×size_h 占格
 
 const MatchControllerScript = preload("res://scripts/match/match_controller.gd")
 const FontUtilScript = preload("res://scripts/ui/font_util.gd")
@@ -11,8 +11,8 @@ const ItemTooltipScript = preload("res://scripts/ui/item_tooltip.gd")
 
 signal slot_pressed(item_index: int)
 
-const DEFAULT_GRID_COLS: int = 10
-const DEFAULT_GRID_ROWS: int = 20
+const DEFAULT_GRID_COLS: int = 9
+const DEFAULT_GRID_ROWS: int = 14
 const CELL_SIZE: int = 42
 const CELL_GAP: int = 1
 

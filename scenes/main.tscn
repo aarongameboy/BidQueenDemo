@@ -130,7 +130,7 @@ size_flags_vertical = 3
 theme_override_constants/separation = 12
 
 [node name="LeftPanel" type="PanelContainer" parent="MatchUI/RootMargin/RootVBox/MainColumns"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(430, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
 size_flags_vertical = 3

@@ -52,3 +52,11 @@ func get_product(product_id: String) -> Dictionary:
 		if str(row.get("product_id", "")) == product_id:
 			return row
 	return {}
+
+
+func get_product_by_tactical_id(tactical_id: String) -> Dictionary:
+	for row in _products:
+		var effect: Dictionary = row.get("effect", {})
+		if str(effect.get("type", "")) == "tactical_item" and str(effect.get("tactical_id", "")) == tactical_id:
+			return row
+	return {}

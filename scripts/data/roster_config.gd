@@ -115,9 +115,9 @@ static func get_archetype_for_intel(character_id: String) -> int:
 	const CharacterDataScript = preload("res://scripts/data/character_data.gd")
 	var skill: String = get_skill_id(character_id)
 	match skill:
-		"night_raven_peek", "holy_bell_shake":
+		"night_raven_peek", "holy_bell_shake", "iron_pact", "art_golden_eye", "keen_sight", "final_seizure":
 			return CharacterDataScript.SkillArchetype.INTEL
-		"star_chart_valuation", "court_announce":
+		"star_chart_valuation", "court_announce", "amber_scale":
 			return CharacterDataScript.SkillArchetype.VALUATION
 		"black_rose_pressure":
 			return CharacterDataScript.SkillArchetype.BLOCKER

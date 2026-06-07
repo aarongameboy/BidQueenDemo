@@ -44,5 +44,10 @@ static func calculate(
 	if res.winning_bid > res.true_value:
 		res.is_overbid = true
 		res.overbid_amount = res.winning_bid - res.true_value
-		res.compensation_each = res.welfare_each
+		var opponent_count: int = maxi(player_count - 1, 1)
+		var comp_pool: int = int(floor(float(res.overbid_amount) * GameConstants.OVERBID_COMPENSATION_RATE))
+		res.compensation_each = int(floor(float(comp_pool) / float(opponent_count)))
+		for i in player_count:
+			if i != winner_seat:
+				res.player_deltas[i] += res.compensation_each
 	return res

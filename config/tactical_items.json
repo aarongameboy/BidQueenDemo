@@ -1,0 +1,485 @@
+{
+  "max_loadout_slots": 5,
+  "items": [
+    {
+      "id": "tact_random_reveal_white",
+      "name": "白品随机显示",
+      "category": "random_reveal",
+      "quality": "white",
+      "icon_path": "res://assets/icons/tactical/tact_random_reveal_white.png",
+      "description": "随机显示 1 件藏品全部信息。",
+      "effect": {
+        "type": "random_reveal",
+        "count": 1
+      },
+      "shop_price": 5000
+    },
+    {
+      "id": "tact_random_reveal_green",
+      "name": "良品随机显示",
+      "category": "random_reveal",
+      "quality": "green",
+      "icon_path": "res://assets/icons/tactical/tact_random_reveal_green.png",
+      "description": "随机显示 2 件藏品全部信息。",
+      "effect": {
+        "type": "random_reveal",
+        "count": 2
+      },
+      "shop_price": 12000
+    },
+    {
+      "id": "tact_random_reveal_blue",
+      "name": "蓝品随机显示",
+      "category": "random_reveal",
+      "quality": "blue",
+      "icon_path": "res://assets/icons/tactical/tact_random_reveal_blue.png",
+      "description": "随机显示 3 件藏品全部信息。",
+      "effect": {
+        "type": "random_reveal",
+        "count": 3
+      },
+      "shop_price": 30000
+    },
+    {
+      "id": "tact_random_reveal_purple",
+      "name": "优品随机显示",
+      "category": "random_reveal",
+      "quality": "purple",
+      "icon_path": "res://assets/icons/tactical/tact_random_reveal_purple.png",
+      "description": "随机显示 4 件藏品全部信息。",
+      "effect": {
+        "type": "random_reveal",
+        "count": 4
+      },
+      "shop_price": 75000
+    },
+    {
+      "id": "tact_random_reveal_gold",
+      "name": "珍品随机显示",
+      "category": "random_reveal",
+      "quality": "gold",
+      "icon_path": "res://assets/icons/tactical/tact_random_reveal_gold.png",
+      "description": "随机显示 5 件藏品全部信息。",
+      "effect": {
+        "type": "random_reveal",
+        "count": 5
+      },
+      "shop_price": 180000
+    },
+    {
+      "id": "tact_random_reveal_red",
+      "name": "极品随机显示",
+      "category": "random_reveal",
+      "quality": "red",
+      "icon_path": "res://assets/icons/tactical/tact_random_reveal_red.png",
+      "description": "随机显示 6 件藏品全部信息。",
+      "effect": {
+        "type": "random_reveal",
+        "count": 6
+      },
+      "shop_price": 450000
+    },
+    {
+      "id": "tact_scan_white",
+      "name": "白品扫描",
+      "category": "scan",
+      "quality": "white",
+      "icon_path": "res://assets/icons/tactical/tact_scan_white.png",
+      "description": "显示所有白色品质藏品的总格数。",
+      "effect": {
+        "type": "scan",
+        "quality": "white"
+      },
+      "shop_price": 5000
+    },
+    {
+      "id": "tact_scan_green",
+      "name": "良品扫描",
+      "category": "scan",
+      "quality": "green",
+      "icon_path": "res://assets/icons/tactical/tact_scan_green.png",
+      "description": "显示所有绿色品质藏品的总格数。",
+      "effect": {
+        "type": "scan",
+        "quality": "green"
+      },
+      "shop_price": 12000
+    },
+    {
+      "id": "tact_scan_blue",
+      "name": "蓝品扫描",
+      "category": "scan",
+      "quality": "blue",
+      "icon_path": "res://assets/icons/tactical/tact_scan_blue.png",
+      "description": "显示所有蓝色品质藏品的总格数。",
+      "effect": {
+        "type": "scan",
+        "quality": "blue"
+      },
+      "shop_price": 30000
+    },
+    {
+      "id": "tact_scan_purple",
+      "name": "优品扫描",
+      "category": "scan",
+      "quality": "purple",
+      "icon_path": "res://assets/icons/tactical/tact_scan_purple.png",
+      "description": "显示所有紫色品质藏品的总格数。",
+      "effect": {
+        "type": "scan",
+        "quality": "purple"
+      },
+      "shop_price": 75000
+    },
+    {
+      "id": "tact_scan_gold",
+      "name": "珍品扫描",
+      "category": "scan",
+      "quality": "gold",
+      "icon_path": "res://assets/icons/tactical/tact_scan_gold.png",
+      "description": "显示所有金色品质藏品的总格数。",
+      "effect": {
+        "type": "scan",
+        "quality": "gold"
+      },
+      "shop_price": 180000
+    },
+    {
+      "id": "tact_scan_red",
+      "name": "极品扫描",
+      "category": "scan",
+      "quality": "red",
+      "icon_path": "res://assets/icons/tactical/tact_scan_red.png",
+      "description": "显示所有红色品质藏品的总格数。",
+      "effect": {
+        "type": "scan",
+        "quality": "red"
+      },
+      "shop_price": 450000
+    },
+    {
+      "id": "tact_stock_white",
+      "name": "白品存量",
+      "category": "stock",
+      "quality": "white",
+      "icon_path": "res://assets/icons/tactical/tact_stock_white.png",
+      "description": "显示所有白色品质藏品的总数量。",
+      "effect": {
+        "type": "stock",
+        "quality": "white"
+      },
+      "shop_price": 5000
+    },
+    {
+      "id": "tact_stock_green",
+      "name": "良品存量",
+      "category": "stock",
+      "quality": "green",
+      "icon_path": "res://assets/icons/tactical/tact_stock_green.png",
+      "description": "显示所有绿色品质藏品的总数量。",
+      "effect": {
+        "type": "stock",
+        "quality": "green"
+      },
+      "shop_price": 12000
+    },
+    {
+      "id": "tact_stock_blue",
+      "name": "蓝品存量",
+      "category": "stock",
+      "quality": "blue",
+      "icon_path": "res://assets/icons/tactical/tact_stock_blue.png",
+      "description": "显示所有蓝色品质藏品的总数量。",
+      "effect": {
+        "type": "stock",
+        "quality": "blue"
+      },
+      "shop_price": 30000
+    },
+    {
+      "id": "tact_stock_purple",
+      "name": "优品存量",
+      "category": "stock",
+      "quality": "purple",
+      "icon_path": "res://assets/icons/tactical/tact_stock_purple.png",
+      "description": "显示所有紫色品质藏品的总数量。",
+      "effect": {
+        "type": "stock",
+        "quality": "purple"
+      },
+      "shop_price": 75000
+    },
+    {
+      "id": "tact_stock_gold",
+      "name": "珍品存量",
+      "category": "stock",
+      "quality": "gold",
+      "icon_path": "res://assets/icons/tactical/tact_stock_gold.png",
+      "description": "显示所有金色品质藏品的总数量。",
+      "effect": {
+        "type": "stock",
+        "quality": "gold"
+      },
+      "shop_price": 180000
+    },
+    {
+      "id": "tact_stock_red",
+      "name": "极品存量",
+      "category": "stock",
+      "quality": "red",
+      "icon_path": "res://assets/icons/tactical/tact_stock_red.png",
+      "description": "显示所有红色品质藏品的总数量。",
+      "effect": {
+        "type": "stock",
+        "quality": "red"
+      },
+      "shop_price": 450000
+    },
+    {
+      "id": "tact_valuation_white",
+      "name": "白品估价",
+      "category": "valuation",
+      "quality": "white",
+      "icon_path": "res://assets/icons/tactical/tact_valuation_white.png",
+      "description": "显示所有白色品质藏品的总价值。",
+      "effect": {
+        "type": "valuation",
+        "quality": "white"
+      },
+      "shop_price": 5000
+    },
+    {
+      "id": "tact_valuation_green",
+      "name": "良品估价",
+      "category": "valuation",
+      "quality": "green",
+      "icon_path": "res://assets/icons/tactical/tact_valuation_green.png",
+      "description": "显示所有绿色品质藏品的总价值。",
+      "effect": {
+        "type": "valuation",
+        "quality": "green"
+      },
+      "shop_price": 12000
+    },
+    {
+      "id": "tact_valuation_blue",
+      "name": "蓝品估价",
+      "category": "valuation",
+      "quality": "blue",
+      "icon_path": "res://assets/icons/tactical/tact_valuation_blue.png",
+      "description": "显示所有蓝色品质藏品的总价值。",
+      "effect": {
+        "type": "valuation",
+        "quality": "blue"
+      },
+      "shop_price": 30000
+    },
+    {
+      "id": "tact_valuation_purple",
+      "name": "优品估价",
+      "category": "valuation",
+      "quality": "purple",
+      "icon_path": "res://assets/icons/tactical/tact_valuation_purple.png",
+      "description": "显示所有紫色品质藏品的总价值。",
+      "effect": {
+        "type": "valuation",
+        "quality": "purple"
+      },
+      "shop_price": 75000
+    },
+    {
+      "id": "tact_valuation_gold",
+      "name": "珍品估价",
+      "category": "valuation",
+      "quality": "gold",
+      "icon_path": "res://assets/icons/tactical/tact_valuation_gold.png",
+      "description": "显示所有金色品质藏品的总价值。",
+      "effect": {
+        "type": "valuation",
+        "quality": "gold"
+      },
+      "shop_price": 180000
+    },
+    {
+      "id": "tact_valuation_red",
+      "name": "极品估价",
+      "category": "valuation",
+      "quality": "red",
+      "icon_path": "res://assets/icons/tactical/tact_valuation_red.png",
+      "description": "显示所有红色品质藏品的总价值。",
+      "effect": {
+        "type": "valuation",
+        "quality": "red"
+      },
+      "shop_price": 450000
+    },
+    {
+      "id": "tact_random_quality_id_white",
+      "name": "白品随机品质鉴定",
+      "category": "random_quality_id",
+      "quality": "white",
+      "icon_path": "res://assets/icons/tactical/tact_random_quality_id_white.png",
+      "description": "随机鉴定 2 件未知藏品的品质与占格。",
+      "effect": {
+        "type": "random_quality_id",
+        "count": 2
+      },
+      "shop_price": 5000
+    },
+    {
+      "id": "tact_random_quality_id_green",
+      "name": "良品随机品质鉴定",
+      "category": "random_quality_id",
+      "quality": "green",
+      "icon_path": "res://assets/icons/tactical/tact_random_quality_id_green.png",
+      "description": "随机鉴定 4 件未知藏品的品质与占格。",
+      "effect": {
+        "type": "random_quality_id",
+        "count": 4
+      },
+      "shop_price": 12000
+    },
+    {
+      "id": "tact_random_quality_id_blue",
+      "name": "蓝品随机品质鉴定",
+      "category": "random_quality_id",
+      "quality": "blue",
+      "icon_path": "res://assets/icons/tactical/tact_random_quality_id_blue.png",
+      "description": "随机鉴定 6 件未知藏品的品质与占格。",
+      "effect": {
+        "type": "random_quality_id",
+        "count": 6
+      },
+      "shop_price": 30000
+    },
+    {
+      "id": "tact_random_quality_id_purple",
+      "name": "优品随机品质鉴定",
+      "category": "random_quality_id",
+      "quality": "purple",
+      "icon_path": "res://assets/icons/tactical/tact_random_quality_id_purple.png",
+      "description": "随机鉴定 8 件未知藏品的品质与占格。",
+      "effect": {
+        "type": "random_quality_id",
+        "count": 8
+      },
+      "shop_price": 75000
+    },
+    {
+      "id": "tact_random_quality_id_gold",
+      "name": "珍品随机品质鉴定",
+      "category": "random_quality_id",
+      "quality": "gold",
+      "icon_path": "res://assets/icons/tactical/tact_random_quality_id_gold.png",
+      "description": "随机鉴定 10 件未知藏品的品质与占格。",
+      "effect": {
+        "type": "random_quality_id",
+        "count": 10
+      },
+      "shop_price": 180000
+    },
+    {
+      "id": "tact_random_quality_id_red",
+      "name": "极品随机品质鉴定",
+      "category": "random_quality_id",
+      "quality": "red",
+      "icon_path": "res://assets/icons/tactical/tact_random_quality_id_red.png",
+      "description": "随机鉴定 12 件未知藏品的品质与占格。",
+      "effect": {
+        "type": "random_quality_id",
+        "count": 12
+      },
+      "shop_price": 450000
+    },
+    {
+      "id": "tact_avg_cells_white",
+      "name": "白品均格",
+      "category": "avg_cells",
+      "quality": "white",
+      "icon_path": "res://assets/icons/tactical/tact_avg_cells_white.png",
+      "description": "显示所有白色品质藏品的平均格数。",
+      "effect": {
+        "type": "avg_cells",
+        "quality": "white"
+      },
+      "shop_price": 5000
+    },
+    {
+      "id": "tact_avg_cells_green",
+      "name": "良品均格",
+      "category": "avg_cells",
+      "quality": "green",
+      "icon_path": "res://assets/icons/tactical/tact_avg_cells_green.png",
+      "description": "显示所有绿色品质藏品的平均格数。",
+      "effect": {
+        "type": "avg_cells",
+        "quality": "green"
+      },
+      "shop_price": 12000
+    },
+    {
+      "id": "tact_avg_cells_blue",
+      "name": "蓝品均格",
+      "category": "avg_cells",
+      "quality": "blue",
+      "icon_path": "res://assets/icons/tactical/tact_avg_cells_blue.png",
+      "description": "显示所有蓝色品质藏品的平均格数。",
+      "effect": {
+        "type": "avg_cells",
+        "quality": "blue"
+      },
+      "shop_price": 30000
+    },
+    {
+      "id": "tact_avg_cells_purple",
+      "name": "优品均格",
+      "category": "avg_cells",
+      "quality": "purple",
+      "icon_path": "res://assets/icons/tactical/tact_avg_cells_purple.png",
+      "description": "显示所有紫色品质藏品的平均格数。",
+      "effect": {
+        "type": "avg_cells",
+        "quality": "purple"
+      },
+      "shop_price": 75000
+    },
+    {
+      "id": "tact_avg_cells_gold",
+      "name": "珍品均格",
+      "category": "avg_cells",
+      "quality": "gold",
+      "icon_path": "res://assets/icons/tactical/tact_avg_cells_gold.png",
+      "description": "显示所有金色品质藏品的平均格数。",
+      "effect": {
+        "type": "avg_cells",
+        "quality": "gold"
+      },
+      "shop_price": 180000
+    },
+    {
+      "id": "tact_avg_cells_red",
+      "name": "极品均格",
+      "category": "avg_cells",
+      "quality": "red",
+      "icon_path": "res://assets/icons/tactical/tact_avg_cells_red.png",
+      "description": "显示所有红色品质藏品的平均格数。",
+      "effect": {
+        "type": "avg_cells",
+        "quality": "red"
+      },
+      "shop_price": 450000
+    },
+    {
+      "id": "tact_omniscient",
+      "name": "全知全能",
+      "category": "omniscient",
+      "quality": "red",
+      "icon_path": "res://assets/icons/tactical/tact_omniscient.png",
+      "description": "显示所有藏品的全部信息。",
+      "effect": {
+        "type": "omniscient"
+      },
+      "shop_price": 2000000
+    }
+  ]
+}
