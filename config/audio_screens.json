@@ -1,0 +1,146 @@
+{
+  "tracks": {
+    "JY": {
+      "path": "res://assets/music/JY.mp3",
+      "title": "琥珀商馆主题曲",
+      "mood": "温暖商都、羊皮纸与金币"
+    },
+    "AL": {
+      "path": "res://assets/music/AL.mp3",
+      "title": "银雾修道院主题曲",
+      "mood": "空灵圣铃、薄雾与禁录"
+    },
+    "CA": {
+      "path": "res://assets/music/CA.mp3",
+      "title": "星塔穹庭主题曲",
+      "mood": "星象魔法、高塔与秘藏"
+    },
+    "CS": {
+      "path": "res://assets/music/CS.mp3",
+      "title": "黑蔷薇王陵主题曲",
+      "mood": "压迫王陵、暗金与威压"
+    },
+    "meta_shop": {
+      "path": "res://assets/music/meta_shop.wav",
+      "title": "琥珀柜台",
+      "mood": "轻快交易、铜铃与算盘"
+    },
+    "meta_warehouse": {
+      "path": "res://assets/music/meta_warehouse.wav",
+      "title": "禁录库房",
+      "mood": "低沉仓储、尘埃与蜡封"
+    },
+    "meta_collection": {
+      "path": "res://assets/music/meta_collection.wav",
+      "title": "藏家陈列厅",
+      "mood": "荣耀陈列、玻璃柜与奖杯"
+    },
+    "meta_characters": {
+      "path": "res://assets/music/meta_characters.wav",
+      "title": "代理人名册",
+      "mood": "角色遴选、委任状与蜡封"
+    },
+    "meta_leaderboard": {
+      "path": "res://assets/music/meta_leaderboard.wav",
+      "title": "竞拍榜",
+      "mood": "竞技榜单、鼓点与名次"
+    },
+    "meta_encyclopedia": {
+      "path": "res://assets/music/meta_encyclopedia.wav",
+      "title": "禁录图鉴",
+      "mood": "静读图鉴、羽笔与微光"
+    },
+    "meta_map_select": {
+      "path": "res://assets/music/meta_map_select.wav",
+      "title": "航线图",
+      "mood": "选图踌躇、地图展开"
+    },
+    "meta_matchmaking": {
+      "path": "res://assets/music/meta_matchmaking.wav",
+      "title": "候场铃",
+      "mood": "匹配等待、心跳渐强"
+    },
+    "meta_room": {
+      "path": "res://assets/music/meta_room.wav",
+      "title": "好友房",
+      "mood": "房间集结、低声交谈"
+    },
+    "meta_settlement": {
+      "path": "res://assets/music/meta_settlement.wav",
+      "title": "落槌清算",
+      "mood": "成交揭晓、金币倾泻"
+    }
+  },
+  "map_tracks": {
+    "dam": "JY",
+    "valley": "AL",
+    "aerospace": "CA",
+    "prison": "CS"
+  },
+  "screens": {
+    "lobby": {
+      "track": "JY",
+      "volume_db": 0.0,
+      "label": "主大厅"
+    },
+    "map_selection": {
+      "track": "meta_map_select",
+      "volume_db": -1.0,
+      "label": "地图选择"
+    },
+    "matchmaking": {
+      "track": "meta_matchmaking",
+      "volume_db": -1.0,
+      "label": "快速匹配"
+    },
+    "room_battle": {
+      "track": "meta_room",
+      "volume_db": -1.0,
+      "label": "房间对战"
+    },
+    "match": {
+      "track_from_map": true,
+      "volume_db": 0.0,
+      "label": "对局拍卖"
+    },
+    "settlement": {
+      "track": "meta_settlement",
+      "volume_db": -1.0,
+      "label": "结算"
+    },
+    "shop": {
+      "track": "meta_shop",
+      "volume_db": -2.0,
+      "label": "商店"
+    },
+    "warehouse": {
+      "track": "meta_warehouse",
+      "volume_db": -2.0,
+      "label": "仓库"
+    },
+    "collection": {
+      "track": "meta_collection",
+      "volume_db": -1.0,
+      "label": "收藏"
+    },
+    "characters": {
+      "track": "meta_characters",
+      "volume_db": -1.0,
+      "label": "角色"
+    },
+    "leaderboard": {
+      "track": "meta_leaderboard",
+      "volume_db": -1.0,
+      "label": "排行榜"
+    },
+    "encyclopedia": {
+      "track": "meta_encyclopedia",
+      "volume_db": -3.0,
+      "label": "百科"
+    },
+    "cinematic": {
+      "duck_db": -12.0,
+      "label": "过场 CG（压低 BGM）"
+    }
+  }
+}

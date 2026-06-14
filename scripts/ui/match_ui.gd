@@ -314,16 +314,18 @@ func _persist_portfolio_from_match() -> void:
     portfolio.sync_total(_controller.get_human_silver_preview())
 
 
-func _play_lobby_bgm() -> void:
+func _play_screen_bgm(screen_id: String, context: Dictionary = {}) -> void:
     var bgm: Node = get_node_or_null("/root/BgmPlayer")
-    if bgm:
-        bgm.play_lobby()
+    if bgm and bgm.has_method("play_for_screen"):
+        bgm.play_for_screen(screen_id, context)
+
+
+func _play_lobby_bgm() -> void:
+    _play_screen_bgm("lobby")
 
 
 func _play_map_bgm(map_id: String) -> void:
-    var bgm: Node = get_node_or_null("/root/BgmPlayer")
-    if bgm:
-        bgm.play_for_map(map_id)
+    _play_screen_bgm("match", {"map_id": map_id})
 
 
 func _is_match_in_progress() -> bool:
@@ -398,7 +400,7 @@ func _show_map_selection(practice: bool = false, practice_subtitle: String = "")
     _hide_lobby()
     if _room_battle_ui:
         _room_battle_ui.hide()
-    _play_lobby_bgm()
+    _play_screen_bgm("map_selection")
     if _map_selection:
         _map_selection.reset_to_map_list()
     if _map_selection:
@@ -519,6 +521,7 @@ func _on_map_match_confirmed(map_id: String, mode_id: String) -> void:
     var map_entry: Dictionary = MapModeConfigScript.get_map(map_id)
     var map_name: String = str(map_entry.get("map_name", map_id))
     if _matchmaking:
+        _play_screen_bgm("matchmaking")
         _matchmaking.start_matching(map_name, _get_persisted_silver())
 
 
@@ -563,6 +566,7 @@ func _on_room_map_confirmed(map_id: String, mode_id: String) -> void:
     _pending_mode_id = mode_id
     _hide_map_selection()
     _hide_match_layout()
+    _play_screen_bgm("room_battle")
     if _room_battle_ui:
         _room_battle_ui.open_hub(map_id, mode_id)
 
@@ -1112,6 +1116,7 @@ func _on_open_collection() -> void:
     _hide_match_layout()
     if _matchmaking:
         _matchmaking.hide()
+    _play_screen_bgm("collection")
     _collection_ui.show()
     _collection_ui.open()
     _collection_ui.move_to_front()
@@ -1131,6 +1136,7 @@ func _on_open_characters() -> void:
     _hide_match_layout()
     if _matchmaking:
         _matchmaking.hide()
+    _play_screen_bgm("characters")
     char_ui.open()
     char_ui.move_to_front()
 
@@ -1157,6 +1163,7 @@ func _on_open_leaderboard() -> void:
     _hide_match_layout()
     if _matchmaking:
         _matchmaking.hide()
+    _play_screen_bgm("leaderboard")
     _leaderboard_ui.open()
     _leaderboard_ui.move_to_front()
 
@@ -1196,6 +1203,7 @@ func _on_open_warehouse() -> void:
     _warehouse_ui.setup(catalog)
     if _matchmaking:
         _matchmaking.hide()
+    _play_screen_bgm("warehouse")
     _warehouse_ui.open()
     _warehouse_ui.move_to_front()
 
@@ -1225,6 +1233,7 @@ func _on_open_shop(category_id: String = "") -> void:
         _matchmaking.hide()
     if _warehouse_ui and _warehouse_ui.visible:
         _warehouse_ui.hide()
+    _play_screen_bgm("shop")
     _shop_ui.open(category_id)
     _shop_ui.move_to_front()
 
@@ -1285,6 +1294,7 @@ func _on_open_encyclopedia() -> void:
     _hide_match_layout()
     if _matchmaking:
         _matchmaking.hide()
+    _play_screen_bgm("encyclopedia")
     _bring_encyclopedia_to_front()
     _encyclopedia.show()
     _encyclopedia.open()
@@ -1313,6 +1323,7 @@ func _on_encyclopedia_closed() -> void:
         return
     if _is_match_in_progress():
         _show_match_layout()
+        _play_screen_bgm("match", {"map_id": _pending_map_id})
         if _controller:
             _on_phase_changed(_controller.get_phase(), _controller.get_round_index())
             _sync_player_sidebar()
@@ -1361,6 +1372,7 @@ func _on_cinematic_requested(payload: Dictionary) -> void:
     if _cinematic_overlay == null:
         _cinematic_overlay = MatchCinematicOverlayScript.new()
         add_child(_cinematic_overlay)
+    _play_screen_bgm("cinematic")
     _set_match_layout_hidden_for_cinematic(true)
     var type_name: String = str(payload.get("type", ""))
     if type_name == "_sequence":
@@ -1372,6 +1384,10 @@ func _on_cinematic_requested(payload: Dictionary) -> void:
             _cinematic_overlay.dismiss_instant()
     _set_match_layout_hidden_for_cinematic(false)
     if _controller:
+        if _is_settlement_active():
+            _play_screen_bgm("settlement")
+        elif _is_match_in_progress():
+            _play_screen_bgm("match", {"map_id": _pending_map_id})
         _controller.notify_cinematic_finished()
 
 
@@ -1662,9 +1678,7 @@ func _make_effect_row(effect: Dictionary) -> PanelContainer:
         const RosterConfigScript = preload("res://scripts/data/roster_config.gd")
         var cid: String = str(effect.get("character_id", ""))
         if not cid.is_empty():
-            var portrait: String = RosterConfigScript.get_portrait_path(cid)
-            if ResourceLoader.exists(portrait):
-                icon.texture = load(portrait)
+            icon.texture = RosterConfigScript.get_avatar_texture(cid)
     elif icon_kind == "tactical":
         const TacticalCatalogScript = preload("res://scripts/data/tactical_item_catalog.gd")
         var tactical_id: String = str(effect.get("tactical_id", ""))
@@ -1759,6 +1773,7 @@ func _on_settlement_tick(tick: Dictionary) -> void:
     var phase: String = str(tick.get("phase", ""))
     var winner: Dictionary = _winner_info_from_tick(tick)
     if phase == "start":
+        _play_screen_bgm("settlement")
         _settlement_recycle_unlocked = false
         if _settlement_recycle_bar:
             _settlement_recycle_bar.hide_bar()

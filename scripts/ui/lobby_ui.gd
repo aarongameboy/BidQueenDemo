@@ -24,9 +24,10 @@ const NAV_ICON_TINT: Color = Color(0.95, 0.96, 1.0, 1.0)
 const ICONS_DIR: String = "res://assets/ui/icons/"
 const NAV_ICON_SIZE: int = 22
 const NAV_ICON_PAD: int = 3
-const NAV_BAR_SEPARATION: int = 7
-const NAV_ITEM_LABEL_GAP: int = 3
+const NAV_BAR_SEPARATION: int = 8
+const NAV_ITEM_LABEL_GAP: int = 4
 const NAV_LABEL_FONT_SIZE: int = 10
+const PANEL_CORNER_RADIUS: int = 8
 const QUICK_MATCH_BTN_HEIGHT: int = 98
 const MODE_CARD_HEIGHT: int = 62
 const QUICK_MATCH_ACCENT: Color = Color(0.92, 0.34, 0.32)
@@ -94,13 +95,13 @@ func _build_ui() -> void:
 	MenuBackgroundScript.apply(self, 0.34)
 	var root := MarginContainer.new()
 	root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	root.add_theme_constant_override("margin_left", 20)
-	root.add_theme_constant_override("margin_top", 16)
-	root.add_theme_constant_override("margin_right", 20)
-	root.add_theme_constant_override("margin_bottom", 16)
+	root.add_theme_constant_override("margin_left", 24)
+	root.add_theme_constant_override("margin_top", 18)
+	root.add_theme_constant_override("margin_right", 24)
+	root.add_theme_constant_override("margin_bottom", 18)
 	add_child(root)
 	var vbox := VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", 14)
+	vbox.add_theme_constant_override("separation", 16)
 	root.add_child(vbox)
 	_build_header(vbox)
 	_build_asset_block(vbox)
@@ -208,7 +209,7 @@ func _make_nav_icon_style(hover: bool) -> StyleBoxFlat:
 		sb.bg_color = Color(0.06, 0.07, 0.1, 0.72)
 		sb.border_color = Color(0.2, 0.24, 0.32, 0.45)
 	sb.set_border_width_all(1)
-	sb.set_corner_radius_all(4)
+	sb.set_corner_radius_all(PANEL_CORNER_RADIUS)
 	sb.content_margin_left = NAV_ICON_PAD
 	sb.content_margin_right = NAV_ICON_PAD
 	sb.content_margin_top = NAV_ICON_PAD
@@ -487,11 +488,7 @@ func _refresh_player_header() -> void:
 		cid = str(roster.selected_character_id)
 	_player_name_label.text = RosterConfigScript.get_display_name(cid)
 	if _player_avatar != null:
-		var path: String = RosterConfigScript.get_portrait_path(cid)
-		if ResourceLoader.exists(path):
-			_player_avatar.texture = load(path)
-		else:
-			_player_avatar.texture = null
+		_player_avatar.texture = RosterConfigScript.get_avatar_texture(cid)
 
 
 static func _format_yuan(amount: int, change_only: bool = false) -> String:

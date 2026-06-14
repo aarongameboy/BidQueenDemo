@@ -368,10 +368,8 @@ func _build_avatar_cell(character_id: String) -> Control:
 	tex.custom_minimum_size = Vector2(40, 40)
 	tex.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	tex.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-	var path: String = RosterConfigScript.get_portrait_path(character_id)
-	if ResourceLoader.exists(path):
-		tex.texture = load(path) as Texture2D
-	else:
+	tex.texture = RosterConfigScript.get_avatar_texture(character_id)
+	if tex.texture == null:
 		tex.modulate = Color(0.25, 0.28, 0.35)
 	var frame := PanelContainer.new()
 	var sb := StyleBoxFlat.new()

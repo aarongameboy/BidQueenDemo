@@ -11,19 +11,18 @@ const RosterConfigScript = preload("res://scripts/data/roster_config.gd")
 const UiButtonStyleScript = preload("res://scripts/ui/ui_button_style.gd")
 const UiCloseButtonScript = preload("res://scripts/ui/ui_close_button.gd")
 
-## 立绘资源为 1:1 方图（豆包 1024/2048）
-const PORTRAIT_ASPECT: float = 1.0
-const PICKER_COL_WIDTH: int = 112
-const PICKER_THUMB_SIZE: int = 100
-const PICKER_LABEL_HEIGHT: int = 28
+const PICKER_COL_WIDTH: int = 96
+const PICKER_FRAME_SIZE: int = 86
+const PICKER_THUMB_SIZE: int = 74
 ## 信息区左侧留白，避免被角色列表遮挡
-const INFO_PANEL_LEFT_INSET: int = PICKER_COL_WIDTH + 28
-const INFO_PANEL_ANCHOR_TOP: float = 0.74
+const INFO_PANEL_LEFT_INSET: int = PICKER_COL_WIDTH + 32
+const INFO_PANEL_ANCHOR_TOP: float = 0.72
 const DEPLOY_BTN_SIZE: Vector2 = Vector2(200, 44)
 const DEPLOY_BTN_FONT: int = 20
 
 var _roster: Node
 var _selected_id: String = ""
+var _scene_background: TextureRect
 var _portrait: TextureRect
 var _portrait_stack: Control
 var _info_panel: PanelContainer
@@ -111,14 +110,25 @@ func _build_portrait_layer() -> void:
 	_portrait_stack.clip_contents = true
 	_portrait_stack.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_portrait_stack)
+	_scene_background = TextureRect.new()
+	_scene_background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_scene_background.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_scene_background.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	_scene_background.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_portrait_stack.add_child(_scene_background)
+	var scene_dim := ColorRect.new()
+	scene_dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	scene_dim.color = Color(0.02, 0.025, 0.035, 0.2)
+	scene_dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_portrait_stack.add_child(scene_dim)
 	_portrait = TextureRect.new()
 	_portrait.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_portrait.offset_left = -40.0
-	_portrait.offset_top = -48.0
-	_portrait.offset_right = 40.0
-	_portrait.offset_bottom = 8.0
+	_portrait.offset_left = float(INFO_PANEL_LEFT_INSET - 18)
+	_portrait.offset_top = 20.0
+	_portrait.offset_right = -18.0
+	_portrait.offset_bottom = 20.0
 	_portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	_portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	_portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	_portrait.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_portrait_stack.add_child(_portrait)
 	_info_panel = PanelContainer.new()
@@ -190,7 +200,7 @@ func _build_portrait_layer() -> void:
 
 
 func _picker_item_height() -> int:
-	return PICKER_THUMB_SIZE + PICKER_LABEL_HEIGHT + 10
+	return PICKER_FRAME_SIZE
 
 
 func _refresh_picker() -> void:
@@ -206,55 +216,69 @@ func _make_picker_item(character_id: String) -> Button:
 	btn.custom_minimum_size = Vector2(PICKER_COL_WIDTH - 4, _picker_item_height())
 	btn.toggle_mode = true
 	btn.button_pressed = selected
-	var vbox := VBoxContainer.new()
-	vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	vbox.add_theme_constant_override("separation", 4)
-	btn.add_child(vbox)
-	var thumb_wrap := CenterContainer.new()
-	thumb_wrap.custom_minimum_size = Vector2(PICKER_THUMB_SIZE, PICKER_THUMB_SIZE)
-	thumb_wrap.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	vbox.add_child(thumb_wrap)
+	btn.text = ""
+	btn.tooltip_text = RosterConfigScript.get_display_name(character_id)
+	var center := CenterContainer.new()
+	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	btn.add_child(center)
+	var frame := PanelContainer.new()
+	frame.custom_minimum_size = Vector2(PICKER_THUMB_SIZE, PICKER_THUMB_SIZE)
+	frame.clip_contents = true
+	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	frame.add_theme_stylebox_override("panel", _make_avatar_frame_box(selected))
+	center.add_child(frame)
+	var frame_margin := MarginContainer.new()
+	frame_margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	frame_margin.add_theme_constant_override("margin_left", 2)
+	frame_margin.add_theme_constant_override("margin_top", 2)
+	frame_margin.add_theme_constant_override("margin_right", 2)
+	frame_margin.add_theme_constant_override("margin_bottom", 2)
+	frame_margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	frame.add_child(frame_margin)
 	var thumb := TextureRect.new()
-	thumb.custom_minimum_size = Vector2(PICKER_THUMB_SIZE, int(PICKER_THUMB_SIZE / PORTRAIT_ASPECT))
-	thumb.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	thumb.custom_minimum_size = Vector2(PICKER_THUMB_SIZE - 4, PICKER_THUMB_SIZE - 4)
 	thumb.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	thumb.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	thumb.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var path: String = RosterConfigScript.get_portrait_path(character_id)
-	if ResourceLoader.exists(path):
-		thumb.texture = load(path)
-	thumb_wrap.add_child(thumb)
-	var lbl := Label.new()
-	lbl.text = RosterConfigScript.get_display_name(character_id)
-	lbl.custom_minimum_size = Vector2(PICKER_COL_WIDTH - 8, PICKER_LABEL_HEIGHT)
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	lbl.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	lbl.max_lines_visible = 2
-	lbl.add_theme_font_size_override("font_size", 11)
-	lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	vbox.add_child(lbl)
+	thumb.texture = _load_avatar_texture(character_id)
+	frame_margin.add_child(thumb)
 	_style_picker_button(btn, selected)
 	btn.pressed.connect(func() -> void: _on_picker_pressed(character_id))
 	return btn
 
 
 func _style_picker_button(btn: Button, selected: bool) -> void:
+	btn.add_theme_stylebox_override("normal", _make_picker_button_box(selected, false))
+	btn.add_theme_stylebox_override("pressed", _make_picker_button_box(true, false))
+	btn.add_theme_stylebox_override("hover", _make_picker_button_box(selected, true))
+	btn.add_theme_stylebox_override("focus", _make_picker_button_box(true, true))
+
+
+func _make_picker_button_box(selected: bool, hover: bool) -> StyleBoxFlat:
 	var sb := StyleBoxFlat.new()
-	if selected:
-		sb.bg_color = Color(0.12, 0.2, 0.28, 0.92)
-		sb.border_color = Color(0.35, 0.88, 0.55)
-		sb.set_border_width_all(2)
-	else:
-		sb.bg_color = Color(0.08, 0.1, 0.14, 0.75)
-		sb.border_color = Color(0.25, 0.3, 0.4, 0.8)
-		sb.set_border_width_all(1)
+	sb.bg_color = Color.TRANSPARENT
+	sb.border_color = Color.TRANSPARENT
+	sb.set_border_width_all(0)
 	sb.set_corner_radius_all(8)
-	btn.add_theme_stylebox_override("normal", sb)
-	btn.add_theme_stylebox_override("pressed", sb)
-	btn.add_theme_stylebox_override("hover", sb)
+	sb.content_margin_left = 4
+	sb.content_margin_right = 4
+	sb.content_margin_top = 4
+	sb.content_margin_bottom = 4
+	return sb
+
+
+func _make_avatar_frame_box(selected: bool) -> StyleBoxFlat:
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(0.025, 0.03, 0.04, 0.92)
+	sb.border_color = Color(0.9, 0.76, 0.42, 0.95) if selected else Color(0.42, 0.46, 0.54, 0.88)
+	sb.set_border_width_all(2 if selected else 1)
+	sb.set_corner_radius_all(6)
+	return sb
+
+
+func _load_avatar_texture(character_id: String) -> Texture2D:
+	return RosterConfigScript.get_avatar_texture(character_id)
 
 
 func _style_deploy_button() -> void:
@@ -291,9 +315,14 @@ func _refresh_detail() -> void:
 	_role_label.text = " · %s" % str(row.get("role", ""))
 	_skill_name_label.text = RosterConfigScript.get_skill_name(_selected_id)
 	_skill_desc_label.text = RosterConfigScript.get_skill_desc(_selected_id)
-	var path: String = RosterConfigScript.get_portrait_path(_selected_id)
-	if ResourceLoader.exists(path):
-		_portrait.texture = load(path)
+	var bg_path: String = RosterConfigScript.get_background_path(_selected_id)
+	if not bg_path.is_empty() and ResourceLoader.exists(bg_path):
+		_scene_background.texture = load(bg_path)
+	else:
+		_scene_background.texture = null
+	var standing_path: String = RosterConfigScript.get_standing_path(_selected_id)
+	if ResourceLoader.exists(standing_path):
+		_portrait.texture = load(standing_path)
 	else:
 		_portrait.texture = null
 	var is_deployed: bool = _selected_id == _get_selected_id()

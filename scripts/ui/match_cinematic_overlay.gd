@@ -368,9 +368,7 @@ func _make_skill_effect_panel(skill: Dictionary) -> PanelContainer:
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	var cid: String = str(skill.get("character_id", ""))
 	if not cid.is_empty():
-		var portrait: String = RosterConfigScript.get_portrait_path(cid)
-		if ResourceLoader.exists(portrait):
-			icon.texture = load(portrait)
+		icon.texture = RosterConfigScript.get_avatar_texture(cid)
 	if icon.texture == null:
 		var ph := ColorRect.new()
 		ph.color = Color(0.55, 0.4, 0.25)
@@ -460,9 +458,7 @@ func _make_reveal_row(rank: int, row: Dictionary, show_kill_tag: bool, is_human:
 	avatar.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	avatar.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	var char_id: String = str(row.get("character_id", ""))
-	var portrait: String = RosterConfigScript.get_portrait_path(char_id)
-	if ResourceLoader.exists(portrait):
-		avatar.texture = load(portrait)
+	avatar.texture = RosterConfigScript.get_avatar_texture(char_id)
 	hbox.add_child(avatar)
 	var name_lbl := Label.new()
 	name_lbl.text = str(row.get("display_name", ""))
@@ -588,9 +584,7 @@ func _make_winner_row(payload: Dictionary, is_success: bool) -> HBoxContainer:
 	avatar.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	avatar.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	var char_id: String = str(payload.get("winner_character_id", ""))
-	var portrait: String = RosterConfigScript.get_portrait_path(char_id)
-	if ResourceLoader.exists(portrait):
-		avatar.texture = load(portrait)
+	avatar.texture = RosterConfigScript.get_avatar_texture(char_id)
 	row.add_child(avatar)
 	var info := VBoxContainer.new()
 	info.add_theme_constant_override("separation", 4)

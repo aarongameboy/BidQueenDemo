@@ -3,6 +3,7 @@ extends RefCounted
 ## 出战角色表：config/characters.json
 
 const CONFIG_PATH := "res://config/characters.json"
+const AVATAR_CROP_TOP_RATIO: float = 0.035
 
 static var _loaded: bool = false
 static var _default_id: String = "aria_lionheart"
@@ -89,11 +90,67 @@ static func get_skill_desc(character_id: String) -> String:
 static func get_portrait_path(character_id: String) -> String:
 	var row: Dictionary = get_row(character_id)
 	var path: String = str(row.get("portrait", ""))
-	if path.is_empty():
-		return "res://assets/ui/avatars/avatar_0.png"
 	if ResourceLoader.exists(path):
 		return path
+	var standing_path: String = str(row.get("standing", ""))
+	if ResourceLoader.exists(standing_path):
+		return standing_path
 	return "res://assets/ui/avatars/avatar_0.png"
+
+
+static func get_standing_path(character_id: String) -> String:
+	var row: Dictionary = get_row(character_id)
+	var path: String = str(row.get("standing", ""))
+	if not path.is_empty() and ResourceLoader.exists(path):
+		return path
+	return get_portrait_path(character_id)
+
+
+static func get_background_path(character_id: String) -> String:
+	var row: Dictionary = get_row(character_id)
+	var path: String = str(row.get("background", ""))
+	if not path.is_empty() and ResourceLoader.exists(path):
+		return path
+	return ""
+
+
+static func get_avatar_source_path(character_id: String) -> String:
+	var row: Dictionary = get_row(character_id)
+	var path: String = str(row.get("avatar", ""))
+	if not path.is_empty() and ResourceLoader.exists(path):
+		return path
+	return get_standing_path(character_id)
+
+
+static func get_avatar_texture(character_id: String) -> Texture2D:
+	var row: Dictionary = get_row(character_id)
+	var avatar_path: String = str(row.get("avatar", ""))
+	if not avatar_path.is_empty() and ResourceLoader.exists(avatar_path):
+		return load(avatar_path) as Texture2D
+	var standing_path: String = str(row.get("standing", ""))
+	if not standing_path.is_empty() and ResourceLoader.exists(standing_path):
+		var standing_tex: Texture2D = load(standing_path) as Texture2D
+		return _make_avatar_crop(standing_tex)
+	var portrait_path: String = get_portrait_path(character_id)
+	if ResourceLoader.exists(portrait_path):
+		return load(portrait_path) as Texture2D
+	return null
+
+
+static func _make_avatar_crop(tex: Texture2D) -> Texture2D:
+	if tex == null:
+		return null
+	var w: int = tex.get_width()
+	var h: int = tex.get_height()
+	if w <= 0 or h <= 0:
+		return tex
+	var side: int = mini(w, h)
+	var y: int = clampi(int(float(h) * AVATAR_CROP_TOP_RATIO), 0, maxi(h - side, 0))
+	var x: int = maxi(int((w - side) * 0.5), 0)
+	var crop := AtlasTexture.new()
+	crop.atlas = tex
+	crop.region = Rect2(float(x), float(y), float(side), float(side))
+	return crop
 
 
 static func get_bot_cfg(character_id: String) -> Dictionary:

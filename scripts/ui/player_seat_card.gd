@@ -47,7 +47,7 @@ func _build_character_block() -> Control:
 	header.custom_minimum_size = Vector2(132, 0)
 	header.add_theme_constant_override("separation", 7)
 	_avatar = TextureRect.new()
-	_avatar.custom_minimum_size = Vector2(54, 78)
+	_avatar.custom_minimum_size = Vector2(64, 64)
 	_avatar.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	_avatar.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	header.add_child(_avatar)
@@ -133,9 +133,7 @@ func set_avatar_seat(seat_visual: int) -> void:
 
 
 func set_avatar_character(character_id: String) -> void:
-	var path: String = RosterConfigScript.get_portrait_path(character_id)
-	if ResourceLoader.exists(path):
-		_avatar.texture = load(path)
+	_avatar.texture = RosterConfigScript.get_avatar_texture(character_id)
 
 
 func _apply_panel_style() -> void:

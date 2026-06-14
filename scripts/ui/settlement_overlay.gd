@@ -196,17 +196,16 @@ func _set_winner(name: String, seat: int, title: String, character_id: String = 
     _winner_name_label.text = name
     _winner_title_label.text = title if not title.is_empty() else "竞拍成功者"
     _winner_title_label.visible = not _winner_title_label.text.is_empty()
-    var av_path: String = _resolve_winner_portrait_path(character_id, seat)
-    if ResourceLoader.exists(av_path):
-        _winner_avatar.texture = load(av_path)
-    else:
-        _winner_avatar.texture = null
+    _winner_avatar.texture = _resolve_winner_avatar_texture(character_id, seat)
 
 
-static func _resolve_winner_portrait_path(character_id: String, seat: int) -> String:
+static func _resolve_winner_avatar_texture(character_id: String, seat: int) -> Texture2D:
     if not character_id.is_empty() and RosterConfigScript.has_character(character_id):
-        return RosterConfigScript.get_portrait_path(character_id)
-    return "res://assets/ui/avatars/avatar_%d.png" % (maxi(seat, 0) % 4)
+        return RosterConfigScript.get_avatar_texture(character_id)
+    var fallback_path: String = "res://assets/ui/avatars/avatar_%d.png" % (maxi(seat, 0) % 4)
+    if ResourceLoader.exists(fallback_path):
+        return load(fallback_path) as Texture2D
+    return null
 
 
 func _set_profit(profit: int) -> void:
